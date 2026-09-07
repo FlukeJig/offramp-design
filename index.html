@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v23</title>
+<title>OFFRAMP — product mock v24</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -438,7 +438,7 @@
     <div class="screen active" id="s-home">
       <button class="iconbtn r" data-sheet="settings" aria-label="Settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.6v2.8M12 18.6v2.8M2.6 12h2.8M18.6 12h2.8M5.2 5.2l2 2M16.8 16.8l2 2M18.8 5.2l-2 2M7.2 16.8l-2 2"/></svg></button>
       <div class="hero rise">
-        <div class="cap">Friday, September 4</div>
+        <div class="cap">Good morning, Glenn · Fri, Sep 4</div>
         <div class="n hero-num" id="home-n" data-go="receipt" title="See the full record">0m</div>
         <div class="l">not on your phone today — counted, verified</div>
       </div>
@@ -461,7 +461,7 @@
       <div class="statbar rise d3">
         <div class="stat" data-go="streak"><b style="color:var(--green-t)">68</b>days</div>
         <div class="stat" data-sheet="gates"><b style="color:var(--teal-t)">3</b>gates</div>
-        <div class="stat" data-go="receipt"><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b>timebank</div>
+        <div class="stat" data-sheet="timebank"><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b>timebank</div>
       </div>
       <div class="bottombar">
         <div class="homelinks"><span data-go="receipt">Today's Receipt ›</span></div>
@@ -640,6 +640,7 @@
         <div class="docfoot">
           <div id="pursuit-line"></div>
           <div id="focus-line" style="display:none;margin-bottom:9px;font-size:13px;font-weight:600;color:var(--sub)">Gates followed your Work Focus on 3 of 5 weekdays.</div>
+          <div id="tb-line" style="margin-bottom:9px;font-size:13px;font-weight:600;color:var(--amber-t)">Timebank — <b id="tb-line-n">6h 40m</b> stored · never expires</div>
           <div class="prov"><svg width="13" height="13" viewBox="0 0 14 14"><path fill="#0B8472" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified from on-device data. Never leaves this phone.</div>
           <div class="flink" data-go="founding"><b>713</b> founding places left ›</div>
         </div>
@@ -761,6 +762,20 @@
       <div style="margin-top:12px"><button class="btn btn-plain sheet-close">Done</button></div>
     </div>
 
+    <!-- TIMEBANK SHEET -->
+    <div class="sheet" id="sheet-timebank">
+      <div class="handle"></div>
+      <div class="micro-h">Timebank</div>
+      <div class="hero"><div class="n hero-num" style="color:var(--amber)" id="tb-hero">6h 40m</div><div class="l">minutes earned off your phone — spend them to open gates</div></div>
+      <div class="igroup">
+        <div class="irow"><span class="st">Earned by</span><span class="v">gate holds · pivots · waits</span></div>
+        <div class="irow"><span class="st">Spent on</span><span class="v">opening a gate · 18m</span></div>
+        <div class="irow"><span class="st">Rule</span><span class="v">never expires · can't be bought</span></div>
+      </div>
+      <div class="tnote">The Timebank is earned, never bought. It doesn't expire, and it doesn't grow by watching — only by holding.</div>
+      <div style="margin-top:12px"><button class="btn btn-plain sheet-close">Done</button></div>
+    </div>
+
     <!-- SHARE -->
     <div id="share">
       <div class="sharecard" id="sharecard">
@@ -783,10 +798,11 @@
 
   <!-- annotations -->
   <div class="notes">
-    <h1>OFFRAMP — v23</h1>
-    <div class="sub">Gates follow Focus · Sep 4, 2026</div>
-    <div class="note"><b>The OS already knows when you're working.</b> Gates tune → "Follow Focus": Work tightens (no extra opens), Personal as tuned, Sleep closes. Set in iOS Settings, where Focus lives — zero scheduling UI of our own. Verified rail: SetFocusFilterIntent, current in Apple's docs (Aug 2026 snapshot).</div>
-    <div class="note"><b>The Receipt notices.</b> One quiet line: "Gates followed your Work Focus on 3 of 5 weekdays." The ledger observing your intent contexts — that's a proof-of-time product, not a blocker with a schedule.</div>
+    <h1>OFFRAMP — v24</h1>
+    <div class="sub">Noun Uniformity Rule · Sep 4, 2026</div>
+    <div class="note"><b>Every noun: its rule on its face, a line in the Receipt, one Tune home.</b> Timebank failed all three — fixed. Its statbar cell now opens the Timebank sheet (earned by / spent on / never expires · can't be bought), its rule sits under the hero number, and the Receipt carries "Timebank — 6h 40m stored · never expires," live when you spend.</div>
+    <div class="note"><b>The greeting has a pulse.</b> "Good morning, Glenn · Fri, Sep 4" — warmth without noise, borrowed from Habi's "Hi, Jojo" principle, none of its flame.</div>
+    <div class="note"><b>Uniformity audit, closed:</b> gates carry rules on their rows ✓ · Edition on the masthead ✓ · Pursuit on the tag ✓ · streak in its sheet ✓ · Timebank now ✓ · the Receipt needs no tune — it is the record.</div>
     <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
     <div class="note"><b>Provenance is the product.</b> Every piece answers "why is this here": From your #N source · time this morning. The masthead shows the rules being enforced: 6 pieces from 5 of your 12 sources · nothing older than 24h · in your order. A feed can't show its work; the Edition does.</div>
     <div class="note"><b>Honest mint.</b> Finish banks the minutes you actually read (Σ of pieces marked read), not a flat reward. Read all six: +34m lands on Home. Skim nothing, mint nothing — "Nothing on the record yet." Proof means measuring truth.</div>
@@ -888,6 +904,7 @@ $("#btn-wait").addEventListener("click",()=>{
 $("#btn-partner").addEventListener("click",()=>note("Asked Jo. Gate holds until they answer."));
 $("#btn-pay").addEventListener("click",()=>{
   state.tbMin-=18; $("#tb-chip").textContent=fmt(state.tbMin);
+  $("#tb-hero").textContent=fmt(state.tbMin); $("#tb-line-n").textContent=fmt(state.tbMin);
   note("18m paid. Gate open — 60:00.");
 });
 function note(t){const n=$("#gate-note");n.textContent=t;n.style.opacity=1;setTimeout(()=>n.style.opacity=0,2600);}
@@ -1121,7 +1138,7 @@ addEventListener("load",()=>{
   const h=location.hash.replace("#","");
   if(!h)return;
   if(h==="streak"){openSheetEl($("#streak"));}
-  else if(["settings","edtune","gates"].includes(h)){openSheetEl($("#sheet-"+h));}
+  else if(["settings","edtune","gates","timebank"].includes(h)){openSheetEl($("#sheet-"+h));}
   else show(h);
 });
 </script>
