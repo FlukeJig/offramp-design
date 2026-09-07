@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v26</title>
+<title>OFFRAMP — product mock v27</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -192,6 +192,20 @@
   .partner-row .t2{font-size:12px;color:var(--sub)}
   #gate-note{text-align:center;color:var(--teal-t);font-size:14px;font-weight:600;height:20px;margin-top:8px;
     opacity:0;transition:opacity .3s}
+  /* recall — the gym lives in the wait; the sentence seals at the close */
+  #recall-card{display:none;margin:14px 22px 0;padding:16px;background:var(--card);border-radius:14px;
+    box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);text-align:left}
+  .rc-tag{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pursuit-t);font-weight:800;margin-bottom:6px}
+  .rc-q{font-size:15px;font-weight:600;line-height:1.4;color:var(--ink)}
+  .rc-a{margin-top:10px;font-size:14px;color:var(--sub);line-height:1.45}
+  .rc-mark{display:none;gap:10px;margin-top:12px}
+  #rc-reveal{margin-top:10px}
+  .btn-sm{height:44px;font-size:15px;border-radius:14px}
+  #write-card{margin:20px 0 0;text-align:left}
+  .wc-q{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px}
+  #wc-input{width:100%;font-size:16px;padding:12px 14px;border:1.5px solid var(--hair);border-radius:12px;
+    background:#fff;color:var(--ink);outline:none;font-family:inherit}
+  #wc-input:focus{border-color:var(--violet)}
 
   /* ---------- PIVOT ---------- */
   .swaphero{margin-top:16px}
@@ -503,6 +517,16 @@
             <button class="btn btn-plain" id="btn-pay" style="height:auto;padding:8px">Pay 18m and open</button>
           </div>
         </div>
+        <div id="recall-card">
+          <div class="rc-tag">Recall · one question while you wait</div>
+          <div class="rc-q">Yesterday's lead argued the phone doesn't steal your time. What does it do instead?</div>
+          <button class="btn btn-plain btn-sm" id="rc-reveal">Reveal</button>
+          <div class="rc-a" style="display:none">It arbitrages your inattention — one notification at a time.</div>
+          <div class="rc-mark" style="display:none">
+            <button class="btn btn-tint btn-sm" id="rc-had" style="--tc:var(--pursuit)">Had it</button>
+            <button class="btn btn-plain btn-sm" id="rc-didnt">Didn't</button>
+          </div>
+        </div>
         <div id="gate-note"></div>
       </div>
     </div>
@@ -619,6 +643,10 @@
         <div class="edend">
           <div class="edend-mark">End of the Edition</div>
           <div class="edend-line">Nothing ranked, nothing infinite.</div>
+          <div id="write-card">
+            <div class="wc-q">Close with one sentence — what will you remember?</div>
+            <input id="wc-input" type="text" placeholder="In your own words…" autocomplete="off">
+          </div>
           <button class="btn btn-black" id="btn-ed-done">Finish — write it to the record</button>
         </div>
       </div>
@@ -647,7 +675,7 @@
           <div id="pursuit-line"></div>
           <div id="focus-line" style="display:none;margin-bottom:9px;font-size:13px;font-weight:600;color:var(--sub)">Gates followed your Work Focus on 3 of 5 weekdays.</div>
           <div id="tb-line" style="margin-bottom:9px;font-size:13px;font-weight:600;color:var(--amber-t)">Timebank — <b id="tb-line-n">6h 40m</b> stored · never expires</div>
-          <div class="prov"><svg width="13" height="13" viewBox="0 0 14 14"><path fill="#0B8472" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified from on-device data. Never leaves this phone.</div>
+          <div class="prov"><svg width="13" height="13" viewBox="0 0 14 14"><path fill="#0B8472" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified from on-device data — recall entries are self-marked. Never leaves this phone.</div>
           <div class="flink" data-go="founding"><b>713</b> founding places left ›</div>
         </div>
       </div>
@@ -813,11 +841,11 @@
 
   <!-- annotations -->
   <div class="notes">
-    <h1>OFFRAMP — v26</h1>
-    <div class="sub">The soft spot · Sep 4, 2026</div>
-    <div class="note"><b>Detection, measured — never guessed.</b> The Receipt now names it: "Your soft spot: 9–10pm — 4 of 5 TikTok opens landed there this week." Derived from gate-open timestamps the product already mints. Opal's schedules are user-guessed; ours are observed.</div>
-    <div class="note"><b>The fill rides the cue, not a calendar.</b> The 642-test meta-analysis: cue-triggered plans (d=.43) beat clock-anchored plans (d=.29), and one plan beats three. So Gates Tune gets one row — "Soft spot · 9–10pm → Walk" (tap to change, or Off) — and when the gate fires, the pivot sheet leads with yesterday's decision, tagged "Pre-decided for your soft spot." The gate IS the cue; the pre-decision is if-then planning with enforcement.</div>
-    <div class="note"><b>Doctrine kept:</b> it's a default, never a lock — pick another chip anytime. No calendar surface was built, none will be: planner chrome dies in ten days, and that's Habi's field, not ours. Each gate fire now resets the pivot — fresh decision, pre-decided lead, every time.</div>
+    <h1>OFFRAMP — v27</h1>
+    <div class="sub">Recall — the educational arm · Sep 4, 2026</div>
+    <div class="note"><b>Think at the wait — zero added seconds.</b> Choose "Wait 10:00 instead" and the wait's dead time gets a job: one retrieval question from yesterday's lead. Answer in your head, Reveal, self-mark. "Had it" mints +2m; "Didn't" respaces it — the spacing effect, not a punishment. Retrieval g≈0.5 with feedback (Springer meta, 2025); the gate was always friction — now the friction trains.</div>
+    <div class="note"><b>Write at the close — the Receipt starts holding your words.</b> End of the Edition: "Close with one sentence — what will you remember?" The sentence mints +5m and seals onto the record (generation effect d≈0.4, 2023 meta). Ninety days in: ~80 of your own sentences — a learning diary no blocker can offer. Speak mode deferred: social friction, weakest differentiation.</div>
+    <div class="note"><b>Two classes of truth, labeled.</b> System-verified entries and self-marked recall entries are now visually distinct — recall rows carry the pursuit blue and the seal reads "Verified from on-device data — recall entries are self-marked." The brand's promise survives the honors system.</div>
     <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
     <div class="note"><b>Provenance is the product.</b> Every piece answers "why is this here": From your #N source · time this morning. The masthead shows the rules being enforced: 6 pieces from 5 of your 12 sources · nothing older than 24h · in your order. A feed can't show its work; the Edition does.</div>
     <div class="note"><b>Honest mint.</b> Finish banks the minutes you actually read (Σ of pieces marked read), not a flat reward. Read all six: +34m lands on Home. Skim nothing, mint nothing — "Nothing on the record yet." Proof means measuring truth.</div>
@@ -919,6 +947,7 @@ let waitT=null;
 $("#btn-wait").addEventListener("click",()=>{
   if(waitT)return;
   let s=600; const b=$("#btn-wait"); b.style.opacity=".55";
+  $("#recall-card").style.display="block"; /* the wait's dead time gets a job */
   waitT=setInterval(()=>{s--; b.textContent="Waiting — "+Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
     if(s<=0){clearInterval(waitT);waitT=null;b.textContent="Wait 10:00 instead";b.style.opacity="1";
       note("Gate passed. The wait was the win.");}},1000);
@@ -930,6 +959,31 @@ $("#btn-pay").addEventListener("click",()=>{
   note("18m paid. Gate open — 60:00.");
 });
 function note(t){const n=$("#gate-note");n.textContent=t;n.style.opacity=1;setTimeout(()=>n.style.opacity=0,2600);}
+
+/* recall — think at the wait, write at the close; self-marked, honestly labeled */
+function mintQuiet(mins,label){ /* mints without leaving the current screen */
+  state.kept+=mins; state.weekMin+=mins;
+  state.entries.unshift({day:"Today",kept:mins,did:label,flash:true,self:true});
+  const r=document.createElement("div"); r.className="trow flash";
+  r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">${label}</span><span class="ta" style="color:var(--pursuit-t)">+${mins}m</span>`;
+  state.nowMin=Math.min(state.nowMin+12,1439);
+  $("#trec-rows").appendChild(r);
+  const tr=$("#trec"); $(".statbar").style.top=(tr.offsetTop+tr.offsetHeight+21)+"px";
+  const tt=$("#toast"); tt.innerHTML="On the record, self-marked. <b>+"+mins+"m</b>";
+  tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
+}
+$("#rc-reveal").addEventListener("click",()=>{
+  $(".rc-a").style.display="block"; $(".rc-mark").style.display="flex"; $("#rc-reveal").style.display="none";
+});
+$("#rc-had").addEventListener("click",()=>{
+  mintQuiet(2,"recall — 'arbitrages inattention'");
+  note("+2m — recall on the record.");
+  $("#recall-card").style.display="none";
+});
+$("#rc-didnt").addEventListener("click",()=>{
+  note("No mint. It returns in a few days.");
+  $("#recall-card").style.display="none";
+});
 
 /* pivot */
 $$(".pchip").forEach(c=>c.addEventListener("click",()=>{
@@ -981,12 +1035,14 @@ function finishEdition(m){
 }
 $("#btn-ed-done").addEventListener("click",()=>{
   const readMin=state.edRead||0;
-  if(state.viaPivot){state.viaPivot=false;finishEdition(45);return;}
+  const sent=$("#wc-input").value.trim();
+  const after=(m)=>{ if(sent){ mintQuiet(5,`recall — '${sent.slice(0,42)}${sent.length>42?"…":""}'`); $("#wc-input").value=""; } };
+  if(state.viaPivot){state.viaPivot=false;finishEdition(45);after();return;}
   if(readMin<=0){
     const t=$("#toast"); t.innerHTML="Nothing on the record yet — read a piece first.";
     t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),2600); return;
   }
-  finishEdition(readMin);
+  finishEdition(readMin); after();
 });
 
 /* edition finite-flow scroll driver */
@@ -1094,6 +1150,7 @@ state.entries=[
   {day:"Mon",kept:244,did:"Edition night — phone in drawer"},
 ];
 function catColor(e){const s=(e.did||"").toLowerCase();
+  if(/recall/.test(s))return "#4A7FBF";
   if(/walk|ride|gym|run/.test(s))return "#35A06F";
   if(/read|edition/.test(s))return "#9678D8";
   if(/call|mom|dad/.test(s))return "#D9960B";
