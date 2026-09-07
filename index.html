@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v24</title>
+<title>OFFRAMP — product mock v25</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -125,6 +125,7 @@
     font-size:13.5px;font-weight:600;color:var(--sub);cursor:pointer;transition:all .15s}
   .pursuit-chip.on{border-color:var(--pursuit);color:var(--pursuit-t);background:color-mix(in srgb,var(--pursuit) 8%,#fff)}
   #pursuit-line{display:none;margin-bottom:9px;font-size:13px;font-weight:600;color:var(--pursuit-t)}
+  #seal-line{font-size:12px;color:var(--ter);margin-bottom:9px}
   .edcard{position:absolute;top:259px;left:22px;right:22px;background:var(--card);
     border-radius:18px;
     box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);padding:22px 18px;cursor:pointer;
@@ -638,6 +639,7 @@
         <div class="docstrip"><div id="strip"></div></div>
         <div class="docrows" id="rows"></div>
         <div class="docfoot">
+          <div id="seal-line"></div>
           <div id="pursuit-line"></div>
           <div id="focus-line" style="display:none;margin-bottom:9px;font-size:13px;font-weight:600;color:var(--sub)">Gates followed your Work Focus on 3 of 5 weekdays.</div>
           <div id="tb-line" style="margin-bottom:9px;font-size:13px;font-weight:600;color:var(--amber-t)">Timebank — <b id="tb-line-n">6h 40m</b> stored · never expires</div>
@@ -685,6 +687,12 @@
       </div>
       <div class="igroup" style="margin-top:12px">
         <div class="irow" style="font-weight:600;font-size:16px">Freeze streak during travel<div class="switch" id="sw"></div></div>
+      </div>
+      <div class="micro-h" style="margin-top:18px">Milestones — sealed into the record</div>
+      <div class="igroup" id="milestones">
+        <div class="irow"><span class="st">Day 7</span><span class="v">sealed Jul 5</span></div>
+        <div class="irow"><span class="st">Day 30</span><span class="v">sealed Jul 28</span></div>
+        <div class="irow" style="color:var(--ter)"><span class="st">Day 100</span><span class="v">32 days out</span></div>
       </div>
       <div style="margin-top:14px"><button class="btn btn-plain sheet-close">Close</button></div>
     </div>
@@ -798,11 +806,11 @@
 
   <!-- annotations -->
   <div class="notes">
-    <h1>OFFRAMP — v24</h1>
-    <div class="sub">Noun Uniformity Rule · Sep 4, 2026</div>
-    <div class="note"><b>Every noun: its rule on its face, a line in the Receipt, one Tune home.</b> Timebank failed all three — fixed. Its statbar cell now opens the Timebank sheet (earned by / spent on / never expires · can't be bought), its rule sits under the hero number, and the Receipt carries "Timebank — 6h 40m stored · never expires," live when you spend.</div>
-    <div class="note"><b>The greeting has a pulse.</b> "Good morning, Glenn · Fri, Sep 4" — warmth without noise, borrowed from Habi's "Hi, Jojo" principle, none of its flame.</div>
-    <div class="note"><b>Uniformity audit, closed:</b> gates carry rules on their rows ✓ · Edition on the masthead ✓ · Pursuit on the tag ✓ · streak in its sheet ✓ · Timebank now ✓ · the Receipt needs no tune — it is the record.</div>
+    <h1>OFFRAMP — v25</h1>
+    <div class="sub">Honest dopamine · Sep 4, 2026</div>
+    <div class="note"><b>The weekly seal.</b> Every Receipt now carries its ceremony: current week reads "Seals Sunday · 6:00 PM"; page back and Week 35 reads "Sealed Sunday, 6:00 PM · on the record." Appointment, completion, reveal — a weekly rhythm on top of the daily one.</div>
+    <div class="note"><b>Goal-gradient, everywhere it pulls.</b> The pursuit arc gains a denominator ("piece 4 of 14" on the tag, "4 of 14 pieces" on the Receipt line). The streak sheet gains milestone documents: Day 7 and Day 30 sealed with dates, Day 100 at "32 days out" — progress that pulls harder as it nears.</div>
+    <div class="note"><b>True near-misses, never manufactured.</b> Tap Thursday in the Receipt: "Thu — 3h 55m kept · 9m short of your best day." The near-miss circuit fires on real data (Thursday reseeded to 235 so the miss is true; week total now 892, share card follows). Slot machines fake this signal; we only ever report it.</div>
     <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
     <div class="note"><b>Provenance is the product.</b> Every piece answers "why is this here": From your #N source · time this morning. The masthead shows the rules being enforced: 6 pieces from 5 of your 12 sources · nothing older than 24h · in your order. A feed can't show its work; the Edition does.</div>
     <div class="note"><b>Honest mint.</b> Finish banks the minutes you actually read (Σ of pieces marked read), not a flat reward. Read all six: +34m lands on Home. Skim nothing, mint nothing — "Nothing on the record yet." Proof means measuring truth.</div>
@@ -830,7 +838,7 @@
 
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={kept:134, tbMin:400, weekMin:842, opens:3, pivot:null, viaPivot:false, edRead:0, editionDone:false, edReadMin:0, seenGate:false, seenReceipt:false, seenWave:false};
+const state={kept:134, tbMin:400, weekMin:892, opens:3, pivot:null, viaPivot:false, edRead:0, editionDone:false, edReadMin:0, seenGate:false, seenReceipt:false, seenWave:false};
 
 const fmt=m=>m<60? m+"m" : Math.floor(m/60)+"h "+String(m%60).padStart(2,"0")+"m";
 const fmtH=m=>fmt(m).replace(/(\d+)([hm])/g,'$1<span class="u">$2</span>'); /* units at hierarchy size (HIG Typography) */
@@ -990,14 +998,14 @@ $("#edscroll").addEventListener("scroll",()=>{
 });
 
 /* pursuit — declared in Tune, fed by verified reads */
-state.pursuit=null; state.pursuitN=4; state.arcCounted=false;
+state.pursuit=null; state.pursuitN=4; state.pursuitTotal=14; state.arcCounted=false;
 const PURSUIT_CONTENT={
   "The chip war":{t:"The Arizona fab is a mirror, not a factory",s:"Chip Letter · 9 min"},
   "Stoicism":{t:"The dichotomy of control, tested on a Tuesday",s:"Daily Stoic · 9 min"},
   "How LLMs work":{t:"Attention is all you need, explained with pizza",s:"ML Explained · 9 min"}
 };
 function updatePursuitLine(){
-  if(state.pursuit) $("#pursuit-line").innerHTML=`${state.pursuit} — <b>${state.pursuitN}</b> pieces into your arc · next piece Monday`;
+  if(state.pursuit) $("#pursuit-line").innerHTML=`${state.pursuit} — <b>${state.pursuitN} of ${state.pursuitTotal}</b> pieces · next piece Monday`;
 }
 function setPursuit(name){
   state.pursuit=name||null; state.pursuitN=4; state.arcCounted=false;
@@ -1007,7 +1015,7 @@ function setPursuit(name){
   if(name){
     const c=PURSUIT_CONTENT[name];
     art.classList.add("pursuit-on");
-    art.querySelector(".ptag").innerHTML=`Pursuit · piece <span class="parc">${state.pursuitN}</span> of your ${name.toLowerCase().replace(/ /g,"-")} arc`;
+    art.querySelector(".ptag").innerHTML=`Pursuit · piece <span class="parc">${state.pursuitN}</span> of ${state.pursuitTotal} · your ${name.toLowerCase().replace(/ /g,"-")} arc`;
     art.querySelector(".pt-meta .t").textContent=c.t;
     art.querySelector(".pt-meta .s").textContent=c.s;
     art.querySelector(".prov-line").textContent="From your pursuit bundle · 6:31 this morning";
@@ -1043,7 +1051,7 @@ function checkPursuitArc(){
 /* receipt */
 state.entries=[
   {day:"Today",kept:134,did:"45m walk · 1h 20m reading"},
-  {day:"Thu",kept:185,did:"called Mom · garage shelf"},
+  {day:"Thu",kept:235,did:"called Mom · garage shelf"},
   {day:"Wed",kept:108,did:"made dinner early"},
   {day:"Tue",kept:171,did:"long ride · no podcasts"},
   {day:"Mon",kept:244,did:"Edition night — phone in drawer"},
@@ -1056,7 +1064,7 @@ function catColor(e){const s=(e.did||"").toLowerCase();
 const weeks={
   36:{total:()=>state.weekMin, entries:()=>state.entries, strip:()=>[
     {l:"M",m:244,c:"#9678D8"},{l:"T",m:171,c:"#35A06F"},{l:"W",m:108,c:"#0EA58F"},
-    {l:"T",m:185,c:"#D9960B"},{l:"F",m:state.kept,c:catColor(state.entries[0]||{}),today:true},
+    {l:"T",m:235,c:"#D9960B"},{l:"F",m:state.kept,c:catColor(state.entries[0]||{}),today:true},
     {l:"S",m:0},{l:"S",m:0}]},
   35:{total:()=>763, entries:()=>[
     {day:"Sun",kept:158,did:"meal prep · called Jo"},
@@ -1095,6 +1103,7 @@ function renderWeek(w){
     e.flash=false;
   });
   $("#share-n").textContent=fmt(W.total());
+  $("#seal-line").textContent = w<36 ? "Sealed Sunday, 6:00 PM · on the record" : "Seals Sunday · 6:00 PM";
   $(".sharecard .wk").textContent="Week "+w+" — On the record";
   $("#wk-prev").style.opacity=w<=35?".3":"1";
   $("#wk-next").style.opacity=w>=36?".3":"1";
@@ -1102,9 +1111,13 @@ function renderWeek(w){
 }
 function selectDay(i){
   selIdx[curWeek]=i;
-  const t=weeks[curWeek].strip()[i];
+  const strip=weeks[curWeek].strip(), t=strip[i];
   $$("#strip .daycell").forEach((c,j)=>c.classList.toggle("sel",j===i));
-  $("#readout").textContent=t&&t.m? DN[i]+" — "+fmt(t.m)+" kept" : "—";
+  if(!t||!t.m){$("#readout").textContent="—";return;}
+  const best=Math.max(...strip.filter(x=>x.m>0).map(x=>x.m));
+  let txt=DN[i]+" — "+fmt(t.m)+" kept";
+  if(t.m<best && best-t.m<=15) txt+=` · ${best-t.m}m short of your best day`; /* true near-misses only */
+  $("#readout").textContent=txt;
 }
 $("#strip").addEventListener("click",e=>{
   const c=e.target.closest(".daycell");
