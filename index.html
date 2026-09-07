@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v25</title>
+<title>OFFRAMP — product mock v26</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -126,6 +126,8 @@
   .pursuit-chip.on{border-color:var(--pursuit);color:var(--pursuit-t);background:color-mix(in srgb,var(--pursuit) 8%,#fff)}
   #pursuit-line{display:none;margin-bottom:9px;font-size:13px;font-weight:600;color:var(--pursuit-t)}
   #seal-line{font-size:12px;color:var(--ter);margin-bottom:9px}
+  #spot-line{font-size:13px;color:var(--sub);margin-bottom:9px;font-weight:600}
+  #spot-tag{display:none;text-align:center;font-size:12.5px;color:var(--sub);margin:12px 22px 0}
   .edcard{position:absolute;top:259px;left:22px;right:22px;background:var(--card);
     border-radius:18px;
     box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);padding:22px 18px;cursor:pointer;
@@ -509,6 +511,7 @@
     <div class="screen" id="s-pivot">
       <div class="scr-head rise"><div class="cap">Gate — Instagram</div><div class="big-title">Pivot</div></div>
       <div class="swaphero rise d1"><div class="n hero-num">45m</div><div class="s">of Instagram <span id="swap-line">→</span></div></div>
+      <div id="spot-tag">Pre-decided for your soft spot · 9–10pm — change anytime in Gates tune</div>
       <div class="pchips rise d2">
         <div class="pchip" data-p="Walk" style="--cc:#35A06F"><span class="dot" style="background:#35A06F"></span>Walk</div>
         <div class="pchip" data-p="Read your Edition" style="--cc:#9678D8"><span class="dot" style="background:#9678D8"></span>Read your Edition</div>
@@ -640,6 +643,7 @@
         <div class="docrows" id="rows"></div>
         <div class="docfoot">
           <div id="seal-line"></div>
+          <div id="spot-line">Your soft spot: 9–10pm — 4 of 5 TikTok opens landed there this week.</div>
           <div id="pursuit-line"></div>
           <div id="focus-line" style="display:none;margin-bottom:9px;font-size:13px;font-weight:600;color:var(--sub)">Gates followed your Work Focus on 3 of 5 weekdays.</div>
           <div id="tb-line" style="margin-bottom:9px;font-size:13px;font-weight:600;color:var(--amber-t)">Timebank — <b id="tb-line-n">6h 40m</b> stored · never expires</div>
@@ -766,6 +770,9 @@
         </div>
         <div class="tnote">When a Focus is on, your gates follow it. Focus lives in iOS Settings — your phone already knows when you're working.</div>
       </div>
+      <div class="igroup" style="margin-top:14px">
+        <div class="irow" id="spot-row" style="cursor:pointer"><span class="st">Soft spot · 9–10pm</span><span class="v" id="spot-val" style="font-weight:700">Walk<span class="chev">›</span></span></div>
+      </div>
       <div class="tnote">Tunes apply tomorrow. Today's gates were set by yesterday's you — no loosening in a weak moment.</div>
       <div style="margin-top:12px"><button class="btn btn-plain sheet-close">Done</button></div>
     </div>
@@ -806,11 +813,11 @@
 
   <!-- annotations -->
   <div class="notes">
-    <h1>OFFRAMP — v25</h1>
-    <div class="sub">Honest dopamine · Sep 4, 2026</div>
-    <div class="note"><b>The weekly seal.</b> Every Receipt now carries its ceremony: current week reads "Seals Sunday · 6:00 PM"; page back and Week 35 reads "Sealed Sunday, 6:00 PM · on the record." Appointment, completion, reveal — a weekly rhythm on top of the daily one.</div>
-    <div class="note"><b>Goal-gradient, everywhere it pulls.</b> The pursuit arc gains a denominator ("piece 4 of 14" on the tag, "4 of 14 pieces" on the Receipt line). The streak sheet gains milestone documents: Day 7 and Day 30 sealed with dates, Day 100 at "32 days out" — progress that pulls harder as it nears.</div>
-    <div class="note"><b>True near-misses, never manufactured.</b> Tap Thursday in the Receipt: "Thu — 3h 55m kept · 9m short of your best day." The near-miss circuit fires on real data (Thursday reseeded to 235 so the miss is true; week total now 892, share card follows). Slot machines fake this signal; we only ever report it.</div>
+    <h1>OFFRAMP — v26</h1>
+    <div class="sub">The soft spot · Sep 4, 2026</div>
+    <div class="note"><b>Detection, measured — never guessed.</b> The Receipt now names it: "Your soft spot: 9–10pm — 4 of 5 TikTok opens landed there this week." Derived from gate-open timestamps the product already mints. Opal's schedules are user-guessed; ours are observed.</div>
+    <div class="note"><b>The fill rides the cue, not a calendar.</b> The 642-test meta-analysis: cue-triggered plans (d=.43) beat clock-anchored plans (d=.29), and one plan beats three. So Gates Tune gets one row — "Soft spot · 9–10pm → Walk" (tap to change, or Off) — and when the gate fires, the pivot sheet leads with yesterday's decision, tagged "Pre-decided for your soft spot." The gate IS the cue; the pre-decision is if-then planning with enforcement.</div>
+    <div class="note"><b>Doctrine kept:</b> it's a default, never a lock — pick another chip anytime. No calendar surface was built, none will be: planner chrome dies in ten days, and that's Habi's field, not ours. Each gate fire now resets the pivot — fresh decision, pre-decided lead, every time.</div>
     <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
     <div class="note"><b>Provenance is the product.</b> Every piece answers "why is this here": From your #N source · time this morning. The masthead shows the rules being enforced: 6 pieces from 5 of your 12 sources · nothing older than 24h · in your order. A feed can't show its work; the Edition does.</div>
     <div class="note"><b>Honest mint.</b> Finish banks the minutes you actually read (Σ of pieces marked read), not a flat reward. Read all six: +34m lands on Home. Skim nothing, mint nothing — "Nothing on the record yet." Proof means measuring truth.</div>
@@ -852,6 +859,13 @@ function countUp(el,target,dur=650){
 /* navigation — push grammar: content screens slide from right, back slides from left */
 let navInit=false, navDir="fwd";
 function show(id){
+  const leaving=$(".screen.active");
+  if(leaving && leaving.id==="s-pivot" && id!=="pivot"){
+    state.pivot=null; $$(".pchip").forEach(x=>x.classList.remove("sel"));
+    $("#pivot-preview").classList.remove("show");
+    const pb=$("#btn-start"); pb.disabled=true; pb.style.opacity=".3"; /* abandoning = fresh decision next fire */
+  }
+  if(id==="pivot")preselectPivot();
   if(id==="gate"){$("#s-gate").classList.add("on");
     if(!state.seenGate){state.seenGate=true;$("#gate-first").style.display="block";}
     else{$("#gate-first").style.display="none";}
@@ -928,7 +942,11 @@ $$(".pchip").forEach(c=>c.addEventListener("click",()=>{
 $("#btn-start").addEventListener("click",()=>{
   if(!state.pivot)return;
   if(state.pivot==="Read your Edition"){state.viaPivot=true;show("edition");return;}
-  mint(45,"pivot: "+state.pivot.toLowerCase());
+  const label=state.pivot;
+  state.pivot=null; $$(".pchip").forEach(x=>x.classList.remove("sel"));
+  $("#pivot-preview").classList.remove("show");
+  const b=$("#btn-start"); b.disabled=true; b.style.opacity=".3"; /* each gate fire = fresh decision */
+  mint(45,"pivot: "+label.toLowerCase());
 });
 state.nowMin=581; /* mock clock: 9:41 — stamps new ledger rows */
 function tstamp(){const h=Math.floor(state.nowMin/60),m=state.nowMin%60;return h+":"+String(m).padStart(2,"0")}
@@ -1045,6 +1063,25 @@ function checkPursuitArc(){
     state.arcCounted=true; state.pursuitN++;
     art.querySelector(".parc").textContent=state.pursuitN;
     updatePursuitLine();
+  }
+}
+
+/* soft spot — measured from gate opens; the pre-decided pivot is yesterday's you protecting today's */
+state.spotPivot="Walk";
+const SPOT_OPTIONS=["Walk","Read your Edition","Call someone","Make something",null];
+$("#spot-row").addEventListener("click",()=>{
+  const i=SPOT_OPTIONS.indexOf(state.spotPivot);
+  state.spotPivot=SPOT_OPTIONS[(i+1)%SPOT_OPTIONS.length];
+  $("#spot-val").innerHTML=(state.spotPivot||"Off")+'<span class="chev">›</span>';
+});
+function preselectPivot(){
+  const tag=$("#spot-tag");
+  if(state.spotPivot && !state.pivot){
+    tag.style.display="block";
+    const c=document.querySelector(`.pchip[data-p="${state.spotPivot}"]`);
+    if(c)c.click();
+  } else {
+    tag.style.display="none";
   }
 }
 
