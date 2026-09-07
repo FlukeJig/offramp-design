@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OFFRAMP — product mock v23</title>
+<style>
+  :root{
+    --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
+    --hair:rgba(0,0,0,.07);
+    --teal:#0EA58F; --violet:#9678D8; --amber:#D9960B; --green:#35A06F; --red:#E05555;
+    --pursuit:#4A7FBF; --pursuit-t:#3A6AA8;
+    --teal-t:#0B8472; --violet-t:#8167BA; --amber-t:#9C6C08; --green-t:#2C845C; /* text tier ≥4.58:1 */
+    --spring:cubic-bezier(.32,1.5,.62,1);
+    --ease:cubic-bezier(.22,.9,.26,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+  html,body{background:#E9E9EE;color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+    font-variant-numeric:tabular-nums}
+  .wrap{display:flex;gap:56px;padding:48px;align-items:flex-start}
+
+  /* ---------- notes ---------- */
+  .notes{width:320px;padding-top:8px}
+  .notes h1{font-size:22px;font-weight:800;letter-spacing:-.01em}
+  .notes .sub{color:var(--ter);font-size:13px;margin:6px 0 26px}
+  .note{border-top:1px solid rgba(0,0,0,.09);padding:13px 0;font-size:14px;color:#4a4a4f;line-height:1.5}
+  .note b{color:var(--ink);font-weight:700}
+  .jump{margin-top:24px;border-top:1px solid rgba(0,0,0,.09);padding-top:16px}
+  .jump span{display:block;font-size:11px;letter-spacing:.12em;color:var(--ter);text-transform:uppercase;margin-bottom:10px;font-weight:600}
+  .jump a{display:inline-block;color:#4a4a4f;font-size:13px;text-decoration:none;background:#fff;
+    border:1px solid rgba(0,0,0,.09);border-radius:99px;padding:6px 14px;margin:0 6px 8px 0;cursor:pointer}
+  .jump a:hover{color:var(--teal);border-color:var(--teal)}
+  .tokens{display:flex;gap:8px;margin-top:20px}
+  .sw{width:22px;height:22px;border-radius:7px;border:1px solid rgba(0,0,0,.12)}
+
+  /* ---------- phone ---------- */
+  .phone{width:390px;height:844px;min-width:390px;position:relative;overflow:hidden;
+    background:linear-gradient(180deg,#FCFCFE 0%,#F5F5F7 34%,#F1F1F5 100%);
+    border-radius:58px;border:1px solid rgba(0,0,0,.14);
+    box-shadow:0 0 0 11px #17171a,0 50px 100px rgba(0,0,0,.28)}
+  .island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:122px;height:35px;
+    background:#000;border-radius:20px;z-index:80}
+  .statusbar{position:absolute;top:0;left:0;right:0;height:56px;z-index:79;
+    display:flex;justify-content:space-between;align-items:center;padding:16px 34px 0;
+    font-size:15px;font-weight:600;color:var(--ink);pointer-events:none}
+  .homeind{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);width:134px;height:5px;
+    border-radius:99px;background:#1D1D1F;opacity:.9;z-index:80;pointer-events:none}
+
+  .screen{position:absolute;inset:0;padding:0 22px;opacity:0;transform:translateX(26px);
+    transition:opacity .34s var(--ease),transform .34s var(--ease);pointer-events:none}
+  .screen.back-in{transform:translateX(-26px)}
+  .screen.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .screen.active .rise{animation:rise .5s var(--ease) backwards}
+  .screen.active .rise.d1{animation-delay:.05s}
+  .screen.active .rise.d2{animation-delay:.11s}
+  .screen.active .rise.d3{animation-delay:.17s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+  .cap{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--ter);font-weight:600}
+  .big-title{font-size:34px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
+  .hero-num{font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+  .sub-line{color:var(--sub);font-size:15px;line-height:1.45}
+
+  .scr-head{margin-top:74px;text-align:left}
+  .iconbtn{position:absolute;top:66px;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+    background:rgba(255,255,255,.72);backdrop-filter:blur(12px);box-shadow:0 1px 3px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.85);
+    display:flex;align-items:center;justify-content:center;color:var(--sub);z-index:6;font-size:13px;font-weight:700;
+    transition:transform .18s var(--spring)}
+  .iconbtn:active{transform:scale(.9)}
+  .iconbtn.r{right:22px}.iconbtn.l{left:22px}
+
+  /* ---------- iOS grouped list ---------- */
+  .igroup{background:var(--card);border-radius:18px;overflow:hidden;
+    box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 28px rgba(0,0,0,.05)}
+  .irow{display:flex;align-items:center;gap:12px;padding:14px 16px;border-top:1px solid var(--hair);
+    font-size:17px;color:var(--ink)}
+  .irow:first-child{border-top:none}
+  .irow .v{margin-left:auto;color:var(--sub);font-size:15px;display:flex;align-items:center;gap:6px}
+  .irow .chev{color:#C7C7CC;font-size:19px;font-weight:600}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:none}
+
+  /* ---------- buttons ---------- */
+  .btn{display:flex;align-items:center;justify-content:center;height:56px;border-radius:18px;width:100%;
+    font-size:17px;font-weight:700;cursor:pointer;border:none;transition:transform .18s var(--spring),opacity .15s}
+  .btn:active{transform:scale(.965);opacity:.92}
+  .btn-black{background:#1D1D1F;color:#fff;box-shadow:0 12px 26px rgba(0,0,0,.2)}
+  .btn-tint{background:color-mix(in srgb,var(--tc,#0EA58F) 12%,#fff);color:var(--tc,#0EA58F)}
+  .btn-plain{background:none;color:var(--sub);font-weight:600}
+  .bottombar{position:absolute;left:22px;right:22px;bottom:34px;display:flex;flex-direction:column;gap:10px}
+
+  /* ---------- HOME ---------- */
+  #s-home .hero{margin-top:89px}
+  #s-home .hero .n{font-size:89px;line-height:1.02;cursor:pointer;letter-spacing:-0.027em}
+  #s-home .hero .n .u{font-size:.55em;font-weight:700;letter-spacing:-.01em}
+  #s-home .hero .l{margin-top:8px;color:var(--sub);font-size:17px}
+  #s-home .wavebox{position:absolute;top:252px;left:-22px;right:-22px;height:280px}
+  #s-home .wavebox svg{width:100%;height:100%;overflow:visible}
+  #s-home .breathe{animation:breathe 4.5s ease-in-out 1.2s infinite;transform-origin:center 80%}
+  @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.03)}}
+  .nowdot{position:absolute;width:11px;height:11px;border-radius:50%;
+    background:var(--teal);border:2.5px solid #fff;box-shadow:0 1px 6px rgba(14,165,143,.55);z-index:3;
+    left:57.4%;top:29.2%}
+  .urges-label{position:absolute;z-index:3;font-size:11.5px;color:var(--sub);white-space:nowrap;
+    left:50%;top:8%;transform:translateX(-50%);opacity:0;transition:opacity .8s}
+  .urges-label.show{opacity:1}
+  .nowdot:after{content:none}
+  .homelinks{display:flex;justify-content:center;font-size:15px;font-weight:600;color:var(--sub)}
+  .homelinks span{cursor:pointer;padding:12px 16px}
+  /* today's record — the ledger, at day granularity */
+  .trec{position:absolute;top:394px;left:22px;right:22px}
+  .trec-cap{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ter);font-weight:700;margin-bottom:8px}
+  .trow{display:flex;align-items:baseline;gap:10px;padding:8px 0;font-size:14.5px;position:relative}
+  .trow+.trow:before{content:"";position:absolute;top:0;left:48px;right:0;height:1px;background:var(--hair)}
+  .trow .tt{color:var(--ter);font-size:12.5px;min-width:38px;font-variant-numeric:tabular-nums}
+  .trow .tl{color:var(--ink)}
+  .trow .ta{margin-left:auto;font-weight:700;font-size:13.5px;font-variant-numeric:tabular-nums}
+  .trow.flash{animation:rowflash .7s var(--ease)}
+  @keyframes rowflash{0%{opacity:0;transform:translateY(-6px)}100%{opacity:1;transform:none}}
+  .ptag{display:none;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pursuit-t);font-weight:800;margin-bottom:4px}
+  .piece.pursuit-on .ptag{display:block}
+  #pursuit-chips{display:none;padding:2px 2px 14px;gap:8px;flex-wrap:wrap}
+  #pursuit-chips.on{display:flex}
+  .pursuit-chip{border:1.5px solid var(--hair);background:#fff;border-radius:99px;padding:9px 14px;
+    font-size:13.5px;font-weight:600;color:var(--sub);cursor:pointer;transition:all .15s}
+  .pursuit-chip.on{border-color:var(--pursuit);color:var(--pursuit-t);background:color-mix(in srgb,var(--pursuit) 8%,#fff)}
+  #pursuit-line{display:none;margin-bottom:9px;font-size:13px;font-weight:600;color:var(--pursuit-t)}
+  .edcard{position:absolute;top:259px;left:22px;right:22px;background:var(--card);
+    border-radius:18px;
+    box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);padding:22px 18px;cursor:pointer;
+    display:flex;align-items:center;gap:14px;transition:transform .18s var(--spring)}
+  .edcard:active{transform:scale(.97)}
+  .edcard .bar{width:4px;align-self:stretch;border-radius:99px;background:var(--violet)}
+  .edthumb{width:44px;min-width:44px;height:44px;border-radius:12px;background:#F2ECFB;
+    display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .edmain{flex:1;min-width:0}
+  .edcard .t1{font-weight:700;font-size:15px;display:flex;align-items:center}
+  .edcard .t2{color:var(--sub);font-size:12.5px;margin-top:2px}
+  .freshdot{width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--violet);margin-right:8px}
+  .edcard.done{opacity:.72}
+  .edcard.done .edthumb{filter:saturate(.4)}
+  .edcheck{color:var(--violet-t);font-weight:800;margin:0 4px}
+  .edcard .t1{font-weight:700;font-size:16px}
+  .edcard .t2{color:var(--sub);font-size:13px;margin-top:2px}
+  .edcard .chev{margin-left:auto;color:#C7C7CC;font-size:20px;font-weight:600}
+  .statbar{position:absolute;top:535px;left:22px;right:22px;display:flex;
+    background:var(--card);border-radius:18px;
+    box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06)}
+  .stat{flex:1;text-align:center;padding:11px 2px;font-size:12px;color:var(--sub);font-weight:600;cursor:pointer}
+  .stat+.stat{border-left:1px solid rgba(0,0,0,.06)}
+  .stat b{display:block;font-size:17px;font-weight:800;margin-bottom:1px}
+
+  /* ---------- GATE (frosted modal) ---------- */
+  #s-gate{position:absolute;inset:0;z-index:60;display:flex;flex-direction:column;justify-content:center;
+    padding:0 22px;background:rgba(242,242,246,.55);backdrop-filter:blur(0px) saturate(1.5);
+    opacity:0;pointer-events:none;transition:opacity .32s var(--ease),backdrop-filter .38s var(--ease)}
+  #s-gate.on{opacity:1;pointer-events:auto;backdrop-filter:blur(26px) saturate(1.5)}
+  #s-gate .card{background:rgba(255,255,255,.66);backdrop-filter:blur(30px) saturate(1.9);
+    border:1px solid rgba(255,255,255,.6);border-radius:28px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 24px 60px rgba(0,0,0,.2);
+    padding:26px 22px 20px;transform:translateY(30px) scale(.96);
+    transition:transform .4s var(--spring)}
+  #s-gate.on .card{transform:translateY(0) scale(1)}
+  #s-gate .gcap{text-align:center;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ter);font-weight:600;margin-bottom:12px}
+  .apptile{width:58px;height:58px;border-radius:16px;margin:0 auto;display:flex;align-items:center;
+    justify-content:center;font-weight:800;font-size:24px;color:#fff;
+    background:linear-gradient(135deg,#B27BE0,#E0689A 55%,#E8A13D);
+    box-shadow:0 8px 20px rgba(224,104,154,.35)}
+  #s-gate .appname{text-align:center;font-weight:700;font-size:16px;margin-top:9px}
+  #gate-first{text-align:center;color:var(--sub);font-size:13px;margin-top:5px}
+  #s-gate .hero{text-align:center;margin-top:12px}
+  #s-gate .hero .n{font-size:84px;line-height:1}
+  #s-gate .hero .l{color:var(--sub);font-size:15px;margin-top:5px}
+  #s-gate .igroup{margin-top:16px;box-shadow:none;background:rgba(0,0,0,.035)}
+  #s-gate .irow{padding:12px 14px;font-size:15px;color:var(--sub)}
+  #s-gate .irow.now{color:var(--ink)}
+  #s-gate .irow .cost{margin-left:auto;font-weight:700;color:var(--ter);font-size:14px}
+  #s-gate .irow.now .cost{color:var(--teal-t)}
+  #s-gate .endlink{position:absolute;top:62px;right:14px;background:none;border:none;color:var(--sub);
+    font-size:14px;font-weight:600;cursor:pointer;z-index:5;padding:12px}
+  .partner-row{display:flex;align-items:center;gap:12px;width:100%;background:rgba(0,0,0,.035);
+    border:none;border-radius:14px;padding:12px 14px;cursor:pointer;text-align:left;margin-top:2px;
+    transition:transform .18s var(--spring)}
+  .partner-row:active{transform:scale(.97)}
+  .squircle{width:40px;height:40px;min-width:40px;border-radius:34%;display:flex;align-items:center;
+    justify-content:center;font-weight:800;font-size:16px;color:#fff;background:var(--teal)}
+  .partner-row .t1{font-size:15px;font-weight:700;color:var(--ink)}
+  .partner-row .t2{font-size:12px;color:var(--sub)}
+  #gate-note{text-align:center;color:var(--teal-t);font-size:14px;font-weight:600;height:20px;margin-top:8px;
+    opacity:0;transition:opacity .3s}
+
+  /* ---------- PIVOT ---------- */
+  .swaphero{margin-top:16px}
+  .swaphero .n{font-size:64px;line-height:1;color:var(--teal)}
+  .swaphero .s{margin-top:8px;color:var(--sub);font-size:17px}
+  .pchips{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .pchip{background:var(--card);border:1.5px solid transparent;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 22px rgba(0,0,0,.05);
+    border-radius:16px;padding:17px 14px;font-size:15px;font-weight:600;cursor:pointer;display:flex;
+    align-items:center;gap:9px;transition:all .18s var(--ease)}
+  .pchip.sel{border-color:var(--cc,var(--teal));background:color-mix(in srgb,var(--cc,#0EA58F) 9%,#fff)}
+  #pivot-preview{margin-top:16px;background:var(--card);border-radius:16px;padding:15px 17px;font-size:14px;
+    color:var(--sub);line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 22px rgba(0,0,0,.05);
+    opacity:0;transform:translateY(8px);transition:all .3s var(--spring)}
+  #pivot-preview.show{opacity:1;transform:translateY(0)}
+  #pivot-preview b{color:var(--teal-t)}
+
+  /* ---------- EDITION ---------- */
+  .ed-hero .n{font-size:64px;line-height:1;color:var(--violet)}
+  .edrows{margin-top:20px}
+  .edrow{display:flex;gap:13px;padding:14px 16px;border-top:1px solid var(--hair);align-items:baseline}
+  .edrow:first-child{border-top:none}
+  .edrow .sdot{width:8px;height:8px;border-radius:50%;background:var(--violet);flex:none;position:relative;top:-1px}
+  .edrow .t{font-size:16px;font-weight:600;line-height:1.35}
+  .edrow.lead .t{font-size:17.5px;font-weight:700}
+  .edrow .s{font-size:13px;color:var(--sub);margin-top:3px}
+  .edfoot{position:absolute;bottom:114px;left:22px;right:22px;text-align:center;color:var(--sub);font-size:12px;line-height:1.5}
+  /* edition v6: editorial grammar */
+  .mast{margin-top:78px;text-align:center}
+  .mast-meta{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-t);font-weight:700}
+  .mast-title{font-family:ui-serif,"New York",serif;font-size:30px;font-weight:700;letter-spacing:-.01em;margin-top:2px}
+  .mast-line{margin-top:7px;font-size:12px;color:var(--ter)}
+  .rule-double{height:6px;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);margin:11px 0 0}
+  .leadcard{margin-top:26px;background:var(--card);border-radius:20px;overflow:hidden;
+    box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(0,0,0,.06)}
+  .leadplate{position:relative;height:118px;background:linear-gradient(165deg,#F3EDFB 0%,#FAF8FD 100%);overflow:hidden}
+  .leadplate svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .leadkick{position:absolute;top:12px;left:14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--violet-t);font-weight:800;background:rgba(255,255,255,.82);padding:4px 9px;border-radius:99px}
+  .lead-h{font-family:ui-serif,"New York",serif;font-size:22px;font-weight:700;line-height:1.22;
+    letter-spacing:-.01em;padding:15px 18px 0}
+  .lead-dek{padding:7px 18px 0;font-size:13.5px;color:var(--sub);line-height:1.45}
+  .src-row{display:flex;align-items:center;gap:8px;padding:11px 18px 14px;font-size:13px;font-weight:600;color:var(--ink)}
+  .src-row .src-time{color:var(--ter);font-weight:500}
+  .bkm{margin-left:auto;width:44px;height:44px;margin-right:-10px;border:none;background:none;
+    color:#C7C7CC;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%}
+  .bkm.on{color:var(--violet-t)}
+  .bkm.on svg path{fill:currentColor}
+  .edsec{margin-top:16px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ter);font-weight:600}
+  .prow{display:flex;align-items:center;gap:12px;padding:12px 14px;border-top:1px solid var(--hair)}
+  .prow:first-child{border-top:none}
+  .plate{width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;
+    justify-content:center;font-family:ui-serif,"New York",serif;font-size:16px;font-weight:700}
+  .prow .pr-main{min-width:0}
+  .prow .t{font-size:15px;font-weight:600;line-height:1.28}
+  .prow .s{font-size:12px;color:var(--sub);margin-top:2px}
+  .prow .bkm{margin-right:-12px}
+  /* edition v10: finite reading flow */
+  #s-edition{padding:0}
+  .progressline{position:absolute;top:55px;left:0;right:0;height:2px;background:rgba(0,0,0,.05);z-index:7}
+  .progressline i{display:block;height:100%;background:var(--violet-t);transform:scaleX(0);transform-origin:left;transition:transform .12s linear}
+  .edscroll{position:absolute;inset:0;overflow-y:auto;padding:0 22px;-webkit-overflow-scrolling:touch}
+  .edscroll .mast{margin-top:118px}
+  .piece{margin-top:26px;transition:opacity .4s var(--ease)}
+  .piece .leadplate{border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 26px rgba(0,0,0,.06)}
+  .ph{font-family:ui-serif,"New York",serif;font-size:24px;font-weight:700;line-height:1.2;letter-spacing:-.01em;margin-top:14px}
+  .piece .src-row{margin-top:10px;padding:0}
+  .pbody{margin-top:14px;font-size:16px;line-height:1.6;color:#2c2c30}
+  .pbody p+p{margin-top:12px}
+  .ptop{display:flex;align-items:center;gap:12px}
+  .pt-meta{min-width:0}
+  .pt-meta .t{font-size:16px;font-weight:700;line-height:1.3}
+  .pt-meta .s{font-size:12.5px;color:var(--sub);margin-top:2px}
+  .piece.locked{opacity:.45}
+  .piece .pbody{display:none}
+  .piece.unlocked .pbody{display:block;animation:rise .5s var(--ease) backwards}
+  .readmark{margin-left:auto;min-width:16px;width:16px;height:16px;opacity:0;transition:opacity .3s;color:var(--violet-t)}
+  .piece.is-read .readmark{opacity:1}
+  .edend{margin:36px 0 48px;text-align:center}
+  .edend-mark{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ter);font-weight:700}
+  .edend-line{margin-top:8px;color:var(--sub);font-size:13px}
+  .edend .btn{margin-top:18px}
+  .edveil{position:absolute;left:0;right:0;bottom:0;height:76px;pointer-events:none;z-index:6;
+    background:linear-gradient(180deg,rgba(245,245,247,0),rgba(245,245,247,.94));transition:opacity .35s}
+  .edveil.off{opacity:0}
+  /* edition v11: covers, provenance, honest mint */
+  .mast-line2{font-size:12.5px;color:var(--sub);margin-top:6px}
+  .mast-line3{font-size:11.5px;color:var(--ter);margin-top:3px}
+  .pcover{height:0;opacity:0;overflow:hidden;border-radius:14px;margin-bottom:0;
+    transition:height .5s var(--ease),opacity .35s var(--ease),margin-bottom .5s var(--ease)}
+  .piece.unlocked .pcover{height:92px;opacity:1;margin-bottom:13px}
+  .pcover svg{width:100%;height:100%;display:block}
+  .piece.unlocked .plate{display:none}
+  .piece.unlocked .pt-meta .t{font-family:ui-serif,"New York",serif;font-size:19px;line-height:1.25}
+  .prov-line{margin-top:4px;font-size:11.5px;color:var(--ter)}
+
+  /* ---------- RECEIPT ---------- */
+  #s-receipt .hero .n{font-size:60px;line-height:1;margin-top:2px}
+  .rrows{margin-top:18px}
+  .rrow{display:flex;align-items:baseline;gap:12px;padding:13.5px 16px;border-top:1px solid var(--hair)}
+  .rrow:first-child{border-top:none}
+  .rrow .day{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);
+    display:flex;align-items:center;gap:7px;font-weight:600;margin-bottom:3px}
+  .rrow .kept{font-size:17px;font-weight:800;color:var(--teal-t);white-space:nowrap}
+  .rrow .did{margin-left:auto;color:var(--sub);font-size:13.5px;text-align:right;line-height:1.4}
+  .rrow.flash .kept{animation:flash 1.6s}
+  @keyframes flash{0%{color:#1D1D1F;text-shadow:0 0 22px rgba(14,165,143,.7)}100%{color:var(--teal-t)}}
+  .rfoot{position:absolute;bottom:114px;left:22px;right:22px;text-align:center}
+  .rfoot .prov{color:var(--sub);font-size:12px;display:flex;align-items:center;justify-content:center;gap:5px}
+  .rfoot .flink{margin-top:9px;font-size:15px;font-weight:600;color:var(--amber-t);cursor:pointer}
+  /* receipt v2: document grammar */
+  .pager{display:flex;align-items:center;gap:8px;margin-top:2px}
+  .pager .pt{font-size:28px;font-weight:800;letter-spacing:-.02em}
+  .pager .pbtn{width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+    background:rgba(255,255,255,.72);backdrop-filter:blur(12px);
+    box-shadow:0 1px 3px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.85);
+    color:var(--sub);font-size:19px;font-weight:600;display:flex;align-items:center;justify-content:center;
+    transition:transform .18s var(--spring),opacity .2s}
+  .pager .pbtn:active{transform:scale(.9)}
+  .pager .pbtn:first-of-type{margin-left:auto}
+  .stripcard{margin-top:16px;background:var(--card);border-radius:18px;padding:16px 18px 10px;
+    box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 28px rgba(0,0,0,.05)}
+  .strip{display:flex;align-items:flex-end;justify-content:space-between;height:52px;padding:0 6px}
+  .tick{width:8px;border-radius:4px;min-height:4px}
+  .tick.empty{background:#E9E9EA}
+  .striplets{display:flex;justify-content:space-between;padding:8px 4px 2px}
+  .striplets span{width:18px;text-align:center;font-size:10px;color:var(--ter);font-weight:600}
+  .striplets span.today{color:var(--ink)}
+  /* receipt v8: ONE document surface */
+  .doccard{margin-top:14px;background:var(--card);border-radius:22px;overflow:hidden;
+    box-shadow:0 1px 2px rgba(0,0,0,.04),0 14px 34px rgba(0,0,0,.06)}
+  .dochead{text-align:center;padding:20px 18px 4px}
+  .docbrand{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);font-weight:700}
+  #receipt-first{margin-top:8px;font-size:13px;color:var(--sub)}
+  .dochead .n{font-size:46px;font-weight:800;letter-spacing:-.02em;margin-top:8px;line-height:1.05}
+  .dochead .ro{margin-top:6px;font-size:13px;color:var(--sub);min-height:18px}
+  .docstrip{padding:14px 12px 6px}
+  #strip{display:flex;align-items:flex-end;justify-content:space-between}
+  .daycell{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:7px;
+    width:44px;height:64px;cursor:pointer;background:none;border:none;padding:0}
+  .daycell .tick{width:10px;border-radius:5px;min-height:4px}
+  .daycell.empty .tick{background:#E9E9EA}
+  .daycell.empty{cursor:default}
+  .daycell .dl{font-size:10px;color:var(--ter);font-weight:600}
+  .daycell.sel .dl{color:var(--ink)}
+  .daycell.sel .tick{box-shadow:0 0 0 2px #fff,0 0 0 3.5px rgba(29,29,31,.3)}
+  .docrows{padding:4px 6px 0}
+  .docrows .rrow{padding:12px 12px}
+  .docfoot{text-align:center;padding:13px 16px 15px;border-top:1px solid var(--hair)}
+  .docfoot .prov{color:var(--sub);font-size:11.5px;display:flex;align-items:center;justify-content:center;gap:5px}
+  .docfoot .flink{margin-top:7px;font-size:12px;color:var(--sub);cursor:pointer}
+  .docfoot .flink b{color:var(--amber-t);font-weight:700}
+
+  /* ---------- FOUNDING ---------- */
+  #s-founding .hero .n{font-size:58px;line-height:1;color:var(--amber);margin-top:4px}
+  #s-founding .hero .n .slash{color:#C7C7CC;font-weight:600}
+  #s-founding .lab{margin-top:10px;color:var(--sub);font-size:15px;line-height:1.5}
+  .facts{margin-top:22px}
+  .fact{display:flex;gap:12px;padding:15px 16px;border-top:1px solid var(--hair);font-size:14.5px;
+    color:#4a4a4f;line-height:1.45}
+  .fact:first-child{border-top:none}
+  .fact i{width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--amber);margin-top:6px}
+  #found-done{display:none}
+  #found-done .big{font-size:26px;font-weight:800;margin-top:8px}
+
+  /* ---------- SHEETS ---------- */
+  .backdrop{position:absolute;inset:0;background:rgba(30,30,40,.3);backdrop-filter:blur(6px);
+    opacity:0;pointer-events:none;transition:opacity .3s;z-index:70}
+  .backdrop.on{opacity:1;pointer-events:auto}
+  .sheet{position:absolute;left:0;right:0;bottom:0;z-index:75;padding:12px 22px 42px;
+    background:rgba(251,251,253,.62);backdrop-filter:blur(34px) saturate(2);
+    border-radius:26px 26px 0 0;border-top:1px solid rgba(255,255,255,.65);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 -14px 44px rgba(0,0,0,.16);
+    transform:translateY(103%);transition:transform .4s var(--spring)}
+  .sheet.on{transform:translateY(0)}
+  .handle{width:38px;height:5px;border-radius:99px;background:rgba(0,0,0,.18);margin:0 auto 16px}
+  .sheet .hero{text-align:center;margin:4px 0 2px}
+  .sheet .hero .n{font-size:64px;line-height:1}
+  .sheet .hero .l{color:var(--sub);font-size:14.5px;margin-top:5px}
+  .sheet .igroup{margin-top:16px}
+  .sheet .micro-h{text-align:center;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ter);font-weight:600;margin-bottom:4px}
+  .policycard{background:var(--card);border-radius:18px;padding:16px 18px;margin-top:14px;
+    box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 28px rgba(0,0,0,.05)}
+  .policycard .pt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-t);font-weight:700;margin-bottom:6px}
+  .policycard .pr{font-size:14px;color:#4a4a4f;padding:8px 0;border-top:1px solid var(--hair);line-height:1.4}
+  .policycard .pr:first-of-type{border-top:none}
+  .setrow .st{font-weight:600;font-size:15.5px}
+  .danger .st{color:var(--red)}
+  .tnote{text-align:center;color:var(--sub);font-size:12px;margin:14px 6px 0;line-height:1.5}
+  .stepper{margin-left:auto;display:flex;align-items:center;gap:13px}
+  .step{width:32px;height:32px;margin:6px;border-radius:50%;border:none;background:rgba(0,0,0,.06);color:var(--ink);
+    font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:transform .15s var(--spring)}
+  .step:active{transform:scale(.88)}
+  .val{min-width:16px;text-align:center;font-weight:800;font-size:17px}
+  .switch{margin-left:auto;width:51px;height:31px;border-radius:99px;background:#E9E9EA;position:relative;
+    cursor:pointer;transition:background .22s;flex:none}
+  .switch:after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;
+    background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18);transition:transform .24s var(--spring)}
+  .switch.on{background:#34C759}
+  .switch.on:after{transform:translateX(20px)}
+
+  /* ---------- SHARE ---------- */
+  #share{position:absolute;inset:0;z-index:85;background:rgba(30,30,40,.42);backdrop-filter:blur(10px);
+    display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+  #share.on{opacity:1;pointer-events:auto}
+  .sharecard{width:314px;height:314px;background:linear-gradient(180deg,#FFFFFF,#F7F7FA);border-radius:30px;
+    box-shadow:0 30px 70px rgba(0,0,0,.3);position:relative;overflow:hidden;padding:28px;cursor:pointer;
+    transform:scale(.9);transition:transform .38s var(--spring)}
+  #share.on .sharecard{transform:scale(1)}
+  .sharecard .wk{font-size:11px;letter-spacing:.12em;color:var(--ter);text-transform:uppercase;font-weight:700}
+  .sharecard .n{font-size:50px;font-weight:800;margin-top:8px;letter-spacing:-.025em}
+  .sharecard .sw2{position:absolute;bottom:42px;left:-8px;right:-8px;height:92px}
+  .sharecard .brand{position:absolute;bottom:20px;left:28px;font-size:12px;letter-spacing:.2em;color:var(--ter);font-weight:800}
+
+  /* ---------- toast: iOS banner from top ---------- */
+  #toast{position:absolute;left:50%;transform:translateX(-50%) translateY(-16px) scale(.96);top:60px;
+    background:rgba(29,29,31,.96);color:#fff;border-radius:99px;padding:12px 20px;font-size:14.5px;
+    font-weight:600;opacity:0;transition:all .42s var(--spring);z-index:78;white-space:nowrap;
+    box-shadow:0 14px 34px rgba(0,0,0,.28)}
+  #toast.on{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+  #toast b{color:#5FD8C4}
+
+  /* bare capture mode */
+  body.bare .notes{display:none}
+  body.bare .wrap{padding:0;gap:0}
+  body.bare .phone{border:none;border-radius:0;box-shadow:none}
+  body.bare *{animation:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="phone" id="phone">
+    <div class="island"></div>
+    <div class="statusbar">
+      <span>9:41</span>
+      <span style="display:flex;gap:6px;align-items:center">
+        <svg width="18" height="11" viewBox="0 0 18 11" fill="#1D1D1F"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="#1D1D1F"><path d="M8 9.6a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zM8 5.5c-1.8 0-3.4.7-4.6 1.9l1.4 1.4A4.4 4.4 0 0 1 8 7.5c1.2 0 2.3.5 3.2 1.3l1.4-1.4A6.4 6.4 0 0 0 8 5.5zM8 1C5 1 2.3 2.2.3 4.2l1.4 1.4A8.9 8.9 0 0 1 8 3c2.4 0 4.6.9 6.3 2.6l1.4-1.4A10.9 10.9 0 0 0 8 1z" transform="translate(0 -1)"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#1D1D1F" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="1.5" fill="#1D1D1F"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="#1D1D1F" opacity=".4"/></svg>
+      </span>
+    </div>
+    <div class="homeind"></div>
+
+    <!-- HOME -->
+    <div class="screen active" id="s-home">
+      <button class="iconbtn r" data-sheet="settings" aria-label="Settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.6v2.8M12 18.6v2.8M2.6 12h2.8M18.6 12h2.8M5.2 5.2l2 2M16.8 16.8l2 2M18.8 5.2l-2 2M7.2 16.8l-2 2"/></svg></button>
+      <div class="hero rise">
+        <div class="cap">Friday, September 4</div>
+        <div class="n hero-num" id="home-n" data-go="receipt" title="See the full record">0m</div>
+        <div class="l">not on your phone today — counted, verified</div>
+      </div>
+      <div class="edcard rise d1" data-go="edition" id="edcard">
+        <div class="edthumb"><svg viewBox="0 0 44 44" width="30" height="30" fill="none"><path d="M2 32 C 9 32, 12 30, 16 28 C 21 26, 23 12, 28 11 C 32 10, 34 20, 42 22" stroke="#9678D8" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+        <div class="edmain">
+          <div class="t1"><span class="freshdot"></span>The quiet economics of attention</div>
+          <div class="t2">The Friday Edition · 6 pieces · 34 min · delivered 6:00</div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="trec rise d2" id="trec">
+        <div class="trec-cap">Today on the record</div>
+        <div id="trec-rows">
+          <div class="trow"><span class="tt">7:30</span><span class="tl">gate held</span><span class="ta" style="color:var(--teal-t)">+12m</span></div>
+          <div class="trow"><span class="tt">8:12</span><span class="tl">morning walk</span><span class="ta">+45m</span></div>
+          <div class="trow"><span class="tt">9:20</span><span class="tl">ride across town</span><span class="ta">+77m</span></div>
+        </div>
+      </div>
+      <div class="statbar rise d3">
+        <div class="stat" data-go="streak"><b style="color:var(--green-t)">68</b>days</div>
+        <div class="stat" data-sheet="gates"><b style="color:var(--teal-t)">3</b>gates</div>
+        <div class="stat" data-go="receipt"><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b>timebank</div>
+      </div>
+      <div class="bottombar">
+        <div class="homelinks"><span data-go="receipt">Today's Receipt ›</span></div>
+      </div>
+    </div>
+
+    <!-- GATE -->
+    <div id="s-gate">
+      <button class="endlink" data-go="home">End session early</button>
+      <div class="card">
+        <div class="gcap">Gate</div>
+        <div class="apptile">IG</div>
+        <div class="appname">Instagram</div>
+        <div id="gate-first" style="display:none">This is a gate. It counts your opens.</div>
+        <div id="gate-normal">
+          <div class="hero"><div class="n hero-num" id="gate-n">3</div><div class="l">opens left today — each one costs more</div></div>
+          <div class="igroup">
+            <div class="irow now">This open<span class="cost">wait 60:00</span></div>
+            <div class="irow">Next open<span class="cost">wait 60:00 · +12m Timebank</span></div>
+            <div class="irow">Last open<span class="cost">+18m Timebank · gate streak ends</span></div>
+          </div>
+          <div style="margin-top:16px;display:flex;flex-direction:column;gap:9px">
+            <button class="btn btn-tint" data-go="pivot">Choose a pivot instead</button>
+            <button class="btn btn-plain" id="btn-use">Use one open</button>
+          </div>
+        </div>
+        <div id="gate-over" style="display:none">
+          <div class="hero"><div class="n hero-num">0</div>
+            <div class="l" style="color:var(--ink);font-weight:600;font-size:16px;margin-top:10px">This open costs 18m of Timebank<br>+ today's gate streak.</div></div>
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:9px">
+            <button class="btn btn-tint" id="btn-wait">Wait 10:00 instead</button>
+            <button class="partner-row" id="btn-partner">
+              <span class="squircle">J</span>
+              <span><span class="t1">Ask my Partner</span><br><span class="t2">Jo holds the other key. One tap asks.</span></span>
+            </button>
+            <button class="btn btn-plain" id="btn-pay" style="height:auto;padding:8px">Pay 18m and open</button>
+          </div>
+        </div>
+        <div id="gate-note"></div>
+      </div>
+    </div>
+
+    <!-- PIVOT -->
+    <div class="screen" id="s-pivot">
+      <div class="scr-head rise"><div class="cap">Gate — Instagram</div><div class="big-title">Pivot</div></div>
+      <div class="swaphero rise d1"><div class="n hero-num">45m</div><div class="s">of Instagram <span id="swap-line">→</span></div></div>
+      <div class="pchips rise d2">
+        <div class="pchip" data-p="Walk" style="--cc:#35A06F"><span class="dot" style="background:#35A06F"></span>Walk</div>
+        <div class="pchip" data-p="Read your Edition" style="--cc:#9678D8"><span class="dot" style="background:#9678D8"></span>Read your Edition</div>
+        <div class="pchip" data-p="Call someone" style="--cc:#D9960B"><span class="dot" style="background:#D9960B"></span>Call someone</div>
+        <div class="pchip" data-p="Make something" style="--cc:#0EA58F"><span class="dot" style="background:#0EA58F"></span>Make something</div>
+      </div>
+      <div id="pivot-preview"><b>+45m on the record</b> — pivot: <span id="pv-name">Walk</span>.<br>Mints when the timer completes.</div>
+      <div class="bottombar">
+        <button class="btn btn-black" id="btn-start" disabled style="opacity:.3">Start 45m</button>
+        <button class="btn btn-plain" data-go="gate">Back to gate</button>
+      </div>
+    </div>
+
+    <!-- EDITION -->
+    <div class="screen" id="s-edition">
+      <button class="iconbtn r" data-go="home">Later</button>
+      <button class="iconbtn l" data-sheet="edtune">Tune</button>
+      <div class="progressline"><i id="edprog"></i></div>
+      <div class="edscroll" id="edscroll">
+        <div class="mast rise">
+          <div class="mast-title">The Friday Edition</div>
+          <div class="mast-line">Nº 36 · Friday, September 4</div>
+          <div class="mast-line2">6 pieces from 5 of your 12 sources · 34 min</div>
+          <div class="mast-line3">nothing older than 24h · in your order</div>
+        </div>
+
+        <article class="piece unlocked rise d1" data-i="0" data-min="6">
+          <div class="leadplate">
+            <svg viewBox="0 0 346 118" fill="none" preserveAspectRatio="none"><path d="M-24 96 C 48 96, 82 92, 122 82 C 172 70, 192 18, 244 8 C 282 1, 308 44, 372 50" stroke="#9678D8" stroke-width="34" stroke-linecap="round" opacity=".30"/><path d="M-24 99 C 48 99, 82 95, 122 85 C 172 73, 192 21, 244 11 C 282 4, 308 47, 372 53" stroke="#8167BA" stroke-width="2.5" stroke-linecap="round" opacity=".55"/></svg>
+            <div class="leadkick">Lead</div>
+          </div>
+          <h2 class="ph">The quiet economics of attention</h2>
+          <div class="src-row"><span class="dot" style="background:#9678D8"></span>Marginal Review<span class="src-time">· 6 min</span>
+            <button class="bkm" aria-label="Save"><svg viewBox="0 0 14 17" width="13" height="16"><path d="M2 1h10a1 1 0 0 1 1 1v13l-6-3.6L1 15V2a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
+            <span class="readmark"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="prov-line">From your #1 source · 6:12 this morning</div>
+          <div class="pbody">
+            <p>Attention is the only budget you spend every waking hour, and it never sends a statement. Most people meet their real priorities at midnight, in the gap between what they planned and what the feed decided.</p>
+            <p>Economists call this a revealed preference: you vote with your minutes, and the tally is brutal. The phone is not stealing your time; it is arbitraging your inattention, one notification at a time.</p>
+            <p>The quiet correction is not willpower. It is accounting. When the minutes are counted, the counting changes them.</p>
+          </div>
+        </article>
+
+        <article class="piece locked" data-i="1" data-min="4">
+          <div class="pcover"><svg viewBox="0 0 346 92" fill="none"><rect width="346" height="92" fill="#F3EFFB"/><circle cx="70" cy="30" r="5" fill="#9678D8" opacity=".5"/><circle cx="150" cy="62" r="4" fill="#9678D8" opacity=".35"/><circle cx="230" cy="26" r="6" fill="#9678D8" opacity=".45"/><circle cx="300" cy="58" r="4" fill="#9678D8" opacity=".3"/><circle cx="150" cy="62" r="14" fill="none" stroke="#8167BA" stroke-width="2" opacity=".5"/></svg></div>
+          <div class="ptop"><div class="plate" style="background:#EFE9FB;color:#8167BA">F</div>
+            <div class="pt-meta"><div class="t">What phones took from boredom</div><div class="s">The Fence · 4 min</div>
+            <div class="prov-line">From your #3 source · 6:47 this morning</div></div>
+            <span class="readmark"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          <div class="pbody">
+            <p>Boredom used to be a room you had to sit in. You stared out the window, your mind wandered, and eventually it came back with something — an idea, a decision, a memory worth keeping.</p>
+            <p>The feed demolished that room and put a casino in its place. The rebuild starts small: one queue, one red light, one elevator ride left unscrolled.</p>
+          </div>
+        </article>
+
+        <article class="piece locked" data-i="2" data-min="9">
+          <div class="pcover"><svg viewBox="0 0 346 92" fill="none"><rect width="346" height="92" fill="#ECF6F1"/><path d="M-10 68 C 40 66, 62 38, 96 42 C 130 46, 140 68, 180 64 C 220 60, 238 28, 278 32 C 308 35, 326 48, 356 44" stroke="#35A06F" stroke-width="12" stroke-linecap="round" opacity=".28"/><path d="M-10 68 C 40 66, 62 38, 96 42 C 130 46, 140 68, 180 64 C 220 60, 238 28, 278 32 C 308 35, 326 48, 356 44" stroke="#2C845C" stroke-width="2.5" stroke-linecap="round" opacity=".6"/><circle cx="12" cy="67" r="5" fill="#2C845C"/><circle cx="334" cy="45" r="5" fill="none" stroke="#2C845C" stroke-width="2"/></svg></div>
+          <div class="ptop"><div class="plate" style="background:#E6F4ED;color:#2C845C">W</div>
+            <div class="pt-meta"><div class="ptag"></div><div class="t">A field guide to walking meetings</div><div class="s">Works in Progress · 9 min</div>
+            <div class="prov-line">From your #2 source · 7:05 this morning</div></div>
+            <span class="readmark"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          <div class="pbody">
+            <p>The calendar says meeting; your legs say otherwise. A growing number of teams are taking the call on foot, and finding that thirty minutes of pavement does what an hour of conference table cannot.</p>
+            <p>The field guide is practical: quiet routes, agendas capped at three items, and a hard rule that the walk ends where the notes begin.</p>
+          </div>
+        </article>
+
+        <article class="piece locked" data-i="3" data-min="5">
+          <div class="pcover"><svg viewBox="0 0 346 92" fill="none"><rect width="346" height="92" fill="#E9F3F2"/><rect x="66" y="58" width="34" height="18" rx="4" fill="#0EA58F" opacity=".25"/><rect x="120" y="46" width="34" height="30" rx="4" fill="#0EA58F" opacity=".35"/><rect x="174" y="34" width="34" height="42" rx="4" fill="#0EA58F" opacity=".45"/><rect x="228" y="22" width="34" height="54" rx="4" fill="#0EA58F" opacity=".6"/></svg></div>
+          <div class="ptop"><div class="plate" style="background:#E2F1EF;color:#0B8472">I</div>
+            <div class="pt-meta"><div class="t">Shipping beats planning, again</div><div class="s">Interconnected · 5 min</div>
+            <div class="prov-line">From your #5 source · 6:38 this morning</div></div>
+            <span class="readmark"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          <div class="pbody">
+            <p>Plans age like milk; prototypes age like wine. The fourth year of this running argument lands on the same conclusion, with better evidence: teams that shipped weekly learned more than teams that planned quarterly.</p>
+            <p>The twist is why. Shipping is not speed — it is contact with reality, and reality is the only teacher that does not grade on a curve.</p>
+          </div>
+        </article>
+
+        <article class="piece locked" data-i="4" data-min="7">
+          <div class="pcover"><svg viewBox="0 0 346 92" fill="none"><rect width="346" height="92" fill="#FAF2E3"/><circle cx="286" cy="24" r="10" fill="#D9960B" opacity=".45"/><path d="M0 62 H346" stroke="#9C6C08" stroke-width="2.5" opacity=".5"/><path d="M60 50v24M120 50v24M180 50v24M240 50v24" stroke="#9C6C08" stroke-width="3" stroke-linecap="round" opacity=".55"/><path d="M48 58h204" stroke="#9C6C08" stroke-width="2" opacity=".4"/></svg></div>
+          <div class="ptop"><div class="plate" style="background:#F8EEDC;color:#9C6C08">L</div>
+            <div class="pt-meta"><div class="t">The town that banned the feed</div><div class="s">Your local paper · 7 min</div>
+            <div class="prov-line">From your #4 source · 5:58 this morning</div></div>
+            <span class="readmark"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          <div class="pbody">
+            <p>The ordinance passed on a Tuesday, with less debate than the parking bylaw before it. No phones in school, bell to bell, and the first week was exactly as loud as predicted.</p>
+            <p>Then came the quieter finding: library checkouts doubled. A visit to a town that treated attention as public infrastructure, and is measuring what grew back.</p>
+          </div>
+        </article>
+
+        <article class="piece locked" data-i="5" data-min="3">
+          <div class="pcover"><svg viewBox="0 0 346 92" fill="none"><rect width="346" height="92" fill="#F3EFFB"/><path d="M60 30h150M60 46h226M60 62h110" stroke="#9678D8" stroke-width="5" stroke-linecap="round" opacity=".3"/><circle cx="296" cy="34" r="12" fill="none" stroke="#8167BA" stroke-width="2" opacity=".55"/><path d="M296 18v32M280 34h32" stroke="#8167BA" stroke-width="1.5" opacity=".45"/></svg></div>
+          <div class="ptop"><div class="plate" style="background:#EFE9FB;color:#8167BA">N</div>
+            <div class="pt-meta"><div class="t">Notes on craft, September</div><div class="s">A blog you follow · 3 min</div>
+            <div class="prov-line">From your #7 source · 7:22 this morning</div></div>
+            <span class="readmark"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          <div class="pbody">
+            <p>September was for tightening screws: fewer materials, truer type, and the discipline of deleting anything that explains itself twice. Monthly notes on the craft of building calm software.</p>
+            <p>The through-line is subtraction. Every screen is a negotiation between what helps and what merely shines, and the shine usually wins unless deletion becomes a ritual.</p>
+          </div>
+        </article>
+
+        <div class="edend">
+          <div class="edend-mark">End of the Edition</div>
+          <div class="edend-line">Nothing ranked, nothing infinite.</div>
+          <button class="btn btn-black" id="btn-ed-done">Finish — write it to the record</button>
+        </div>
+      </div>
+      <div class="edveil"></div>
+    </div>
+
+    <!-- RECEIPT -->
+    <div class="screen" id="s-receipt">
+      <div class="scr-head rise"><div class="cap">Receipt</div>
+        <div class="pager"><div class="pt" id="week-t">Week 36</div>
+          <button class="pbtn" id="wk-prev" aria-label="Previous week">‹</button>
+          <button class="pbtn" id="wk-next" aria-label="Next week">›</button>
+        </div></div>
+      <div class="doccard rise d2">
+        <div class="dochead">
+          <div class="docbrand">Offramp · Weekly Receipt</div>
+          <div id="receipt-first" style="display:none">This is your week, verified from your phone.</div>
+          <div class="n hero-num" id="receipt-n">0m</div>
+          <div class="ro" id="readout">—</div>
+        </div>
+        <div class="docstrip"><div id="strip"></div></div>
+        <div class="docrows" id="rows"></div>
+        <div class="docfoot">
+          <div id="pursuit-line"></div>
+          <div id="focus-line" style="display:none;margin-bottom:9px;font-size:13px;font-weight:600;color:var(--sub)">Gates followed your Work Focus on 3 of 5 weekdays.</div>
+          <div class="prov"><svg width="13" height="13" viewBox="0 0 14 14"><path fill="#0B8472" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified from on-device data. Never leaves this phone.</div>
+          <div class="flink" data-go="founding"><b>713</b> founding places left ›</div>
+        </div>
+      </div>
+      <div class="bottombar">
+        <button class="btn btn-tint" id="btn-share">Share this week's Receipt</button>
+      </div>
+    </div>
+
+    <!-- FOUNDING -->
+    <div class="screen" id="s-founding">
+      <div class="scr-head rise" style="text-align:center"><div class="cap">Founding record</div>
+        <div class="hero"><div class="n hero-num">713 <span class="slash">/</span> 1,000</div></div>
+        <div class="lab">founding places left — $199, lifetime, in the public record</div></div>
+      <div id="found-main" class="rise d2">
+        <div class="igroup facts">
+          <div class="fact"><i></i>Gates, full Receipt, Timebank and Tune depth. Forever, including everything we ship next.</div>
+          <div class="fact"><i></i>The founding scoreboard is public and permanent. Place numbers never recycle.</div>
+          <div class="fact"><i></i>We remind you before anything ever renews, in writing. That is policy, not a promise.</div>
+        </div>
+      </div>
+      <div id="found-done" style="text-align:center;margin-top:30px">
+        <div class="cap">Founding record</div>
+        <div class="big">Place #713 is yours.</div>
+        <div class="sub-line" style="margin-top:8px">Written into the record. It does not come back.</div>
+      </div>
+      <div class="bottombar">
+        <button class="btn btn-black" id="btn-take">Take a founding place</button>
+        <button class="btn btn-plain" data-go="receipt">Not now</button>
+      </div>
+    </div>
+
+    <!-- STREAK SHEET -->
+    <div class="backdrop" id="bd"></div>
+    <div class="sheet" id="streak">
+      <div class="handle"></div>
+      <div class="hero"><div class="n hero-num" style="color:var(--green)">68</div><div class="l">days on the record</div></div>
+      <div class="igroup">
+        <div class="irow" style="font-size:15px;color:#4a4a4f"><span class="dot" style="background:var(--green)"></span>Protected — 1 grace day available this month</div>
+        <div class="irow" style="font-size:15px;color:#4a4a4f"><span class="dot" style="background:var(--green)"></span>1 repair token earned</div>
+        <div class="irow" style="font-size:15px;color:#4a4a4f"><span class="dot" style="background:var(--green)"></span>A bug on our side can never break your streak — in writing</div>
+      </div>
+      <div class="igroup" style="margin-top:12px">
+        <div class="irow" style="font-weight:600;font-size:16px">Freeze streak during travel<div class="switch" id="sw"></div></div>
+      </div>
+      <div style="margin-top:14px"><button class="btn btn-plain sheet-close">Close</button></div>
+    </div>
+
+    <!-- SETTINGS SHEET -->
+    <div class="sheet" id="sheet-settings">
+      <div class="handle"></div>
+      <div class="micro-h">Settings</div>
+      <div class="policycard">
+        <div class="pt">In writing</div>
+        <div class="pr">One morning delivery. Nothing else pings you.</div>
+        <div class="pr">We remind you before anything renews.</div>
+        <div class="pr">A bug on our side can never break your streak.</div>
+        <div class="pr">Your data never leaves this phone.</div>
+      </div>
+      <div class="igroup" style="margin-top:14px">
+        <div class="irow setrow"><span class="squircle" style="width:32px;height:32px;min-width:32px;font-size:13px">J</span><span class="st">Partner — Jo holds the other key</span><span class="v">Manage<span class="chev">›</span></span></div>
+        <div class="irow setrow"><span class="st">Founding place</span><span class="v">#713<span class="chev">›</span></span></div>
+        <div class="irow setrow"><span class="st">Export your record</span><span class="v">JSON<span class="chev">›</span></span></div>
+        <div class="irow setrow danger"><span class="st">Delete the record</span></div>
+      </div>
+      <div style="margin-top:14px"><button class="btn btn-plain sheet-close">Close</button></div>
+    </div>
+
+    <!-- EDITION TUNE SHEET -->
+    <div class="sheet" id="sheet-edtune">
+      <div class="handle"></div>
+      <div class="micro-h">Tune — Edition</div>
+      <div class="hero"><div class="n hero-num" style="color:var(--violet)">12</div><div class="l">sources, ranked by you — the Edition follows this list, nothing else</div></div>
+      <div class="igroup" style="margin-bottom:14px">
+        <div class="irow" id="pursuit-row" style="cursor:pointer"><span class="st">Your pursuit</span><span class="v" id="pursuit-val" style="font-weight:700">None declared<span class="chev">›</span></span></div>
+      </div>
+      <div id="pursuit-chips">
+        <div class="pursuit-chip" data-pursuit="The chip war">The chip war</div>
+        <div class="pursuit-chip" data-pursuit="Stoicism">Stoicism</div>
+        <div class="pursuit-chip" data-pursuit="How LLMs work">How LLMs work</div>
+        <div class="pursuit-chip" data-pursuit="">No pursuit</div>
+      </div>
+      <div class="igroup">
+        <div class="irow">Marginal Review<div class="switch on"></div></div>
+        <div class="irow">The Fence<div class="switch on"></div></div>
+        <div class="irow">Works in Progress<div class="switch on"></div></div>
+        <div class="irow">Interconnected<div class="switch on"></div></div>
+        <div class="irow">Your local paper<div class="switch on"></div></div>
+        <div class="irow">Hacker News — front page, once<div class="switch"></div></div>
+        <div class="irow" style="color:var(--ter);font-weight:600;font-size:16px">+ Add a source</div>
+      </div>
+      <div class="tnote">Changes apply to tomorrow's Edition.</div>
+      <div style="margin-top:12px"><button class="btn btn-plain sheet-close">Done</button></div>
+    </div>
+
+    <!-- GATES TUNE SHEET -->
+    <div class="sheet" id="sheet-gates">
+      <div class="handle"></div>
+      <div class="micro-h">Gates</div>
+      <div class="hero"><div class="n hero-num" style="color:var(--teal)">3</div><div class="l">apps gated — opens per day</div></div>
+      <div class="igroup">
+        <div class="irow">Instagram<span class="stepper"><button class="step" data-dir="-1">−</button><span class="val">3</span><button class="step" data-dir="1">+</button></span></div>
+        <div class="irow">TikTok<span class="stepper"><button class="step" data-dir="-1">−</button><span class="val">2</span><button class="step" data-dir="1">+</button></span></div>
+        <div class="irow">X<span class="stepper"><button class="step" data-dir="-1">−</button><span class="val">1</span><button class="step" data-dir="1">+</button></span></div>
+        <div class="irow" style="color:var(--ter);font-weight:600;font-size:16px">+ Gate another app</div>
+      </div>
+      <div class="igroup" style="margin-top:14px">
+        <div class="irow"><span class="st">Follow Focus</span><div class="switch" id="focus-switch"></div></div>
+      </div>
+      <div id="focus-rows" style="display:none">
+        <div class="igroup" style="margin-top:10px">
+          <div class="irow"><span class="st">Work</span><span class="v">gates tighten · no extra opens</span></div>
+          <div class="irow"><span class="st">Personal</span><span class="v">as tuned</span></div>
+          <div class="irow"><span class="st">Sleep</span><span class="v">gates closed</span></div>
+        </div>
+        <div class="tnote">When a Focus is on, your gates follow it. Focus lives in iOS Settings — your phone already knows when you're working.</div>
+      </div>
+      <div class="tnote">Tunes apply tomorrow. Today's gates were set by yesterday's you — no loosening in a weak moment.</div>
+      <div style="margin-top:12px"><button class="btn btn-plain sheet-close">Done</button></div>
+    </div>
+
+    <!-- SHARE -->
+    <div id="share">
+      <div class="sharecard" id="sharecard">
+        <div class="wk">Week 36 — On the record</div>
+        <div class="n" id="share-n">14h 02m</div>
+        <div class="sw2">
+          <svg viewBox="0 0 336 92" fill="none" preserveAspectRatio="none" style="width:100%;height:100%">
+            <defs><linearGradient id="swg" x1="0" y1="0" x2="336" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#0EA58F"/><stop offset=".6" stop-color="#35A06F"/><stop offset="1" stop-color="#9678D8"/></linearGradient></defs>
+            <path d="M0 76 C 45 76, 60 74, 85 72 C 115 69, 128 26, 152 22 C 172 19, 182 50, 205 55 C 228 60, 245 64, 336 62"
+              stroke="url(#swg)" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand">OFFRAMP</div>
+      </div>
+    </div>
+
+    <div id="toast">Written to your ledger. <b>+45m</b></div>
+  </div>
+
+  <!-- annotations -->
+  <div class="notes">
+    <h1>OFFRAMP — v23</h1>
+    <div class="sub">Gates follow Focus · Sep 4, 2026</div>
+    <div class="note"><b>The OS already knows when you're working.</b> Gates tune → "Follow Focus": Work tightens (no extra opens), Personal as tuned, Sleep closes. Set in iOS Settings, where Focus lives — zero scheduling UI of our own. Verified rail: SetFocusFilterIntent, current in Apple's docs (Aug 2026 snapshot).</div>
+    <div class="note"><b>The Receipt notices.</b> One quiet line: "Gates followed your Work Focus on 3 of 5 weekdays." The ledger observing your intent contexts — that's a proof-of-time product, not a blocker with a schedule.</div>
+    <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
+    <div class="note"><b>Provenance is the product.</b> Every piece answers "why is this here": From your #N source · time this morning. The masthead shows the rules being enforced: 6 pieces from 5 of your 12 sources · nothing older than 24h · in your order. A feed can't show its work; the Edition does.</div>
+    <div class="note"><b>Honest mint.</b> Finish banks the minutes you actually read (Σ of pieces marked read), not a flat reward. Read all six: +34m lands on Home. Skim nothing, mint nothing — "Nothing on the record yet." Proof means measuring truth.</div>
+    <div class="note"><b>Push navigation, not web fades.</b> Content screens slide in from the right; returning to Home slides from the left. The gate stays a modal — interrupts don't push.</div>
+    <div class="note"><b>The pivot sentence completes.</b> Choose a chip and "of Instagram →" becomes "of Instagram → walk". The interface finishes your thought.</div>
+    <div class="note"><b>Edition gets editorial hierarchy.</b> The lead story runs larger — a page, not a feed of identical rows.</div>
+    <div class="note"><b>The gate names itself.</b> A small caps GATE label above the app tile, the way Apple's shield says "Time Limit" before anything else.</div>
+    <div class="note"><b>Everything from v4 holds.</b> Liquid Glass only on controls, solid content layer, two-tier contrast colors, 44pt targets, the Receipt's document grammar.</div>
+    <div class="jump"><span>Jump to screen</span>
+      <a data-go="home">Home</a><a data-go="gate">Gate</a><a data-go="pivot">Pivot</a><a data-go="edition">Edition</a><a data-go="receipt">Receipt</a><a data-go="founding">Founding</a>
+    </div>
+    <div class="tokens">
+      <div class="sw" style="background:#F5F5F7" title="#F5F5F7"></div>
+      <div class="sw" style="background:#FFFFFF" title="#FFFFFF"></div>
+      <div class="sw" style="background:#1D1D1F" title="#1D1D1F"></div>
+      <div class="sw" style="background:#0EA58F" title="#0EA58F gates display"></div>
+      <div class="sw" style="background:#0B8472" title="#0B8472 teal text"></div>
+      <div class="sw" style="background:#9678D8" title="#9678D8 edition display"></div>
+      <div class="sw" style="background:#D9960B" title="#D9960B timebank display"></div>
+      <div class="sw" style="background:#9C6C08" title="#9C6C08 amber text"></div>
+      <div class="sw" style="background:#35A06F" title="#35A06F streak display"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const state={kept:134, tbMin:400, weekMin:842, opens:3, pivot:null, viaPivot:false, edRead:0, editionDone:false, edReadMin:0, seenGate:false, seenReceipt:false, seenWave:false};
+
+const fmt=m=>m<60? m+"m" : Math.floor(m/60)+"h "+String(m%60).padStart(2,"0")+"m";
+const fmtH=m=>fmt(m).replace(/(\d+)([hm])/g,'$1<span class="u">$2</span>'); /* units at hierarchy size (HIG Typography) */
+function countUp(el,target,dur=650){
+  const t0=performance.now();
+  setTimeout(()=>el.innerHTML=fmtH(target),dur+80);
+  (function tick(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
+    el.innerHTML=fmtH(Math.round(target*e)); if(p<1)requestAnimationFrame(tick);})(t0);
+}
+
+/* navigation — push grammar: content screens slide from right, back slides from left */
+let navInit=false, navDir="fwd";
+function show(id){
+  if(id==="gate"){$("#s-gate").classList.add("on");
+    if(!state.seenGate){state.seenGate=true;$("#gate-first").style.display="block";}
+    else{$("#gate-first").style.display="none";}
+    if(state.opens===0){$("#gate-normal").style.display="none";$("#gate-over").style.display="block";}
+    return;}
+  $("#s-gate").classList.remove("on");
+  const el=$("#s-"+id);
+  navDir=(id==="home")?"back":"fwd";
+  if(navInit&&navDir==="back"){el.classList.add("back-in");}
+  $$(".screen").forEach(s=>{if(s!==el)s.classList.remove("active");});
+  if(navInit){void el.offsetWidth;} /* let the start pose paint before transitioning */
+  el.classList.add("active");
+  if(navInit){setTimeout(()=>el.classList.remove("back-in"),400);}
+  navInit=true;
+  el.querySelectorAll(".rise").forEach(r=>{r.style.animation="none";void r.offsetWidth;r.style.animation="";});
+  if(id==="home")countUp($("#home-n"),state.kept);
+  if(id==="receipt"){
+    if(!state.seenReceipt){state.seenReceipt=true;$("#receipt-first").style.display="block";}
+    else{$("#receipt-first").style.display="none";}
+    renderReceipt();
+  }
+}
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]");
+  if(g){const d=g.dataset.go;
+    if(d==="streak"){openSheetEl($("#streak"));return;}
+    show(d);return;}
+  const sh=e.target.closest("[data-sheet]");
+  if(sh){openSheetEl($("#sheet-"+sh.dataset.sheet));return;}
+  if(e.target.closest(".sheet-close")){closeSheets();return;}
+  const st=e.target.closest(".step");
+  if(st){const v=st.parentElement.querySelector(".val");
+    let n=Math.max(0,Math.min(9,parseInt(v.textContent)+parseInt(st.dataset.dir)));
+    v.textContent=n;return;}
+  const sw=e.target.closest(".switch");
+  if(sw){sw.classList.toggle("on");}
+  const bk=e.target.closest(".bkm");
+  if(bk){bk.classList.toggle("on");return;}
+});
+show("home");
+
+/* gate */
+$("#btn-use").addEventListener("click",()=>{
+  state.opens--;
+  if(state.opens<=0){state.opens=0;show("gate");return;}  $("#gate-n").textContent=state.opens;
+  const rows=$$("#s-gate .irow");
+  rows.forEach(r=>r.classList.remove("now"));
+  rows[3-state.opens-1].classList.add("now");
+});
+let waitT=null;
+$("#btn-wait").addEventListener("click",()=>{
+  if(waitT)return;
+  let s=600; const b=$("#btn-wait"); b.style.opacity=".55";
+  waitT=setInterval(()=>{s--; b.textContent="Waiting — "+Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+    if(s<=0){clearInterval(waitT);waitT=null;b.textContent="Wait 10:00 instead";b.style.opacity="1";
+      note("Gate passed. The wait was the win.");}},1000);
+});
+$("#btn-partner").addEventListener("click",()=>note("Asked Jo. Gate holds until they answer."));
+$("#btn-pay").addEventListener("click",()=>{
+  state.tbMin-=18; $("#tb-chip").textContent=fmt(state.tbMin);
+  note("18m paid. Gate open — 60:00.");
+});
+function note(t){const n=$("#gate-note");n.textContent=t;n.style.opacity=1;setTimeout(()=>n.style.opacity=0,2600);}
+
+/* pivot */
+$$(".pchip").forEach(c=>c.addEventListener("click",()=>{
+  $$(".pchip").forEach(x=>x.classList.remove("sel")); c.classList.add("sel");
+  state.pivot=c.dataset.p; $("#pv-name").textContent=state.pivot;
+  $("#swap-line").textContent="→ "+state.pivot.toLowerCase();
+  $("#pivot-preview").classList.add("show");
+  const b=$("#btn-start"); b.disabled=false; b.style.opacity="1";
+}));
+$("#btn-start").addEventListener("click",()=>{
+  if(!state.pivot)return;
+  if(state.pivot==="Read your Edition"){state.viaPivot=true;show("edition");return;}
+  mint(45,"pivot: "+state.pivot.toLowerCase());
+});
+state.nowMin=581; /* mock clock: 9:41 — stamps new ledger rows */
+function tstamp(){const h=Math.floor(state.nowMin/60),m=state.nowMin%60;return h+":"+String(m).padStart(2,"0")}
+function mint(mins,label){
+  state.kept+=mins; state.weekMin+=mins;
+  state.entries.unshift({day:"Today",kept:mins,did:label,flash:true});
+  /* today's record: the mint lands as a live row, screen fills as the day fills */
+  const pretty=label.replace("pivot: ","").replace("read the friday edition","edition reading");
+  const col=label.includes("edition")?"var(--violet-t)":label.includes("pivot")?"":"var(--teal-t)";
+  const r=document.createElement("div"); r.className="trow flash";
+  r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">${pretty}</span><span class="ta"${col?` style="color:${col}"`:""}>+${mins}m</span>`;
+  state.nowMin=Math.min(state.nowMin+12,1439);
+  $("#trec-rows").appendChild(r);
+  const t=$("#trec"); $(".statbar").style.top=(t.offsetTop+t.offsetHeight+21)+"px";
+  show("home");
+  const tt=$("#toast"); tt.innerHTML="Written to your ledger. <b>+"+mins+"m</b>";
+  tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
+}
+function refreshHomeStates(){
+  const card=$("#edcard");
+  if(state.editionDone){
+    card.classList.add("done");
+    card.querySelector(".t1").innerHTML="Today’s Edition <span class='edcheck'>✓</span> "+(state.edReadMin||34)+"m on the record";
+    card.querySelector(".t2").textContent="New Edition tomorrow · 6:00";
+  } else {
+    card.classList.remove("done");
+  }
+}
+function finishEdition(m){
+  mint(m,"read the friday edition");
+  state.editionDone=true; state.edReadMin=m; refreshHomeStates();
+}
+$("#btn-ed-done").addEventListener("click",()=>{
+  const readMin=state.edRead||0;
+  if(state.viaPivot){state.viaPivot=false;finishEdition(45);return;}
+  if(readMin<=0){
+    const t=$("#toast"); t.innerHTML="Nothing on the record yet — read a piece first.";
+    t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),2600); return;
+  }
+  finishEdition(readMin);
+});
+
+/* edition finite-flow scroll driver */
+function unlockPiece(p){
+  if(!p.classList.contains("locked"))return;
+  p.classList.remove("locked");p.classList.add("unlocked");
+  const c=p.querySelector(".pcover");
+  if(c)setTimeout(()=>{c.style.transition="none";c.style.height="92px";c.style.opacity="1";c.style.marginBottom="13px";},560); /* lands even if the transition stalls */
+}
+$("#edscroll").addEventListener("scroll",()=>{
+  const ed=$("#edscroll"), vh=ed.clientHeight, st=ed.scrollTop;
+  $$("#s-edition .piece.locked").forEach(p=>{
+    if(p.offsetTop < st + vh*0.85){unlockPiece(p);}
+  });
+  $$("#s-edition .piece.unlocked").forEach(p=>{
+    if(!p.classList.contains("is-read") && p.offsetTop+p.offsetHeight < st + vh*0.62){p.classList.add("is-read");}
+  });
+  if(st+vh >= ed.scrollHeight-160){ /* reaching the end opens everything */
+    $$("#s-edition .piece.locked").forEach(p=>unlockPiece(p));
+    $$("#s-edition .piece").forEach(p=>p.classList.add("is-read"));
+  }
+  let rm=0; $$("#s-edition .piece.is-read").forEach(p=>rm+=(+p.dataset.min||0)); state.edRead=rm;
+  checkPursuitArc();
+  const max=ed.scrollHeight-vh;
+  $("#edprog").style.transform="scaleX("+(max>0?Math.min(1,st/max):1)+")";
+  $(".edveil").classList.toggle("off", st>40);
+});
+
+/* pursuit — declared in Tune, fed by verified reads */
+state.pursuit=null; state.pursuitN=4; state.arcCounted=false;
+const PURSUIT_CONTENT={
+  "The chip war":{t:"The Arizona fab is a mirror, not a factory",s:"Chip Letter · 9 min"},
+  "Stoicism":{t:"The dichotomy of control, tested on a Tuesday",s:"Daily Stoic · 9 min"},
+  "How LLMs work":{t:"Attention is all you need, explained with pizza",s:"ML Explained · 9 min"}
+};
+function updatePursuitLine(){
+  if(state.pursuit) $("#pursuit-line").innerHTML=`${state.pursuit} — <b>${state.pursuitN}</b> pieces into your arc · next piece Monday`;
+}
+function setPursuit(name){
+  state.pursuit=name||null; state.pursuitN=4; state.arcCounted=false;
+  $("#pursuit-val").innerHTML=(name||"None declared")+'<span class="chev">›</span>';
+  $("#pursuit-val").style.color=name?"var(--pursuit-t)":"";
+  const art=document.querySelector('.piece[data-i="2"]');
+  if(name){
+    const c=PURSUIT_CONTENT[name];
+    art.classList.add("pursuit-on");
+    art.querySelector(".ptag").innerHTML=`Pursuit · piece <span class="parc">${state.pursuitN}</span> of your ${name.toLowerCase().replace(/ /g,"-")} arc`;
+    art.querySelector(".pt-meta .t").textContent=c.t;
+    art.querySelector(".pt-meta .s").textContent=c.s;
+    art.querySelector(".prov-line").textContent="From your pursuit bundle · 6:31 this morning";
+    $("#pursuit-line").style.display="block"; updatePursuitLine();
+  } else {
+    art.classList.remove("pursuit-on");
+    art.querySelector(".pt-meta .t").textContent="A field guide to walking meetings";
+    art.querySelector(".pt-meta .s").textContent="Works in Progress · 9 min";
+    art.querySelector(".prov-line").textContent="From your #2 source · 7:05 this morning";
+    $("#pursuit-line").style.display="none";
+  }
+}
+$("#pursuit-row").addEventListener("click",()=>$("#pursuit-chips").classList.toggle("on"));
+$("#focus-switch").addEventListener("click",()=>{
+  const showing=$("#focus-rows").style.display==="block";
+  $("#focus-rows").style.display=showing?"none":"block";
+  $("#focus-line").style.display=showing?"none":"block";
+});
+$$(".pursuit-chip").forEach(c=>c.addEventListener("click",()=>{
+  $$(".pursuit-chip").forEach(x=>x.classList.remove("on")); c.classList.add("on");
+  setPursuit(c.dataset.pursuit);
+}));
+function checkPursuitArc(){
+  if(!state.pursuit||state.arcCounted)return;
+  const art=document.querySelector('.piece[data-i="2"]');
+  if(art.classList.contains("is-read")){
+    state.arcCounted=true; state.pursuitN++;
+    art.querySelector(".parc").textContent=state.pursuitN;
+    updatePursuitLine();
+  }
+}
+
+/* receipt */
+state.entries=[
+  {day:"Today",kept:134,did:"45m walk · 1h 20m reading"},
+  {day:"Thu",kept:185,did:"called Mom · garage shelf"},
+  {day:"Wed",kept:108,did:"made dinner early"},
+  {day:"Tue",kept:171,did:"long ride · no podcasts"},
+  {day:"Mon",kept:244,did:"Edition night — phone in drawer"},
+];
+function catColor(e){const s=(e.did||"").toLowerCase();
+  if(/walk|ride|gym|run/.test(s))return "#35A06F";
+  if(/read|edition/.test(s))return "#9678D8";
+  if(/call|mom|dad/.test(s))return "#D9960B";
+  return "#0EA58F";}
+const weeks={
+  36:{total:()=>state.weekMin, entries:()=>state.entries, strip:()=>[
+    {l:"M",m:244,c:"#9678D8"},{l:"T",m:171,c:"#35A06F"},{l:"W",m:108,c:"#0EA58F"},
+    {l:"T",m:185,c:"#D9960B"},{l:"F",m:state.kept,c:catColor(state.entries[0]||{}),today:true},
+    {l:"S",m:0},{l:"S",m:0}]},
+  35:{total:()=>763, entries:()=>[
+    {day:"Sun",kept:158,did:"meal prep · called Jo"},
+    {day:"Sat",kept:121,did:"flea market, phone away"},
+    {day:"Fri",kept:97,did:"left work on time"},
+    {day:"Thu",kept:189,did:"long walk · no podcasts"},
+    {day:"Wed",kept:198,did:"Edition night — phone in drawer"}],
+    strip:()=>[
+    {l:"M",m:143,c:"#0EA58F"},{l:"T",m:88,c:"#35A06F"},{l:"W",m:198,c:"#9678D8"},
+    {l:"T",m:189,c:"#35A06F"},{l:"F",m:97,c:"#0EA58F"},{l:"S",m:121,c:"#D9960B"},{l:"S",m:158,c:"#9678D8"}]}
+};
+let curWeek=36;
+const DN=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+const selIdx={36:4,35:6};
+function renderReceipt(){renderWeek(curWeek);}
+function renderWeek(w){
+  const W=weeks[w];
+  $("#week-t").textContent="Week "+w;
+  countUp($("#receipt-n"),W.total(),700);
+  const strip=W.strip(), max=Math.max(...strip.map(t=>t.m),1);
+  const S=$("#strip"); S.innerHTML="";
+  strip.forEach((t,i)=>{
+    const c=document.createElement("button");
+    c.className="daycell"+(t.m?"":" empty");
+    c.dataset.i=i;
+    const h=t.m?Math.max(6,Math.round(t.m/max*44)):4;
+    c.innerHTML=`<span class="tick" style="height:${h}px;${t.m?`background:${t.c};`:""}"></span><span class="dl">${t.l}</span>`;
+    S.appendChild(c);
+  });
+  const R=$("#rows"); R.innerHTML="";
+  W.entries().forEach((e)=>{
+    const d=document.createElement("div");
+    d.className="rrow"+(e.flash?" flash":"");
+    d.innerHTML=`<div><span class="day"><span class="dot" style="background:${catColor(e)}"></span>${e.day}</span><span class="kept">${fmt(e.kept)}</span></div><div class="did">${e.did}</div>`;
+    R.appendChild(d);
+    e.flash=false;
+  });
+  $("#share-n").textContent=fmt(W.total());
+  $(".sharecard .wk").textContent="Week "+w+" — On the record";
+  $("#wk-prev").style.opacity=w<=35?".3":"1";
+  $("#wk-next").style.opacity=w>=36?".3":"1";
+  selectDay(selIdx[w]);
+}
+function selectDay(i){
+  selIdx[curWeek]=i;
+  const t=weeks[curWeek].strip()[i];
+  $$("#strip .daycell").forEach((c,j)=>c.classList.toggle("sel",j===i));
+  $("#readout").textContent=t&&t.m? DN[i]+" — "+fmt(t.m)+" kept" : "—";
+}
+$("#strip").addEventListener("click",e=>{
+  const c=e.target.closest(".daycell");
+  if(!c||c.classList.contains("empty"))return;
+  selectDay(+c.dataset.i);
+});
+$("#wk-prev").addEventListener("click",()=>{if(curWeek>35){curWeek--;selIdx[curWeek]=curWeek===36?4:6;renderWeek(curWeek);}});
+$("#wk-next").addEventListener("click",()=>{if(curWeek<36){curWeek++;selIdx[curWeek]=curWeek===36?4:6;renderWeek(curWeek);}});
+
+/* sheets */
+function openSheetEl(el){$("#bd").classList.add("on");el.classList.add("on");}
+function closeSheets(){$("#bd").classList.remove("on");$$(".sheet").forEach(s=>s.classList.remove("on"));}
+$("#bd").addEventListener("click",closeSheets);
+
+/* share */
+$("#btn-share").addEventListener("click",()=>$("#share").classList.add("on"));
+$("#share").addEventListener("click",()=>$("#share").classList.remove("on"));
+
+/* founding */
+$("#btn-take").addEventListener("click",()=>{
+  $("#found-main").style.display="none";
+  $("#found-done").style.display="block";
+  $("#btn-take").style.display="none";
+});
+
+/* deep-link + bare capture */
+if(location.search.includes("bare")){
+  document.body.classList.add("bare");
+}
+addEventListener("load",()=>{
+  const h=location.hash.replace("#","");
+  if(!h)return;
+  if(h==="streak"){openSheetEl($("#streak"));}
+  else if(["settings","edtune","gates"].includes(h)){openSheetEl($("#sheet-"+h));}
+  else show(h);
+});
+</script>
+</body>
+</html>
