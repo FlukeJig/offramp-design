@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v28</title>
+<title>OFFRAMP — product mock v29</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -107,6 +107,7 @@
   .nowdot:after{content:none}
   .homelinks{display:flex;justify-content:center;font-size:15px;font-weight:600;color:var(--sub)}
   .homelinks span{cursor:pointer;padding:12px 16px}
+  .homelinks .sep{cursor:default;color:var(--ter);padding:12px 2px}
   /* today's record — the ledger, at day granularity */
   .trec{position:absolute;top:394px;left:22px;right:22px}
   .trec-cap{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ter);font-weight:700;margin-bottom:8px}
@@ -220,6 +221,10 @@
   .swaphero{margin-top:16px}
   .swaphero .n{font-size:64px;line-height:1;color:var(--teal)}
   .swaphero .s{margin-top:8px;color:var(--sub);font-size:17px}
+  .durs{display:flex;justify-content:center;gap:8px;margin-top:13px}
+  .dur{padding:8px 13px;border-radius:99px;border:1.5px solid var(--hair);background:#fff;
+    font-size:13px;font-weight:700;color:var(--sub);cursor:pointer}
+  .dur.on{border-color:var(--ink);color:var(--ink)}
   .pchips{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .pchip{background:var(--card);border:1.5px solid transparent;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 22px rgba(0,0,0,.05);
     border-radius:16px;padding:17px 14px;font-size:15px;font-weight:600;cursor:pointer;display:flex;
@@ -490,7 +495,7 @@
         <div class="stat" data-sheet="timebank"><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b>timebank</div>
       </div>
       <div class="bottombar">
-        <div class="homelinks"><span data-go="receipt">Today's Receipt ›</span></div>
+        <div class="homelinks"><span data-go="receipt">Today's Receipt ›</span><span class="sep">·</span><span id="home-session" data-go="pivot">Start a session ›</span></div>
       </div>
     </div>
 
@@ -542,8 +547,11 @@
 
     <!-- PIVOT -->
     <div class="screen" id="s-pivot">
-      <div class="scr-head rise"><div class="cap">Gate — Instagram</div><div class="big-title">Pivot</div></div>
-      <div class="swaphero rise d1"><div class="n hero-num">45m</div><div class="s">of Instagram <span id="swap-line">→</span></div></div>
+      <div class="scr-head rise"><div class="cap" id="pivot-cap">Gate — Instagram</div><div class="big-title" id="pivot-title">Pivot</div></div>
+      <div class="swaphero rise d1"><div class="n hero-num" id="swap-n">45m</div><div class="s"><span id="swap-of">of Instagram</span> <span id="swap-line">→</span></div></div>
+      <div class="durs rise d1" id="durs">
+        <span class="dur" data-d="25">25m</span><span class="dur on" data-d="45">45m</span><span class="dur" data-d="90">90m</span>
+      </div>
       <div id="spot-tag">Pre-decided for your soft spot · 9–10pm — change anytime in Gates tune</div>
       <div class="pchips rise d2">
         <div class="pchip" data-p="Walk" style="--cc:#35A06F"><span class="dot" style="background:#35A06F"></span>Walk</div>
@@ -551,7 +559,7 @@
         <div class="pchip" data-p="Call someone" style="--cc:#D9960B"><span class="dot" style="background:#D9960B"></span>Call someone</div>
         <div class="pchip" data-p="Make something" style="--cc:#0EA58F"><span class="dot" style="background:#0EA58F"></span>Make something</div>
       </div>
-      <div id="pivot-preview"><b>+45m on the record</b> — pivot: <span id="pv-name">Walk</span>.<br>Mints when the timer completes.</div>
+      <div id="pivot-preview"><b>+<span id="pv-min">45m</span> on the record</b> — <span id="pv-kind">pivot</span>: <span id="pv-name">Walk</span>.<br>Mints when the timer completes.</div>
       <div class="bottombar">
         <button class="btn btn-black" id="btn-start" disabled style="opacity:.3">Start 45m</button>
         <button class="btn btn-plain" data-go="gate">Back to gate</button>
@@ -870,11 +878,11 @@
 
   <!-- annotations -->
   <div class="notes">
-    <h1>OFFRAMP — v28</h1>
-    <div class="sub">The Circle — verified social · Sep 4, 2026</div>
-    <div class="note"><b>The network is the unit of change.</b> The Chicago ban paper: leaving alone succeeds 15% of the time, leaving together 86%. BePresent gamified social (leaderboard, cheer — and a mother forced to tap "give up" at a hospital). The Circle is the third way: 2–6 people, invite-only, one shared sealed document. Ordered by sealed minutes — a scoreboard is data; a leaderboard is badges.</div>
-    <div class="note"><b>The seal is the share act.</b> The Receipt gains My week / Circle. Sunday you seal your week; it publishes to the circle — sealed total, streak, arc position. <b>Entries never leave the phone</b>: your walks, your calls, your sentences stay yours. Skip a week, nothing happens — there is no "give up" button and never will be.</div>
-    <div class="note"><b>Decoupled by design.</b> "Days we all held" seals as a group milestone; your streak never dies because someone else slipped (Duolingo's portfolio lesson). No chat, no nudges, no cheer — the visibility is the consequence, and a person who noticed beats a notification every time.</div>
+    <h1>OFFRAMP — v29</h1>
+    <div class="sub">Sessions — intentional time joins the record · Sep 4, 2026</div>
+    <div class="note"><b>A door, not a button.</b> The Home bottombar gains a second quiet link: "Start a session ›" — opening the pivot sheet, which was always the session surface. No fat CTA, nothing asks for attention, the φ composition doesn't move a pixel.</div>
+    <div class="note"><b>Same sheet, two frames.</b> From a gate: "Gate — Instagram → Pivot" with the soft-spot pre-decision. From Home: "Session — Start one," 25/45/90 duration chips, no pre-decision. The JITAI evidence says users rarely self-initiate in the moment — the gate stays the engine; sessions serve the planners.</div>
+    <div class="note"><b>The first honest session in the category.</b> Forest's tree "does not watch you." Ours mints verified: in production, DeviceActivity confirms no gated apps were touched during the window. End at 41 of 45 and the record says 41 — partial truth, no withering tree, no guilt object. And one-color-one-noun held: session rows are ink, not gate teal (caught and fixed in the mint path).</div>
     <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
     <div class="note"><b>Provenance is the product.</b> Every piece answers "why is this here": From your #N source · time this morning. The masthead shows the rules being enforced: 6 pieces from 5 of your 12 sources · nothing older than 24h · in your order. A feed can't show its work; the Edition does.</div>
     <div class="note"><b>Honest mint.</b> Finish banks the minutes you actually read (Σ of pieces marked read), not a flat reward. Read all six: +34m lands on Home. Skim nothing, mint nothing — "Nothing on the record yet." Proof means measuring truth.</div>
@@ -1025,11 +1033,11 @@ $$(".pchip").forEach(c=>c.addEventListener("click",()=>{
 $("#btn-start").addEventListener("click",()=>{
   if(!state.pivot)return;
   if(state.pivot==="Read your Edition"){state.viaPivot=true;show("edition");return;}
-  const label=state.pivot;
+  const label=state.pivot, mins=state.sessionDur, kind=state.sessionMode?"session":"pivot";
   state.pivot=null; $$(".pchip").forEach(x=>x.classList.remove("sel"));
   $("#pivot-preview").classList.remove("show");
   const b=$("#btn-start"); b.disabled=true; b.style.opacity=".3"; /* each gate fire = fresh decision */
-  mint(45,"pivot: "+label.toLowerCase());
+  mint(mins,kind+": "+label.toLowerCase());
 });
 state.nowMin=581; /* mock clock: 9:41 — stamps new ledger rows */
 function tstamp(){const h=Math.floor(state.nowMin/60),m=state.nowMin%60;return h+":"+String(m).padStart(2,"0")}
@@ -1038,7 +1046,7 @@ function mint(mins,label){
   state.entries.unshift({day:"Today",kept:mins,did:label,flash:true});
   /* today's record: the mint lands as a live row, screen fills as the day fills */
   const pretty=label.replace("pivot: ","").replace("read the friday edition","edition reading");
-  const col=label.includes("edition")?"var(--violet-t)":label.includes("pivot")?"":"var(--teal-t)";
+  const col=label.includes("edition")?"var(--violet-t)":label.includes("gate")?"var(--teal-t)":"";
   const r=document.createElement("div"); r.className="trow flash";
   r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">${pretty}</span><span class="ta"${col?` style="color:${col}"`:""}>+${mins}m</span>`;
   state.nowMin=Math.min(state.nowMin+12,1439);
@@ -1066,7 +1074,7 @@ $("#btn-ed-done").addEventListener("click",()=>{
   const readMin=state.edRead||0;
   const sent=$("#wc-input").value.trim();
   const after=(m)=>{ if(sent){ mintQuiet(5,`recall — '${sent.slice(0,42)}${sent.length>42?"…":""}'`); $("#wc-input").value=""; } };
-  if(state.viaPivot){state.viaPivot=false;finishEdition(45);after();return;}
+  if(state.viaPivot){state.viaPivot=false;finishEdition(state.sessionDur||45);after();return;}
   if(readMin<=0){
     const t=$("#toast"); t.innerHTML="Nothing on the record yet — read a piece first.";
     t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),2600); return;
@@ -1161,6 +1169,14 @@ $("#spot-row").addEventListener("click",()=>{
 });
 function preselectPivot(){
   const tag=$("#spot-tag");
+  if(state.sessionMode){
+    tag.style.display="none";
+    $("#pivot-cap").textContent="Session"; $("#pivot-title").textContent="Start one";
+    $("#swap-of").textContent="on the record"; $("#pv-kind").textContent="session";
+    return;
+  }
+  $("#pivot-cap").textContent="Gate — Instagram"; $("#pivot-title").textContent="Pivot";
+  $("#swap-of").textContent="of Instagram"; $("#pv-kind").textContent="pivot";
   if(state.spotPivot && !state.pivot){
     tag.style.display="block";
     const c=document.querySelector(`.pchip[data-p="${state.spotPivot}"]`);
@@ -1169,6 +1185,16 @@ function preselectPivot(){
     tag.style.display="none";
   }
 }
+state.sessionMode=false; state.sessionDur=45;
+$("#home-session").addEventListener("click",()=>{state.sessionMode=true;});
+$$('#s-gate [data-go="pivot"]').forEach(b=>b.addEventListener("click",()=>{state.sessionMode=false;}));
+$$(".dur").forEach(d=>d.addEventListener("click",()=>{
+  $$(".dur").forEach(x=>x.classList.remove("on")); d.classList.add("on");
+  state.sessionDur=+d.dataset.d;
+  $("#swap-n").innerHTML=fmtH(state.sessionDur);
+  $("#pv-min").textContent=fmt(state.sessionDur);
+  $("#btn-start").textContent="Start "+fmt(state.sessionDur);
+}));
 
 /* circle — verified social: aggregate proof, entries never shared */
 state.scope="mine"; state.circleSealed=false;
