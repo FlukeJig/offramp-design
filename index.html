@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v27</title>
+<title>OFFRAMP — product mock v28</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -92,7 +92,7 @@
   /* ---------- HOME ---------- */
   #s-home .hero{margin-top:89px}
   #s-home .hero .n{font-size:89px;line-height:1.02;cursor:pointer;letter-spacing:-0.027em}
-  #s-home .hero .n .u{font-size:.55em;font-weight:700;letter-spacing:-.01em}
+  .hero-num .u{font-size:.55em;font-weight:700;letter-spacing:-.01em}
   #s-home .hero .l{margin-top:8px;color:var(--sub);font-size:17px}
   #s-home .wavebox{position:absolute;top:252px;left:-22px;right:-22px;height:280px}
   #s-home .wavebox svg{width:100%;height:100%;overflow:visible}
@@ -192,6 +192,15 @@
   .partner-row .t2{font-size:12px;color:var(--sub)}
   #gate-note{text-align:center;color:var(--teal-t);font-size:14px;font-weight:600;height:20px;margin-top:8px;
     opacity:0;transition:opacity .3s}
+  /* circle — verified social: the sealed week, shared */
+  .scope-toggle{display:flex;background:rgba(0,0,0,.06);border-radius:12px;padding:3px;margin-bottom:14px}
+  .scope{flex:1;border:none;background:none;padding:8px;font-size:14px;font-weight:700;color:var(--sub);border-radius:9px;cursor:pointer;font-family:inherit}
+  .scope.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  .crow .cname{font-weight:700;font-size:15px}
+  .crow .cmeta{margin-left:auto;color:var(--sub);font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .crow.you{background:color-mix(in srgb,var(--teal) 6%,#fff);border-radius:10px;padding-left:8px;padding-right:8px}
+  #circle-mile{font-size:13px;font-weight:600;color:var(--green-t);margin-bottom:9px}
+  #seal-circle{margin-top:9px;font-size:15px;font-weight:600;color:var(--teal-t);cursor:pointer}
   /* recall — the gym lives in the wait; the sentence seals at the close */
   #recall-card{display:none;margin:14px 22px 0;padding:16px;background:var(--card);border-radius:14px;
     box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);text-align:left}
@@ -661,6 +670,11 @@
           <button class="pbtn" id="wk-next" aria-label="Next week">›</button>
         </div></div>
       <div class="doccard rise d2">
+        <div class="scope-toggle">
+          <button class="scope on" id="scope-mine">My week</button>
+          <button class="scope" id="scope-circle">Circle</button>
+        </div>
+        <div id="doc-mine">
         <div class="dochead">
           <div class="docbrand">Offramp · Weekly Receipt</div>
           <div id="receipt-first" style="display:none">This is your week, verified from your phone.</div>
@@ -678,7 +692,22 @@
           <div class="prov"><svg width="13" height="13" viewBox="0 0 14 14"><path fill="#0B8472" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified from on-device data — recall entries are self-marked. Never leaves this phone.</div>
           <div class="flink" data-go="founding"><b>713</b> founding places left ›</div>
         </div>
+        </div><!-- /doc-mine -->
+        <div id="doc-circle" style="display:none">
+          <div class="dochead">
+            <div class="docbrand">Offramp · Circle Receipt</div>
+            <div class="n hero-num" id="circle-n">0m</div>
+            <div class="ro">sealed by 3 people this week</div>
+          </div>
+          <div class="docrows" id="circle-rows"></div>
+          <div class="docfoot">
+            <div id="circle-mile">2 days all three of you held — sealed.</div>
+            <div class="prov">Entries stay on each person's phone. Only sealed totals are shared.</div>
+            <div id="seal-circle">Seal this week to your Circle ›</div>
+          </div>
+        </div>
       </div>
+
       <div class="bottombar">
         <button class="btn btn-tint" id="btn-share">Share this week's Receipt</button>
       </div>
@@ -841,11 +870,11 @@
 
   <!-- annotations -->
   <div class="notes">
-    <h1>OFFRAMP — v27</h1>
-    <div class="sub">Recall — the educational arm · Sep 4, 2026</div>
-    <div class="note"><b>Think at the wait — zero added seconds.</b> Choose "Wait 10:00 instead" and the wait's dead time gets a job: one retrieval question from yesterday's lead. Answer in your head, Reveal, self-mark. "Had it" mints +2m; "Didn't" respaces it — the spacing effect, not a punishment. Retrieval g≈0.5 with feedback (Springer meta, 2025); the gate was always friction — now the friction trains.</div>
-    <div class="note"><b>Write at the close — the Receipt starts holding your words.</b> End of the Edition: "Close with one sentence — what will you remember?" The sentence mints +5m and seals onto the record (generation effect d≈0.4, 2023 meta). Ninety days in: ~80 of your own sentences — a learning diary no blocker can offer. Speak mode deferred: social friction, weakest differentiation.</div>
-    <div class="note"><b>Two classes of truth, labeled.</b> System-verified entries and self-marked recall entries are now visually distinct — recall rows carry the pursuit blue and the seal reads "Verified from on-device data — recall entries are self-marked." The brand's promise survives the honors system.</div>
+    <h1>OFFRAMP — v28</h1>
+    <div class="sub">The Circle — verified social · Sep 4, 2026</div>
+    <div class="note"><b>The network is the unit of change.</b> The Chicago ban paper: leaving alone succeeds 15% of the time, leaving together 86%. BePresent gamified social (leaderboard, cheer — and a mother forced to tap "give up" at a hospital). The Circle is the third way: 2–6 people, invite-only, one shared sealed document. Ordered by sealed minutes — a scoreboard is data; a leaderboard is badges.</div>
+    <div class="note"><b>The seal is the share act.</b> The Receipt gains My week / Circle. Sunday you seal your week; it publishes to the circle — sealed total, streak, arc position. <b>Entries never leave the phone</b>: your walks, your calls, your sentences stay yours. Skip a week, nothing happens — there is no "give up" button and never will be.</div>
+    <div class="note"><b>Decoupled by design.</b> "Days we all held" seals as a group milestone; your streak never dies because someone else slipped (Duolingo's portfolio lesson). No chat, no nudges, no cheer — the visibility is the consequence, and a person who noticed beats a notification every time.</div>
     <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
     <div class="note"><b>Provenance is the product.</b> Every piece answers "why is this here": From your #N source · time this morning. The masthead shows the rules being enforced: 6 pieces from 5 of your 12 sources · nothing older than 24h · in your order. A feed can't show its work; the Edition does.</div>
     <div class="note"><b>Honest mint.</b> Finish banks the minutes you actually read (Σ of pieces marked read), not a flat reward. Read all six: +34m lands on Home. Skim nothing, mint nothing — "Nothing on the record yet." Proof means measuring truth.</div>
@@ -1141,6 +1170,35 @@ function preselectPivot(){
   }
 }
 
+/* circle — verified social: aggregate proof, entries never shared */
+state.scope="mine"; state.circleSealed=false;
+const CIRCLE=[{name:"You",sealed:892,streak:68,you:true},{name:"Jo",sealed:611,streak:34},{name:"Sam",sealed:405,streak:12}];
+function setScope(s){
+  state.scope=s;
+  $("#scope-mine").classList.toggle("on",s==="mine");
+  $("#scope-circle").classList.toggle("on",s==="circle");
+  $("#doc-mine").style.display=s==="mine"?"block":"none";
+  $("#doc-circle").style.display=s==="circle"?"block":"none";
+  if(s==="circle")renderCircle(); else renderWeek(curWeek);
+}
+$("#scope-mine").addEventListener("click",()=>setScope("mine"));
+$("#scope-circle").addEventListener("click",()=>setScope("circle"));
+function renderCircle(){
+  countUp($("#circle-n"),CIRCLE.reduce((a,m)=>a+m.sealed,0),700);
+  const R=$("#circle-rows"); R.innerHTML="";
+  [...CIRCLE].sort((a,b)=>b.sealed-a.sealed).forEach(m=>{
+    const d=document.createElement("div");
+    d.className="rrow crow"+(m.you?" you":"");
+    d.innerHTML=`<div><span class="cname">${m.name}</span></div><div class="cmeta">${fmt(m.sealed)} · ${m.streak}d</div>`;
+    R.appendChild(d);
+  });
+}
+$("#seal-circle").addEventListener("click",()=>{
+  if(state.circleSealed)return; state.circleSealed=true;
+  $("#seal-circle").textContent="Sealed ✓ — Jo and Sam see the total, never the entries.";
+  const t=$("#toast"); t.innerHTML="Sealed to your Circle."; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),2400);
+});
+
 /* receipt */
 state.entries=[
   {day:"Today",kept:134,did:"45m walk · 1h 20m reading"},
@@ -1173,7 +1231,7 @@ const weeks={
 let curWeek=36;
 const DN=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 const selIdx={36:4,35:6};
-function renderReceipt(){renderWeek(curWeek);}
+function renderReceipt(){ if(state.scope==="circle")renderCircle(); else renderWeek(curWeek);}
 function renderWeek(w){
   const W=weeks[w];
   $("#week-t").textContent="Week "+w;
