@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v29</title>
+<title>OFFRAMP — product mock v30</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -512,7 +512,7 @@
           <div class="igroup">
             <div class="irow now">This open<span class="cost">wait 60:00</span></div>
             <div class="irow">Next open<span class="cost">wait 60:00 · +12m Timebank</span></div>
-            <div class="irow">Last open<span class="cost">+18m Timebank · gate streak ends</span></div>
+            <div class="irow">Last open<span class="cost">+18m Timebank</span></div>
           </div>
           <div style="margin-top:16px;display:flex;flex-direction:column;gap:9px">
             <button class="btn btn-tint" data-go="pivot">Choose a pivot instead</button>
@@ -521,7 +521,7 @@
         </div>
         <div id="gate-over" style="display:none">
           <div class="hero"><div class="n hero-num">0</div>
-            <div class="l" style="color:var(--ink);font-weight:600;font-size:16px;margin-top:10px">This open costs 18m of Timebank<br>+ today's gate streak.</div></div>
+            <div class="l" style="color:var(--ink);font-weight:600;font-size:16px;margin-top:10px">This open costs 18m of Timebank.</div></div>
           <div style="margin-top:18px;display:flex;flex-direction:column;gap:9px">
             <button class="btn btn-tint" id="btn-wait">Wait 10:00 instead</button>
             <button class="partner-row" id="btn-partner">
@@ -749,6 +749,7 @@
     <div class="sheet" id="streak">
       <div class="handle"></div>
       <div class="hero"><div class="n hero-num" style="color:var(--green)">68</div><div class="l">days on the record</div></div>
+      <div style="margin-top:13px;font-size:13px;color:var(--sub)">A day counts when anything lands on the record — one gate held is enough.</div>
       <div class="igroup">
         <div class="irow" style="font-size:15px;color:#4a4a4f"><span class="dot" style="background:var(--green)"></span>Protected — 1 grace day available this month</div>
         <div class="irow" style="font-size:15px;color:#4a4a4f"><span class="dot" style="background:var(--green)"></span>1 repair token earned</div>
@@ -878,9 +879,9 @@
 
   <!-- annotations -->
   <div class="notes">
-    <h1>OFFRAMP — v29</h1>
-    <div class="sub">Sessions — intentional time joins the record · Sep 4, 2026</div>
-    <div class="note"><b>A door, not a button.</b> The Home bottombar gains a second quiet link: "Start a session ›" — opening the pivot sheet, which was always the session surface. No fat CTA, nothing asks for attention, the φ composition doesn't move a pixel.</div>
+    <h1>OFFRAMP — v30</h1>
+    <div class="sub">Loop gaps closed · Sep 4, 2026</div>
+    <div class="note"><b>The core verb now mints.</b> Leaving a gate without opening banks +12m to your Timebank — the open you didn't take becomes minutes you own. Holds fill the Timebank; pivots, the Edition and sessions fill the kept number. The streak's floor is written down: a day counts when anything lands on the record.</div>
     <div class="note"><b>Same sheet, two frames.</b> From a gate: "Gate — Instagram → Pivot" with the soft-spot pre-decision. From Home: "Session — Start one," 25/45/90 duration chips, no pre-decision. The JITAI evidence says users rarely self-initiate in the moment — the gate stays the engine; sessions serve the planners.</div>
     <div class="note"><b>The first honest session in the category.</b> Forest's tree "does not watch you." Ours mints verified: in production, DeviceActivity confirms no gated apps were touched during the window. End at 41 of 45 and the record says 41 — partial truth, no withering tree, no guilt object. And one-color-one-noun held: session rows are ink, not gate teal (caught and fixed in the mint path).</div>
     <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
@@ -932,6 +933,7 @@ function show(id){
   }
   if(id==="pivot")preselectPivot();
   if(id==="gate"){$("#s-gate").classList.add("on");
+    state.gateArmed=true; /* a gate presented can be held — leaving without opening banks it */
     if(!state.seenGate){state.seenGate=true;$("#gate-first").style.display="block";}
     else{$("#gate-first").style.display="none";}
     if(state.opens===0){$("#gate-normal").style.display="none";$("#gate-over").style.display="block";}
@@ -974,6 +976,7 @@ show("home");
 
 /* gate */
 $("#btn-use").addEventListener("click",()=>{
+  state.gateArmed=false;
   state.opens--;
   if(state.opens<=0){state.opens=0;show("gate");return;}  $("#gate-n").textContent=state.opens;
   const rows=$$("#s-gate .irow");
@@ -991,11 +994,29 @@ $("#btn-wait").addEventListener("click",()=>{
 });
 $("#btn-partner").addEventListener("click",()=>note("Asked Jo. Gate holds until they answer."));
 $("#btn-pay").addEventListener("click",()=>{
+  state.gateArmed=false;
   state.tbMin-=18; $("#tb-chip").textContent=fmt(state.tbMin);
   $("#tb-hero").textContent=fmt(state.tbMin); $("#tb-line-n").textContent=fmt(state.tbMin);
   note("18m paid. Gate open — 60:00.");
 });
 function note(t){const n=$("#gate-note");n.textContent=t;n.style.opacity=1;setTimeout(()=>n.style.opacity=0,2600);}
+
+/* the gate-hold is the loop's core verb — it mints to the Timebank, not to kept */
+$("#s-gate .endlink").addEventListener("click",()=>{
+  if(!state.gateArmed||state.opens<=0)return;
+  state.gateArmed=false; state.tbMin+=12;
+  $("#tb-chip").textContent=fmt(state.tbMin);
+  $("#tb-hero").textContent=fmt(state.tbMin); $("#tb-line-n").textContent=fmt(state.tbMin);
+  state.entries.unshift({day:"Today",kept:12,did:"gate held",flash:true});
+  const r=document.createElement("div"); r.className="trow flash";
+  r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">gate held</span><span class="ta" style="color:var(--teal-t)">+12m</span>`;
+  state.nowMin=Math.min(state.nowMin+12,1439);
+  $("#trec-rows").appendChild(r);
+  const tr=$("#trec"); $(".statbar").style.top=(tr.offsetTop+tr.offsetHeight+21)+"px";
+  const tt=$("#toast"); tt.innerHTML="Gate held. <b>+12m</b> to your Timebank.";
+  tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
+  note("Gate held. +12m banked.");
+});
 
 /* recall — think at the wait, write at the close; self-marked, honestly labeled */
 function mintQuiet(mins,label){ /* mints without leaving the current screen */
