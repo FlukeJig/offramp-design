@@ -109,7 +109,7 @@
   .homelinks span{cursor:pointer;padding:12px 16px}
   .homelinks .sep{cursor:default;color:var(--ter);padding:12px 2px}
   /* today's record — the ledger, at day granularity */
-  .trec{position:absolute;top:394px;left:22px;right:22px}
+  .trec{position:absolute;top:392px;left:22px;right:22px}
   .trec-cap{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ter);font-weight:700;margin-bottom:8px}
   .trow{display:flex;align-items:baseline;gap:10px;padding:8px 0;font-size:14.5px;position:relative}
   .trow+.trow:before{content:"";position:absolute;top:0;left:48px;right:0;height:1px;background:var(--hair)}
@@ -147,8 +147,9 @@
   .edcard .t1{font-weight:700;font-size:16px}
   .edcard .t2{color:var(--sub);font-size:13px;margin-top:2px}
   .edcard .t3{color:var(--ter);font-size:12px;margin-top:3px}
+  .edcard .t1,.edcard .t2,.edcard .t3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .edcard .chev{margin-left:auto;color:#C7C7CC;font-size:20px;font-weight:600}
-  .statbar{position:absolute;top:535px;left:22px;right:22px;display:flex;
+  .statbar{position:absolute;top:533px;left:22px;right:22px;display:flex;
     background:var(--card);border-radius:18px;
     box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06)}
   .stat{flex:1;text-align:center;padding:11px 2px;font-size:12px;color:var(--sub);font-weight:600;cursor:pointer}
@@ -479,8 +480,8 @@
         <div class="edthumb"><svg viewBox="0 0 44 44" width="30" height="30" fill="none"><path d="M2 32 C 9 32, 12 30, 16 28 C 21 26, 23 12, 28 11 C 32 10, 34 20, 42 22" stroke="#9678D8" stroke-width="3.5" stroke-linecap="round"/></svg></div>
         <div class="edmain">
           <div class="t1"><span class="freshdot"></span>Read your Friday Edition</div>
-          <div class="t2">6 pieces from your 12 sources · 34 min</div>
-          <div class="t3" id="ed-lead">The lead: The quiet economics of attention</div>
+          <div class="t2">6 pieces from 12 sources · 34 min</div>
+          <div class="t3" id="ed-lead">“The quiet economics of attention”</div>
         </div>
         <div class="chev">›</div>
       </div>
