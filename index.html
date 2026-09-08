@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v37</title>
+<title>OFFRAMP — product mock v38</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -127,6 +127,21 @@
     font-size:13.5px;font-weight:600;color:var(--sub);cursor:pointer;transition:all .15s}
   .pursuit-chip.on{border-color:var(--pursuit);color:var(--pursuit-t);background:color-mix(in srgb,var(--pursuit) 8%,#fff)}
   #pursuit-line{display:none;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--pursuit-t)}
+  /* ---------- PURSUIT — the arc object, two scales ---------- */
+  .arcoffer{display:flex;align-items:center;gap:12px;margin:0 0 10px;padding:13px 16px;border-radius:14px;
+    background:color-mix(in srgb,var(--pursuit) 8%,#fff);box-shadow:inset 0 0 0 .5px rgba(74,127,191,.18)}
+  .arcoffer .ao-t{font-size:14.5px;font-weight:700;color:var(--ink)}
+  .arcoffer .ao-t b{color:var(--pursuit-t)}
+  .arcoffer .ao-s{font-size:12.5px;color:var(--sub);margin-top:2px;line-height:1.4}
+  .arcoffer .ao-go{margin-left:auto;font-size:15px;font-weight:700;color:var(--pursuit-t);cursor:pointer;white-space:nowrap;padding:8px 2px}
+  .archead{margin:0 0 10px;padding:13px 16px 11px;border-radius:14px;background:var(--card);
+    box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 22px rgba(0,0,0,.05),inset 0 0 0 .5px rgba(0,0,0,.04)}
+  .archead .ah-t{font-size:15px;font-weight:800;color:var(--pursuit-t);letter-spacing:-.01em}
+  .archead .ah-s{font-size:12px;color:var(--sub);margin-top:1px;font-weight:600}
+  .arctrack{display:block;width:100%;height:26px;margin-top:6px}
+  .arctrack-mini{display:block;width:100%;height:14px;margin-top:2px}
+  .anode-today{animation:anodepulse 2.6s ease-in-out infinite}
+  @keyframes anodepulse{0%,100%{opacity:1}50%{opacity:.5}}
   #seal-line{font-size:12px;color:var(--ter);margin-bottom:8px}
   #spot-line{font-size:13px;color:var(--sub);margin-bottom:8px;font-weight:600}
   #spot-tag{display:none;text-align:center;font-size:12.5px;color:var(--sub);margin:13px 22px 0}
@@ -628,6 +643,18 @@
         </article>
 
         <article class="piece locked" data-i="2" data-min="9">
+          <div class="arcoffer" id="arcoffer">
+            <div class="ao-main">
+              <div class="ao-t">Follow <b>The chip war</b>?</div>
+              <div class="ao-s">A 14-piece pursuit — one piece each morning until it closes.</div>
+            </div>
+            <div class="ao-go" id="arc-follow">Follow ›</div>
+          </div>
+          <div class="archead" id="archead" style="display:none">
+            <div class="ah-t">The chip war</div>
+            <div class="ah-s">piece <span class="parc">4</span> of 14 · one each morning</div>
+            <svg class="arctrack" id="arctrack" viewBox="0 0 346 26" preserveAspectRatio="none"></svg>
+          </div>
           <div class="pcover"><svg viewBox="0 0 346 92" fill="none"><rect width="346" height="92" fill="#ECF6F1"/><path d="M-10 68 C 40 66, 62 38, 96 42 C 130 46, 140 68, 180 64 C 220 60, 238 28, 278 32 C 308 35, 326 48, 356 44" stroke="#35A06F" stroke-width="12" stroke-linecap="round" opacity=".28"/><path d="M-10 68 C 40 66, 62 38, 96 42 C 130 46, 140 68, 180 64 C 220 60, 238 28, 278 32 C 308 35, 326 48, 356 44" stroke="#2C845C" stroke-width="2.5" stroke-linecap="round" opacity=".6"/><circle cx="12" cy="67" r="5" fill="#2C845C"/><circle cx="334" cy="45" r="5" fill="none" stroke="#2C845C" stroke-width="2"/></svg></div>
           <div class="ptop"><div class="plate" style="background:#E6F4ED;color:#2C845C">W</div>
             <div class="pt-meta"><div class="ptag"></div><div class="t">A field guide to walking meetings</div><div class="s">Works in Progress · 9 min</div>
@@ -922,8 +949,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v37</h1>
-    <div class="sub">Content or control — never both · Sep 8, 2026</div>
+    <h1>OFFRAMP — v38</h1>
+    <div class="sub">The arc becomes an object · Sep 8, 2026</div>
+    <div class="note"><b>The pursuit finally shows itself.</b> Before: a config-sheet declaration and a bare "4 of 14" on one article — a journey nobody could see. Now the arc is one object at two scales, built to four laws pulled live from Apple's own docs (HIG progress indicators / charts / onboarding + Apple Books reading goals, Sep 8): a 14-node track in our own curve grammar rides the pursuit piece's header — done, today glowing, still to come (determinate, consistent location, a few key things only); a micro-track ambassadors it on Home's Edition card so the journey survives past morning. Declaration left the Tune sheet for the moment of encounter — "Follow The chip war? 14 pieces, one each morning — Follow ›" — one contextual tap, teach-by-doing (Tune keeps change/exit, the Books-in-Settings pattern). Read today's piece and the track fills live; finish all fourteen and it seals — in the archead and in the Receipt's ledger. Noun sweep: "arc" and "bundle" are dead in copy; only Pursuit remains.</div>
     <div class="note"><b>The caption learned to be trusted.</b> v36's quiet line wore Weather's H/L grammar but secretly acted as three buttons — ambiguous, and the eye knew it ("floating, not buttons"). Apple's law: everything is clearly content or clearly control. So the caption became pure provenance — it states, it never taps (the banked number still ticks live on gate holds; provenance that updates is allowed). The doors moved to where their objects live: Timebank and the streak into the Receipt's own insight lines ("Timebank — 6h 40m stored ›", "Day 68 — the streak holds ›"), gated-apps into Settings, where configuration belongs. Home's interactivity is now the number, the Edition card, and the pill — not dead, finished.</div>
     <div class="note"><b>Home subtracted to its Apple frame: one hero, one object, one control, void.</b> The week strip died (the wave owns the day; the Receipt owns the week — Health's one-highlight rule), and the stat chips died with it (a stat strip is banned chrome; their three doors survive as ONE Weather-pattern caption line under the hero — Day 68 · 6h 40m banked · 3 gated, noun colors, same taps, zero chrome). The wave breathes into the freed space: band 434×268 = φ exactly. Grid re-verified by probe: number center y210 (ρ⁻³), 21px Fib seams, zero text collisions in both states.</div>
     <div class="note"><b>The last screen speaks ledger now, and its math finally agrees with itself.</b> Founding was a stat block in a product that speaks document — rebuilt in the Receipt's grammar: 713-left as the hero number, a hairline track showing 287 written, facts behind one drawer, done-state sealed with the Receipt's own provenance line ("only the place number ever leaves this phone"). Caught while designing: v34 sold place № 713 in the done-state while the Receipt advertised 713 places <i>left</i> — both can't be true; the record now numbers the next place № 288 consistently. Flow audit found one wrong-direction door: founding→receipt pushed forward; it now slides back from the left, measured in the transition classes.</div>
@@ -1210,29 +1238,76 @@ const PURSUIT_CONTENT={
   "How LLMs work":{t:"Attention is all you need, explained with pizza",s:"ML Explained · 9 min"}
 };
 function updatePursuitLine(){
-  if(state.pursuit) $("#pursuit-line").innerHTML=`<span class="fdot" style="background:var(--pursuit)"></span>${state.pursuit} — <b>${state.pursuitN} of ${state.pursuitTotal}</b> pieces · next piece Monday`;
+  if(!state.pursuit){$("#pursuit-line").style.display="none";return;}
+  const sealed=state.pursuitN>=state.pursuitTotal;
+  $("#pursuit-line").style.display="flex";
+  $("#pursuit-line").innerHTML=`<span class="fdot" style="background:var(--pursuit)"></span>${state.pursuit} — <b>${sealed? "closed · "+state.pursuitTotal+" of "+state.pursuitTotal : state.pursuitN+" of "+state.pursuitTotal+"</b> pieces · next piece Monday"}${sealed?"</b>":""}`;
+}
+/* ---------- the pursuit object: one track, two scales ---------- */
+function renderArcTrack(svg,done,total,r){
+  if(!svg)return;
+  const W=svg.viewBox.baseVal.width, H=svg.viewBox.baseVal.height, pad=r+6, span=W-2*pad;
+  const pts=[]; for(let i=0;i<total;i++){const t=i/(total-1);pts.push([pad+t*span, H-7-(H-14)*t]);}
+  let d="M"+pts[0][0].toFixed(1)+" "+pts[0][1].toFixed(1);
+  pts.slice(1).forEach(p=>{d+=" L"+p[0].toFixed(1)+" "+p[1].toFixed(1);});
+  let h=`<path d="${d}" fill="none" stroke="rgba(74,127,191,.28)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  pts.forEach((p,i)=>{
+    const x=p[0].toFixed(1),y=p[1].toFixed(1);
+    if(i<done)h+=`<circle cx="${x}" cy="${y}" r="${r}" fill="var(--pursuit)"/>`;
+    else if(i===done)h+=`<circle class="anode-today" cx="${x}" cy="${y}" r="${r+0.5}" fill="var(--pursuit)" stroke="#fff" stroke-width="2"/>`;
+    else h+=`<circle cx="${x}" cy="${y}" r="${Math.max(r-0.5,2)}" fill="#fff" stroke="rgba(0,0,0,.14)"/>`;
+  });
+  svg.innerHTML=h;
+}
+const ED_ORIG={t1:document.querySelector("#edcard .t1").innerHTML,
+  t2:document.querySelector("#edcard .t2").textContent,
+  t3:document.querySelector("#edcard .t3").textContent};
+function renderEdcard(){
+  const ed=$("#edcard");
+  if(state.pursuit){
+    ed.querySelector(".t1").innerHTML=`<span class="freshdot" style="background:var(--pursuit)"></span>${state.pursuit}`;
+    ed.querySelector(".t2").textContent=`Your pursuit · piece ${Math.min(state.pursuitN+1,state.pursuitTotal)} of ${state.pursuitTotal} · 9 min`;
+    ed.querySelector(".t3").innerHTML=`<svg class="arctrack-mini" id="arctrack-mini" viewBox="0 0 240 14" preserveAspectRatio="none"></svg>`;
+    renderArcTrack($("#arctrack-mini"),state.pursuitN,state.pursuitTotal,2.5);
+  } else {
+    ed.querySelector(".t1").innerHTML=ED_ORIG.t1;
+    ed.querySelector(".t2").textContent=ED_ORIG.t2;
+    ed.querySelector(".t3").textContent=ED_ORIG.t3;
+  }
+}
+function renderPursuit(){
+  const art=document.querySelector('.piece[data-i="2"]');
+  const off=$("#arcoffer"), ah=$("#archead");
+  if(state.pursuit){
+    off.style.display="none"; ah.style.display="block";
+    const sealed=state.pursuitN>=state.pursuitTotal;
+    ah.querySelector(".ah-t").textContent=state.pursuit;
+    ah.querySelector(".ah-s").innerHTML=sealed ? "closed — all 14 pieces read"
+      : `piece <span class="parc">${state.pursuitN+1}</span> of ${state.pursuitTotal} · one each morning`;
+    art.classList.add("pursuit-on");
+    const c=PURSUIT_CONTENT[state.pursuit];
+    art.querySelector(".pt-meta .t").textContent=c.t;
+    art.querySelector(".pt-meta .s").textContent=c.s;
+    art.querySelector(".prov-line").textContent="From your pursuit · 6:31 this morning";
+    art.querySelector(".ptag").textContent="";
+    renderArcTrack($("#arctrack"),state.pursuitN,state.pursuitTotal,4);
+  } else {
+    ah.style.display="none"; off.style.display="flex";
+    art.classList.remove("pursuit-on");
+    art.querySelector(".pt-meta .t").textContent="A field guide to walking meetings";
+    art.querySelector(".pt-meta .s").textContent="Works in Progress · 9 min";
+    art.querySelector(".prov-line").textContent="From your #2 source · 7:05 this morning";
+    art.querySelector(".ptag").textContent="";
+  }
+  renderEdcard();
 }
 function setPursuit(name){
   state.pursuit=name||null; state.pursuitN=4; state.arcCounted=false;
   $("#pursuit-val").innerHTML=(name||"None declared")+'<span class="chev">›</span>';
   $("#pursuit-val").style.color=name?"var(--pursuit-t)":"";
-  const art=document.querySelector('.piece[data-i="2"]');
-  if(name){
-    const c=PURSUIT_CONTENT[name];
-    art.classList.add("pursuit-on");
-    art.querySelector(".ptag").innerHTML=`Pursuit · piece <span class="parc">${state.pursuitN}</span> of ${state.pursuitTotal} · your ${name.toLowerCase().replace(/ /g,"-")} arc`;
-    art.querySelector(".pt-meta .t").textContent=c.t;
-    art.querySelector(".pt-meta .s").textContent=c.s;
-    art.querySelector(".prov-line").textContent="From your pursuit bundle · 6:31 this morning";
-    $("#pursuit-line").style.display="block"; updatePursuitLine();
-  } else {
-    art.classList.remove("pursuit-on");
-    art.querySelector(".pt-meta .t").textContent="A field guide to walking meetings";
-    art.querySelector(".pt-meta .s").textContent="Works in Progress · 9 min";
-    art.querySelector(".prov-line").textContent="From your #2 source · 7:05 this morning";
-    $("#pursuit-line").style.display="none";
-  }
+  renderPursuit(); updatePursuitLine();
 }
+$("#arc-follow").addEventListener("click",e=>{e.stopPropagation();setPursuit("The chip war");});
 $("#pursuit-row").addEventListener("click",()=>$("#pursuit-chips").classList.toggle("on"));
 $("#focus-switch").addEventListener("click",()=>{
   const showing=$("#focus-rows").style.display==="block";
@@ -1247,9 +1322,9 @@ function checkPursuitArc(){
   if(!state.pursuit||state.arcCounted)return;
   const art=document.querySelector('.piece[data-i="2"]');
   if(art.classList.contains("is-read")){
-    state.arcCounted=true; state.pursuitN++;
-    art.querySelector(".parc").textContent=state.pursuitN;
-    updatePursuitLine();
+    state.arcCounted=true;
+    state.pursuitN=Math.min(state.pursuitN+1,state.pursuitTotal);
+    renderPursuit(); updatePursuitLine();
   }
 }
 
