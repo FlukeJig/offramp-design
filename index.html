@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v39</title>
+<title>OFFRAMP — product mock v40</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -116,9 +116,11 @@
     transition:opacity .4s var(--ease),transform .45s var(--spring)}
   .wbump.on{opacity:1;transform:scale(1)}
   .wavelabel{position:absolute;z-index:2;font-size:13px;color:var(--sub);pointer-events:none;
-    white-space:nowrap;transform:translate(-50%,-160%);
+    white-space:nowrap;transform:translate(-50%,0);
     transition:left .55s var(--ease),top .55s var(--ease)}
   .wavelabel b{color:var(--ink)}
+  .waveleader{position:absolute;z-index:1;width:.5px;background:rgba(0,0,0,.14);pointer-events:none;
+    transform:translateX(-50%);transition:left .55s var(--ease),height .55s var(--ease),top .55s var(--ease)}
   .ptag{display:none;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pursuit-t);font-weight:800;margin-bottom:4px}
   .piece.pursuit-on .ptag{display:block}
   #pursuit-chips{display:none;padding:2px 2px 13px;gap:8px;flex-wrap:wrap}
@@ -531,6 +533,7 @@
           <path id="wavepath" pathLength="1" d="M-11 210 C 45 210, 69 203, 102 195 C 142 183, 167 174, 202 148 C 234 124, 253 88, 280 68 C 305 49, 325 55, 351 84 C 376 113, 391 155, 445 172"/>
           <g id="wave-bumps"></g>
         </svg>
+        <div class="waveleader" id="waveleader"></div>
         <div id="latest-row" class="wavelabel"><b>ride to work</b> · 9:20</div>
       </div>
       <div class="edcard rise d1" data-go="edition" id="edcard">
@@ -964,8 +967,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v39</h1>
-    <div class="sub">The arc, at Apple detail · Sep 8, 2026</div>
+    <h1>OFFRAMP — v40</h1>
+    <div class="sub">Annotations float clear · Sep 8, 2026</div>
+    <div class="note"><b>The wave's label no longer sits on the curve.</b> Path-sampled geometry proved the crest label intersected the line in every state — a collision the eye caught before the probe did. Apple's chart grammar (Weather's hourly curve): the value floats in a fixed zone above, the point stays marked on the line, a hairline connects them. The label now pins to the top of the wave band — x tracking the latest bump, clamped to the frame — with a 0.5px leader down to the dot. Verified by the same path-sampling probe: zero intersections, all states. HIG charts: descriptive content gives context; it never obscures the marks.</div>
     <div class="note"><b>Detail pass, every choice sourced from today's HIG pulls.</b> Materials (Sep 9, 2025): the archead is content, so no Liquid Glass — solid document card with concentric radii, 0.5px hairline ring, two-layer ambient shadow. Motion (Sep 9, 2025): the perpetual today-pulse was a violation and it's dead — today now wears a static halo and breathes exactly once when the track advances; the track draws in a single time with spring-staggered node pops; completion gets one 600ms shimmer sweep and the seal glyph; prefers-reduced-motion silences all of it. Color (Dec 16, 2025): pursuit blue audited — one color, one noun, zero leaks. The track itself graduated from polyline segments to a catmull-rom curve — the product's wave grammar at reading scale. Counts run tabular; the offer's Follow presses on the same spring as the glass pill.</div>
     <div class="note"><b>The pursuit finally shows itself.</b> Before: a config-sheet declaration and a bare "4 of 14" on one article — a journey nobody could see. Now the arc is one object at two scales, built to four laws pulled live from Apple's own docs (HIG progress indicators / charts / onboarding + Apple Books reading goals, Sep 8): a 14-node track in our own curve grammar rides the pursuit piece's header — done, today glowing, still to come (determinate, consistent location, a few key things only); a micro-track ambassadors it on Home's Edition card so the journey survives past morning. Declaration left the Tune sheet for the moment of encounter — "Follow The chip war? 14 pieces, one each morning — Follow ›" — one contextual tap, teach-by-doing (Tune keeps change/exit, the Books-in-Settings pattern). Read today's piece and the track fills live; finish all fourteen and it seals — in the archead and in the Receipt's ledger. Noun sweep: "arc" and "bundle" are dead in copy; only Pursuit remains.</div>
     <div class="note"><b>The caption learned to be trusted.</b> v36's quiet line wore Weather's H/L grammar but secretly acted as three buttons — ambiguous, and the eye knew it ("floating, not buttons"). Apple's law: everything is clearly content or clearly control. So the caption became pure provenance — it states, it never taps (the banked number still ticks live on gate holds; provenance that updates is allowed). The doors moved to where their objects live: Timebank and the streak into the Receipt's own insight lines ("Timebank — 6h 40m stored ›", "Day 68 — the streak holds ›"), gated-apps into Settings, where configuration belongs. Home's interactivity is now the number, the Edition card, and the pill — not dead, finished.</div>
@@ -1026,7 +1030,10 @@ function bump(x,y,delay){
 }
 function moveWaveLabel(x,y){
   const lr=$("#latest-row");
-  lr.style.left=(x/434*100)+"%"; lr.style.top=(y/268*100)+"%";
+  lr.style.left=Math.min(86,Math.max(14,(x/434*100)))+"%"; lr.style.top="3%";
+  const lead=$("#waveleader");
+  lead.style.left=(x/434*100)+"%"; lead.style.top="calc(3% + 18px)";
+  lead.style.height=Math.max(0,(y/268*100)-3-(18/268*100))+"%";
 }
 function renderWave(){
   waveSeeds.forEach((s,i)=>bump(s[0],s[1],600+i*160));
