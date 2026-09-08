@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v36</title>
+<title>OFFRAMP — product mock v37</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -155,8 +155,8 @@
   .edcard .t1,.edcard .t2,.edcard .t3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .edcard .chev{margin-left:auto;color:#C7C7CC;font-size:20px;font-weight:600}
   .hquiet{position:absolute;top:247px;left:22px;right:22px;font-size:13px;color:var(--sub);display:flex;gap:8px;align-items:baseline}
-  .hquiet span{cursor:pointer;white-space:nowrap}
-  .hquiet .qsep{color:var(--ter);cursor:default}
+  .hquiet span{white-space:nowrap}
+  .hquiet .qsep{color:var(--ter)}
   .hquiet b{font-weight:800}
 
   /* ---------- GATE (frosted modal) ---------- */
@@ -495,7 +495,7 @@
         <div class="l">kept off your phone today — proven</div>
         <div class="l" id="home-first" style="display:none;margin-top:8px;font-size:13px;line-height:1.5">This is your day off your phone, proven.<br>Gates hold your apps; the record shows what you did instead.</div>
       </div>
-      <div class="hquiet rise d3"><span data-go="streak">Day <b style="color:var(--green-t)">68</b></span><span class="qsep">·</span><span data-sheet="timebank"><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b> banked</span><span class="qsep">·</span><span data-sheet="gates"><b style="color:var(--teal-t)">3</b> gated</span></div>
+      <div class="hquiet rise d3"><span>Day <b style="color:var(--green-t)">68</b></span><span class="qsep">·</span><span><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b> banked</span><span class="qsep">·</span><span><b style="color:var(--teal-t)">3</b> gated</span></div>
       <div class="wavebox" aria-hidden="true">
         <svg viewBox="0 0 434 268" preserveAspectRatio="none">
           <path id="wavepath" pathLength="1" d="M-11 210 C 45 210, 69 203, 102 195 C 142 183, 167 174, 202 148 C 234 124, 253 88, 280 68 C 305 49, 325 55, 351 84 C 376 113, 391 155, 445 172"/>
@@ -715,7 +715,8 @@
           <div id="spot-line" class="fline"><span class="fdot" style="background:var(--teal)"></span>Your soft spot: 9–10pm — 4 of 5 TikTok opens landed there this week.</div>
           <div id="pursuit-line" class="fline"></div>
           <div id="focus-line" class="fline" style="display:none;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--sub)"><span class="fdot" style="background:var(--ter)"></span>Gates followed your Work Focus on 3 of 5 weekdays.</div>
-          <div id="tb-line" class="fline" style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--amber-t)"><span class="fdot" style="background:var(--amber)"></span>Timebank — <b id="tb-line-n">6h 40m</b> stored · never expires</div>
+          <div id="tb-line" class="fline" data-sheet="timebank" style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--amber-t);cursor:pointer"><span class="fdot" style="background:var(--amber)"></span>Timebank — <b id="tb-line-n">6h 40m</b> stored · never expires <span style="color:var(--ter)">›</span></div>
+          <div id="streak-line" class="fline" data-go="streak" style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--green-t);cursor:pointer"><span class="fdot" style="background:var(--green)"></span>Day 68 — the streak holds <span style="color:var(--ter)">›</span></div>
           <div class="prov"><svg width="13" height="13" viewBox="0 0 14 14"><path fill="#0B8472" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified from on-device data — recall entries are self-marked. Never leaves this phone.</div>
           <div class="flink" data-go="founding"><b>713</b> founding places left ›</div>
         </div>
@@ -820,6 +821,7 @@
         <div class="pr">Your data never leaves this phone.</div>
       </div>
       <div class="igroup" style="margin-top:14px">
+        <div class="irow setrow" data-sheet="gates"><span class="st">Gated apps</span><span class="v">3<span class="chev">›</span></span></div>
         <div class="irow setrow"><span class="squircle" style="width:32px;height:32px;min-width:32px;font-size:13px">J</span><span class="st">Partner — Jo holds the other key</span><span class="v">Manage<span class="chev">›</span></span></div>
         <div class="irow setrow"><span class="st">Founding place</span><span class="v">#713<span class="chev">›</span></span></div>
         <div class="irow setrow"><span class="st">Export your record</span><span class="v">JSON<span class="chev">›</span></span></div>
@@ -920,8 +922,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v36</h1>
-    <div class="sub">The day becomes the object · Sep 8, 2026</div>
+    <h1>OFFRAMP — v37</h1>
+    <div class="sub">Content or control — never both · Sep 8, 2026</div>
+    <div class="note"><b>The caption learned to be trusted.</b> v36's quiet line wore Weather's H/L grammar but secretly acted as three buttons — ambiguous, and the eye knew it ("floating, not buttons"). Apple's law: everything is clearly content or clearly control. So the caption became pure provenance — it states, it never taps (the banked number still ticks live on gate holds; provenance that updates is allowed). The doors moved to where their objects live: Timebank and the streak into the Receipt's own insight lines ("Timebank — 6h 40m stored ›", "Day 68 — the streak holds ›"), gated-apps into Settings, where configuration belongs. Home's interactivity is now the number, the Edition card, and the pill — not dead, finished.</div>
     <div class="note"><b>Home subtracted to its Apple frame: one hero, one object, one control, void.</b> The week strip died (the wave owns the day; the Receipt owns the week — Health's one-highlight rule), and the stat chips died with it (a stat strip is banned chrome; their three doors survive as ONE Weather-pattern caption line under the hero — Day 68 · 6h 40m banked · 3 gated, noun colors, same taps, zero chrome). The wave breathes into the freed space: band 434×268 = φ exactly. Grid re-verified by probe: number center y210 (ρ⁻³), 21px Fib seams, zero text collisions in both states.</div>
     <div class="note"><b>The last screen speaks ledger now, and its math finally agrees with itself.</b> Founding was a stat block in a product that speaks document — rebuilt in the Receipt's grammar: 713-left as the hero number, a hairline track showing 287 written, facts behind one drawer, done-state sealed with the Receipt's own provenance line ("only the place number ever leaves this phone"). Caught while designing: v34 sold place № 713 in the done-state while the Receipt advertised 713 places <i>left</i> — both can't be true; the record now numbers the next place № 288 consistently. Flow audit found one wrong-direction door: founding→receipt pushed forward; it now slides back from the left, measured in the transition classes.</div>
     <div class="note"><b>Insight lines got their dots.</b> Soft spot (teal), Focus (gray), Pursuit (blue), Timebank (amber) — one scannable grammar in the Receipt's fine print, noun colors doing their job. Single-line ellipsis now covers receipt rows and every sheet row: labels truncate, they never wrap and swell a layout — the rule that fixed Home, applied everywhere.</div>
