@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v38</title>
+<title>OFFRAMP — product mock v39</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -127,21 +127,36 @@
     font-size:13.5px;font-weight:600;color:var(--sub);cursor:pointer;transition:all .15s}
   .pursuit-chip.on{border-color:var(--pursuit);color:var(--pursuit-t);background:color-mix(in srgb,var(--pursuit) 8%,#fff)}
   #pursuit-line{display:none;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--pursuit-t)}
-  /* ---------- PURSUIT — the arc object, two scales ---------- */
+  /* ---------- PURSUIT — the arc object, two scales (Apple detail, sourced Sep 8) ---------- */
   .arcoffer{display:flex;align-items:center;gap:12px;margin:0 0 10px;padding:13px 16px;border-radius:14px;
     background:color-mix(in srgb,var(--pursuit) 8%,#fff);box-shadow:inset 0 0 0 .5px rgba(74,127,191,.18)}
   .arcoffer .ao-t{font-size:14.5px;font-weight:700;color:var(--ink)}
   .arcoffer .ao-t b{color:var(--pursuit-t)}
   .arcoffer .ao-s{font-size:12.5px;color:var(--sub);margin-top:2px;line-height:1.4}
-  .arcoffer .ao-go{margin-left:auto;font-size:15px;font-weight:700;color:var(--pursuit-t);cursor:pointer;white-space:nowrap;padding:8px 2px}
+  .arcoffer .ao-go{margin-left:auto;font-size:15px;font-weight:700;color:var(--pursuit-t);cursor:pointer;white-space:nowrap;
+    padding:8px 2px;transition:transform .18s var(--spring)}
+  .arcoffer .ao-go:active{transform:scale(.97)}
+  /* content layer — solid card, no Liquid Glass (HIG Materials, Sep 9 2025) */
   .archead{margin:0 0 10px;padding:13px 16px 11px;border-radius:14px;background:var(--card);
-    box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 22px rgba(0,0,0,.05),inset 0 0 0 .5px rgba(0,0,0,.04)}
+    box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 26px rgba(0,0,0,.06),inset 0 0 0 .5px rgba(0,0,0,.04)}
   .archead .ah-t{font-size:15px;font-weight:800;color:var(--pursuit-t);letter-spacing:-.01em}
-  .archead .ah-s{font-size:12px;color:var(--sub);margin-top:1px;font-weight:600}
+  .archead .ah-s{font-size:12px;color:var(--sub);margin-top:1px;font-weight:600;font-variant-numeric:tabular-nums;
+    display:flex;align-items:center;gap:5px}
   .arctrack{display:block;width:100%;height:26px;margin-top:6px}
   .arctrack-mini{display:block;width:100%;height:14px;margin-top:2px}
-  .anode-today{animation:anodepulse 2.6s ease-in-out infinite}
-  @keyframes anodepulse{0%,100%{opacity:1}50%{opacity:.5}}
+  /* motion: draw once, pop with spring, breathe once on advance, then rest (HIG Motion, Sep 9 2025) */
+  .arcline{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s var(--ease)}
+  .arcline.drawn{stroke-dashoffset:0}
+  .anode{transform-origin:center;transform-box:fill-box}
+  .anode-fill{animation:anodepop .35s var(--spring) backwards}
+  .anode-new{animation:anodepop .35s var(--spring)}
+  .anode-breath{animation:anodebreath .6s var(--spring) 1}
+  @keyframes anodepop{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+  @keyframes anodebreath{0%{transform:scale(1)}45%{transform:scale(1.18)}100%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){
+    .arcline{transition:none;stroke-dashoffset:0}
+    .anode-fill,.anode-new,.anode-breath,.arcoffer .ao-go{animation:none!important;transition:none!important}
+  }
   #seal-line{font-size:12px;color:var(--ter);margin-bottom:8px}
   #spot-line{font-size:13px;color:var(--sub);margin-bottom:8px;font-weight:600}
   #spot-tag{display:none;text-align:center;font-size:12.5px;color:var(--sub);margin:13px 22px 0}
@@ -949,8 +964,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v38</h1>
-    <div class="sub">The arc becomes an object · Sep 8, 2026</div>
+    <h1>OFFRAMP — v39</h1>
+    <div class="sub">The arc, at Apple detail · Sep 8, 2026</div>
+    <div class="note"><b>Detail pass, every choice sourced from today's HIG pulls.</b> Materials (Sep 9, 2025): the archead is content, so no Liquid Glass — solid document card with concentric radii, 0.5px hairline ring, two-layer ambient shadow. Motion (Sep 9, 2025): the perpetual today-pulse was a violation and it's dead — today now wears a static halo and breathes exactly once when the track advances; the track draws in a single time with spring-staggered node pops; completion gets one 600ms shimmer sweep and the seal glyph; prefers-reduced-motion silences all of it. Color (Dec 16, 2025): pursuit blue audited — one color, one noun, zero leaks. The track itself graduated from polyline segments to a catmull-rom curve — the product's wave grammar at reading scale. Counts run tabular; the offer's Follow presses on the same spring as the glass pill.</div>
     <div class="note"><b>The pursuit finally shows itself.</b> Before: a config-sheet declaration and a bare "4 of 14" on one article — a journey nobody could see. Now the arc is one object at two scales, built to four laws pulled live from Apple's own docs (HIG progress indicators / charts / onboarding + Apple Books reading goals, Sep 8): a 14-node track in our own curve grammar rides the pursuit piece's header — done, today glowing, still to come (determinate, consistent location, a few key things only); a micro-track ambassadors it on Home's Edition card so the journey survives past morning. Declaration left the Tune sheet for the moment of encounter — "Follow The chip war? 14 pieces, one each morning — Follow ›" — one contextual tap, teach-by-doing (Tune keeps change/exit, the Books-in-Settings pattern). Read today's piece and the track fills live; finish all fourteen and it seals — in the archead and in the Receipt's ledger. Noun sweep: "arc" and "bundle" are dead in copy; only Pursuit remains.</div>
     <div class="note"><b>The caption learned to be trusted.</b> v36's quiet line wore Weather's H/L grammar but secretly acted as three buttons — ambiguous, and the eye knew it ("floating, not buttons"). Apple's law: everything is clearly content or clearly control. So the caption became pure provenance — it states, it never taps (the banked number still ticks live on gate holds; provenance that updates is allowed). The doors moved to where their objects live: Timebank and the streak into the Receipt's own insight lines ("Timebank — 6h 40m stored ›", "Day 68 — the streak holds ›"), gated-apps into Settings, where configuration belongs. Home's interactivity is now the number, the Edition card, and the pill — not dead, finished.</div>
     <div class="note"><b>Home subtracted to its Apple frame: one hero, one object, one control, void.</b> The week strip died (the wave owns the day; the Receipt owns the week — Health's one-highlight rule), and the stat chips died with it (a stat strip is banned chrome; their three doors survive as ONE Weather-pattern caption line under the hero — Day 68 · 6h 40m banked · 3 gated, noun colors, same taps, zero chrome). The wave breathes into the freed space: band 434×268 = φ exactly. Grid re-verified by probe: number center y210 (ρ⁻³), 21px Fib seams, zero text collisions in both states.</div>
@@ -1244,19 +1260,37 @@ function updatePursuitLine(){
   $("#pursuit-line").innerHTML=`<span class="fdot" style="background:var(--pursuit)"></span>${state.pursuit} — <b>${sealed? "closed · "+state.pursuitTotal+" of "+state.pursuitTotal : state.pursuitN+" of "+state.pursuitTotal+"</b> pieces · next piece Monday"}${sealed?"</b>":""}`;
 }
 /* ---------- the pursuit object: one track, two scales ---------- */
-function renderArcTrack(svg,done,total,r){
+function renderArcTrack(svg,done,total,r,opts){
   if(!svg)return;
+  opts=opts||{};
   const W=svg.viewBox.baseVal.width, H=svg.viewBox.baseVal.height, pad=r+6, span=W-2*pad;
   const pts=[]; for(let i=0;i<total;i++){const t=i/(total-1);pts.push([pad+t*span, H-7-(H-14)*t]);}
-  let d="M"+pts[0][0].toFixed(1)+" "+pts[0][1].toFixed(1);
-  pts.slice(1).forEach(p=>{d+=" L"+p[0].toFixed(1)+" "+p[1].toFixed(1);});
-  let h=`<path d="${d}" fill="none" stroke="rgba(74,127,191,.28)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  /* catmull-rom → cubic bezier: the wave grammar, not segments */
+  const P=i=>pts[Math.max(0,Math.min(total-1,i))];
+  let d=`M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+  for(let i=0;i<total-1;i++){
+    const p0=P(i-1),p1=P(i),p2=P(i+1),p3=P(i+2);
+    d+=` C${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)}, ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)}, ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+  }
+  let h=`<path class="arcline" d="${d}" pathLength="1" fill="none" stroke="rgba(74,127,191,.3)" stroke-width="1.5" stroke-linecap="round"/>`;
   pts.forEach((p,i)=>{
     const x=p[0].toFixed(1),y=p[1].toFixed(1);
-    if(i<done)h+=`<circle cx="${x}" cy="${y}" r="${r}" fill="var(--pursuit)"/>`;
-    else if(i===done)h+=`<circle class="anode-today" cx="${x}" cy="${y}" r="${r+0.5}" fill="var(--pursuit)" stroke="#fff" stroke-width="2"/>`;
-    else h+=`<circle cx="${x}" cy="${y}" r="${Math.max(r-0.5,2)}" fill="#fff" stroke="rgba(0,0,0,.14)"/>`;
+    if(i<done){
+      const cls=opts.intro?`anode anode-fill`:(opts.advance&&i===done-1?`anode anode-new`:`anode`);
+      const delay=opts.intro?` style="animation-delay:${140+i*40}ms"`:"";
+      h+=`<circle class="${cls}" cx="${x}" cy="${y}" r="${r}" fill="var(--pursuit)"${delay}/>`;
+    } else if(i===done){
+      h+=`<circle class="anode-halo" cx="${x}" cy="${y}" r="${r+4.5}" fill="none" stroke="var(--pursuit)" stroke-opacity=".25" stroke-width="1.5"/>`;
+      h+=`<circle class="anode${opts.advance?" anode-breath":""}" cx="${x}" cy="${y}" r="${r+0.5}" fill="var(--pursuit)" stroke="#fff" stroke-width="2"/>`;
+    } else h+=`<circle class="anode" cx="${x}" cy="${y}" r="${Math.max(r-0.5,2)}" fill="#fff" stroke="rgba(0,0,0,.14)"/>`;
   });
+  if(opts.sealShimmer){
+    h+=`<defs><linearGradient id="arcshine" x1="-1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      <animate attributeName="x1" from="-1" to="1" dur="0.6s" fill="freeze"/>
+      <animate attributeName="x2" from="0" to="2" dur="0.6s" fill="freeze"/></linearGradient></defs>
+      <path d="${d}" fill="none" stroke="url(#arcshine)" stroke-width="2.5" stroke-linecap="round"/>`;
+  }
   svg.innerHTML=h;
 }
 const ED_ORIG={t1:document.querySelector("#edcard .t1").innerHTML,
@@ -1290,7 +1324,11 @@ function renderPursuit(){
     art.querySelector(".pt-meta .s").textContent=c.s;
     art.querySelector(".prov-line").textContent="From your pursuit · 6:31 this morning";
     art.querySelector(".ptag").textContent="";
-    renderArcTrack($("#arctrack"),state.pursuitN,state.pursuitTotal,4);
+    const intro=!state.arcIntroDone, advance=!!state.arcJustAdvanced;
+    state.arcIntroDone=true; state.arcJustAdvanced=false;
+    renderArcTrack($("#arctrack"),state.pursuitN,state.pursuitTotal,4,{intro,advance,sealShimmer:sealed});
+    if(intro)setTimeout(()=>{const l=$("#arctrack .arcline");l&&l.classList.add("drawn");},120);
+    if(sealed)ah.querySelector(".ah-s").innerHTML=`<svg width="12" height="12" viewBox="0 0 14 14"><path fill="var(--pursuit-t)" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>closed — all 14 pieces read`;
   } else {
     ah.style.display="none"; off.style.display="flex";
     art.classList.remove("pursuit-on");
@@ -1324,6 +1362,7 @@ function checkPursuitArc(){
   if(art.classList.contains("is-read")){
     state.arcCounted=true;
     state.pursuitN=Math.min(state.pursuitN+1,state.pursuitTotal);
+    state.arcJustAdvanced=true;
     renderPursuit(); updatePursuitLine();
   }
 }
@@ -1403,7 +1442,7 @@ state.entries=[
   {day:"Mon",kept:244,did:"Edition night — phone in drawer"},
 ];
 function catColor(e){const s=(e.did||"").toLowerCase();
-  if(/recall/.test(s))return "#4A7FBF";
+  if(/recall/.test(s))return "#8494A7"; /* recall's own slate — pursuit blue is pursuit's alone (HIG Color) */
   if(/walk|ride|gym|run/.test(s))return "#35A06F";
   if(/read|edition/.test(s))return "#9678D8";
   if(/call|mom|dad/.test(s))return "#D9960B";
