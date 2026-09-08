@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v34</title>
+<title>OFFRAMP — product mock v35</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -397,16 +397,24 @@
   .docfoot .flink b{color:var(--amber-t);font-weight:700}
 
   /* ---------- FOUNDING ---------- */
-  #s-founding .hero .n{font-size:58px;line-height:1;color:var(--amber);margin-top:4px}
-  #s-founding .hero .n .slash{color:#C7C7CC;font-weight:600}
-  #s-founding .lab{margin-top:10px;color:var(--sub);font-size:15px;line-height:1.5}
-  .facts{margin-top:22px}
-  .fact{display:flex;gap:12px;padding:15px 16px;border-top:1px solid var(--hair);font-size:14.5px;
+  .foundoc .dochead .n{font-size:64px;line-height:1.05;color:var(--amber);margin-top:8px}
+  .ftrack{height:4px;border-radius:2px;background:#EFEFF0;margin:16px 18px 7px;overflow:hidden}
+  .ftrack i{display:block;height:100%;width:28.7%;background:var(--amber);border-radius:2px}
+  .flabels{display:flex;justify-content:space-between;padding:0 18px 15px;font-size:11px;font-weight:600;color:var(--ter)}
+  .flabels b{color:var(--amber-t);font-weight:700}
+  .fdrawer{margin-top:14px;background:var(--card);border-radius:18px;overflow:hidden;
+    box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 28px rgba(0,0,0,.05)}
+  .fdrawer summary{list-style:none;cursor:pointer;padding:17px 18px;font-size:15px;font-weight:600;
+    color:var(--ink);display:flex;align-items:center;justify-content:center;gap:6px}
+  .fdrawer summary::-webkit-details-marker{display:none}
+  .fdrawer summary::after{content:"›";color:var(--ter);font-weight:600;transition:transform .25s var(--ease)}
+  .fdrawer[open] summary::after{transform:rotate(90deg)}
+  .fdrawer .facts{padding:0 6px 6px;margin-top:0}
+  .facts .fact{display:flex;gap:12px;padding:15px 16px;border-top:1px solid var(--hair);font-size:14.5px;
     color:#4a4a4f;line-height:1.45}
-  .fact:first-child{border-top:none}
-  .fact i{width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--amber);margin-top:6px}
+  .facts .fact:first-child{border-top:none}
+  .facts .fact i{width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--amber);margin-top:6px}
   #found-done{display:none}
-  #found-done .big{font-size:26px;font-weight:800;margin-top:8px}
 
   /* ---------- SHEETS ---------- */
   .backdrop{position:absolute;inset:0;background:rgba(30,30,40,.3);backdrop-filter:blur(6px);
@@ -746,20 +754,40 @@
 
     
     <div class="screen" id="s-founding">
-      <div class="scr-head rise" style="text-align:center"><div class="cap">Founding record</div>
-        <div class="hero"><div class="n hero-num">713 <span class="slash">/</span> 1,000</div></div>
-        <div class="lab">founding places left — $199, lifetime, in the public record</div></div>
-      <div id="found-main" class="rise d2">
-        <div class="igroup facts">
-          <div class="fact"><i></i>Gates, full Receipt, Timebank and Tune depth. Forever, including everything we ship next.</div>
-          <div class="fact"><i></i>The founding scoreboard is public and permanent. Place numbers never recycle.</div>
-          <div class="fact"><i></i>We remind you before anything ever renews, in writing. That is policy, not a promise.</div>
+      <div class="scr-head rise" style="text-align:center"><div class="cap">Founding</div></div>
+      <div id="found-main">
+        <div class="doccard rise d2 foundoc">
+          <div class="dochead">
+            <div class="docbrand">Offramp · Founding record</div>
+            <div class="n hero-num">713</div>
+            <div class="ro">founding places left of 1,000 · $199, lifetime</div>
+          </div>
+          <div class="ftrack"><i></i></div>
+          <div class="flabels"><span>287 written</span><span>next <b>№ 288</b></span><span>cap 1,000</span></div>
+          <div class="docfoot">
+            <div class="prov">Place numbers never recycle. The scoreboard is public and permanent.</div>
+          </div>
         </div>
+        <details class="fdrawer rise d3">
+          <summary>What a founding place carries</summary>
+          <div class="facts">
+            <div class="fact"><i></i>Gates, full Receipt, Timebank and Tune depth. Forever, including everything we ship next.</div>
+            <div class="fact"><i></i>The founding scoreboard is public and permanent. Place numbers never recycle.</div>
+            <div class="fact"><i></i>We remind you before anything ever renews, in writing. That is policy, not a promise.</div>
+          </div>
+        </details>
       </div>
-      <div id="found-done" style="text-align:center;margin-top:30px">
-        <div class="cap">Founding record</div>
-        <div class="big">Place #713 is yours.</div>
-        <div class="sub-line" style="margin-top:8px">Written into the record. It does not come back.</div>
+      <div id="found-done">
+        <div class="doccard foundoc">
+          <div class="dochead">
+            <div class="docbrand">Offramp · Founding record</div>
+            <div class="n hero-num">№ 288</div>
+            <div class="ro">written — it does not come back</div>
+          </div>
+          <div class="docfoot">
+            <div class="prov"><svg width="13" height="13" viewBox="0 0 14 14"><path fill="#0B8472" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Written into the founding record — public, permanent. Only the place number ever leaves this phone.</div>
+          </div>
+        </div>
       </div>
       <div class="bottombar">
         <button class="btn btn-black" id="btn-take">Take a founding place</button>
@@ -902,9 +930,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v34</h1>
-    <div class="sub">Pinned-chrome fix · Sep 8, 2026</div>
-    <div class="note"><b>The Receipt's chrome is actually pinned now.</b> v33's collision probe was right but the fix was half-done: the Share button and scroll veil lived inside the scrolling layer, so they rode the content up and the button covered the document's fine print when fully scrolled — the "clears by 26px" read was taken on the wrong screen state. The scroll now happens on an inner layer (.rscroll); Share and the veil are pinned to the screen. Verified by geometry, not by eye: at max scroll the document footer clears the button by 40px and the button doesn't move.</div>
+    <h1>OFFRAMP — v35</h1>
+    <div class="sub">The founding page becomes a document · Sep 8, 2026</div>
+    <div class="note"><b>The last screen speaks ledger now, and its math finally agrees with itself.</b> Founding was a stat block in a product that speaks document — rebuilt in the Receipt's grammar: 713-left as the hero number, a hairline track showing 287 written, facts behind one drawer, done-state sealed with the Receipt's own provenance line ("only the place number ever leaves this phone"). Caught while designing: v34 sold place № 713 in the done-state while the Receipt advertised 713 places <i>left</i> — both can't be true; the record now numbers the next place № 288 consistently. Flow audit found one wrong-direction door: founding→receipt pushed forward; it now slides back from the left, measured in the transition classes.</div>
     <div class="note"><b>Insight lines got their dots.</b> Soft spot (teal), Focus (gray), Pursuit (blue), Timebank (amber) — one scannable grammar in the Receipt's fine print, noun colors doing their job. Single-line ellipsis now covers receipt rows and every sheet row: labels truncate, they never wrap and swell a layout — the rule that fixed Home, applied everywhere.</div>
     <div class="note"><b>Same sheet, two frames.</b> From a gate: "Gate — Instagram → Pivot" with the soft-spot pre-decision. From Home: "Session — Start one," 25/45/90 duration chips, no pre-decision. The JITAI evidence says users rarely self-initiate in the moment — the gate stays the engine; sessions serve the planners.</div>
     <div class="note"><b>The first honest session in the category.</b> Forest's tree "does not watch you." Ours mints verified: in production, DeviceActivity confirms no gated apps were touched during the window. End at 41 of 45 and the record says 41 — partial truth, no withering tree, no guilt object. And one-color-one-noun held: session rows are ink, not gate teal (caught and fixed in the mint path).</div>
@@ -968,7 +996,7 @@ function show(id){
     return;}
   $("#s-gate").classList.remove("on");
   const el=$("#s-"+id);
-  navDir=(id==="home")?"back":"fwd";
+  navDir=(id==="home"||(leaving&&leaving.id==="s-founding"&&id==="receipt"))?"back":"fwd";
   if(navInit&&navDir==="back"){el.classList.add("back-in");}
   $$(".screen").forEach(s=>{if(s!==el)s.classList.remove("active");});
   if(navInit){void el.offsetWidth;} /* let the start pose paint before transitioning */
