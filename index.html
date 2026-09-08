@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v35</title>
+<title>OFFRAMP — product mock v36</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -88,36 +88,37 @@
   .btn-tint{background:color-mix(in srgb,var(--tc,#0EA58F) 12%,#fff);color:var(--tc,#0EA58F)}
   .btn-plain{background:none;color:var(--sub);font-weight:600}
   .bottombar{position:absolute;left:22px;right:22px;bottom:34px;display:flex;flex-direction:column;gap:10px}
+  .homepill{display:flex;align-items:center;border-radius:999px;padding:3px;
+    background:rgba(255,255,255,.72);backdrop-filter:blur(14px) saturate(1.5);-webkit-backdrop-filter:blur(14px) saturate(1.5);
+    box-shadow:0 .5px 0 rgba(0,0,0,.04),0 1px 3px rgba(0,0,0,.05),0 10px 28px rgba(0,0,0,.07),
+      inset 0 0 0 .5px rgba(0,0,0,.05),inset 0 1px 0 rgba(255,255,255,.9)}
+  .homepill .hp-seg{flex:1;text-align:center;padding:13px 8px;font-size:15px;font-weight:600;color:var(--sub);
+    border-radius:999px;cursor:pointer;transition:transform .18s var(--spring),background .2s,color .2s}
+  .homepill .hp-seg .chev{font-size:13px;color:var(--ter);font-weight:600}
+  .homepill .hp-seg:active{background:#fff;color:var(--ink);transform:scale(.97);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  .homepill .hp-seg + .hp-seg{position:relative}
+  .homepill .hp-seg + .hp-seg::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+    width:.5px;height:18px;background:rgba(0,0,0,.1)}
 
-  /* ---------- HOME ---------- */
-  #s-home .hero{margin-top:89px}
+  /* ---------- HOME (golden-ratio stack on the 891 canvas: number center at φ⁻³ ≈ y210 · wave = φ² band 390×166 · Fib 21px seams) ---------- */
+  #s-home .hero{margin-top:86px}
   #s-home .hero .n{font-size:89px;line-height:1.02;cursor:pointer;letter-spacing:-0.027em}
   .hero-num .u{font-size:.55em;font-weight:700;letter-spacing:-.01em}
   #s-home .hero .l{margin-top:8px;color:var(--sub);font-size:17px}
-  #s-home .wavebox{position:absolute;top:252px;left:-22px;right:-22px;height:280px}
+  #s-home .wavebox{position:absolute;top:320px;left:-22px;right:-22px;height:268px;pointer-events:none} /* 434×268 = φ exactly */
   #s-home .wavebox svg{width:100%;height:100%;overflow:visible}
   #s-home .breathe{animation:breathe 4.5s ease-in-out 1.2s infinite;transform-origin:center 80%}
   @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.03)}}
-  .nowdot{position:absolute;width:11px;height:11px;border-radius:50%;
-    background:var(--teal);border:2.5px solid #fff;box-shadow:0 1px 6px rgba(14,165,143,.55);z-index:3;
-    left:57.4%;top:29.2%}
-  .urges-label{position:absolute;z-index:3;font-size:11.5px;color:var(--sub);white-space:nowrap;
-    left:50%;top:8%;transform:translateX(-50%);opacity:0;transition:opacity .8s}
-  .urges-label.show{opacity:1}
-  .nowdot:after{content:none}
-  .homelinks{display:flex;justify-content:center;font-size:15px;font-weight:600;color:var(--sub)}
-  .homelinks span{cursor:pointer;padding:12px 16px}
-  .homelinks .sep{cursor:default;color:var(--ter);padding:12px 2px}
-  /* today's record — the ledger, at day granularity */
-  .trec{position:absolute;top:392px;left:22px;right:22px}
-  .trec-cap{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ter);font-weight:700;margin-bottom:8px}
-  .trow{display:flex;align-items:baseline;gap:10px;padding:8px 0;font-size:14.5px;position:relative}
-  .trow+.trow:before{content:"";position:absolute;top:0;left:48px;right:0;height:1px;background:var(--hair)}
-  .trow .tt{color:var(--ter);font-size:12.5px;min-width:38px;font-variant-numeric:tabular-nums}
-  .trow .tl{color:var(--ink)}
-  .trow .ta{margin-left:auto;font-weight:700;font-size:13.5px;font-variant-numeric:tabular-nums}
-  .trow.flash{animation:rowflash .7s var(--ease)}
-  @keyframes rowflash{0%{opacity:0;transform:translateY(-6px)}100%{opacity:1;transform:none}}
+  #wavepath{stroke:#1D1D1F;stroke-opacity:.09;stroke-width:2.5;fill:none;
+    stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .85s var(--ease)}
+  #wavepath.drawn{stroke-dashoffset:0}
+  .wbump{opacity:0;transform:scale(0);transform-origin:center;transform-box:fill-box;
+    transition:opacity .4s var(--ease),transform .45s var(--spring)}
+  .wbump.on{opacity:1;transform:scale(1)}
+  .wavelabel{position:absolute;z-index:2;font-size:13px;color:var(--sub);pointer-events:none;
+    white-space:nowrap;transform:translate(-50%,-160%);
+    transition:left .55s var(--ease),top .55s var(--ease)}
+  .wavelabel b{color:var(--ink)}
   .ptag{display:none;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pursuit-t);font-weight:800;margin-bottom:4px}
   .piece.pursuit-on .ptag{display:block}
   #pursuit-chips{display:none;padding:2px 2px 13px;gap:8px;flex-wrap:wrap}
@@ -129,21 +130,11 @@
   #seal-line{font-size:12px;color:var(--ter);margin-bottom:8px}
   #spot-line{font-size:13px;color:var(--sub);margin-bottom:8px;font-weight:600}
   #spot-tag{display:none;text-align:center;font-size:12.5px;color:var(--sub);margin:13px 22px 0}
-  /* home strip — the week's shape, Apple Health grammar; today ringed, grows live */
-  .hstrip{position:absolute;top:245px;left:22px;right:22px;display:flex;align-items:flex-end;gap:13px;min-height:48px;cursor:pointer}
-  .hstrip .hc{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
-  .hstrip .ht{width:100%;border-radius:4px;position:relative}
-  .hstrip .ht.today:after{content:"";position:absolute;inset:-4px;border-radius:8px;border:1.5px solid var(--teal);opacity:.7}
-  .hstrip .hc.future .ht{background:rgba(0,0,0,.06)!important}
-  .hstrip .hd{font-size:10px;color:var(--ter);font-weight:700}
-  .latest{position:absolute;top:308px;left:22px;font-size:13px;color:var(--sub)}
-  .latest b{color:var(--ink);font-weight:600}
-  /* first-run: the explainer grows the hero — the whole stack yields 42px, then returns */
-  #s-home.firstrun .hstrip{top:311px}
-  #s-home.firstrun .latest{top:374px}
-  #s-home.firstrun .edcard{top:411px}
-  #s-home.firstrun .statbar{top:530px}
-  .edcard{position:absolute;top:345px;left:22px;right:22px;background:var(--card);
+  /* first-run: the explainer grows the hero — the stack yields 34px, then returns */
+  #s-home.firstrun .wavebox{top:354px}
+  #s-home.firstrun .edcard{top:643px}
+  #s-home.firstrun .hquiet{top:306px}
+  .edcard{position:absolute;top:609px;left:22px;right:22px;background:var(--card);
     border-radius:18px;
     box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);padding:22px 18px;cursor:pointer;
     display:flex;align-items:center;gap:14px;transition:transform .18s var(--spring)}
@@ -163,12 +154,10 @@
   .edcard .t3{color:var(--ter);font-size:12px;margin-top:3px}
   .edcard .t1,.edcard .t2,.edcard .t3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .edcard .chev{margin-left:auto;color:#C7C7CC;font-size:20px;font-weight:600}
-  .statbar{position:absolute;top:464px;left:22px;right:22px;display:flex;
-    background:var(--card);border-radius:18px;
-    box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06)}
-  .stat{flex:1;text-align:center;padding:11px 2px;font-size:12px;color:var(--sub);font-weight:600;cursor:pointer}
-  .stat+.stat{border-left:1px solid rgba(0,0,0,.06)}
-  .stat b{display:block;font-size:17px;font-weight:800;margin-bottom:1px}
+  .hquiet{position:absolute;top:247px;left:22px;right:22px;font-size:13px;color:var(--sub);display:flex;gap:8px;align-items:baseline}
+  .hquiet span{cursor:pointer;white-space:nowrap}
+  .hquiet .qsep{color:var(--ter);cursor:default}
+  .hquiet b{font-weight:800}
 
   /* ---------- GATE (frosted modal) ---------- */
   #s-gate{position:absolute;inset:0;z-index:60;display:flex;flex-direction:column;justify-content:center;
@@ -506,6 +495,14 @@
         <div class="l">kept off your phone today — proven</div>
         <div class="l" id="home-first" style="display:none;margin-top:8px;font-size:13px;line-height:1.5">This is your day off your phone, proven.<br>Gates hold your apps; the record shows what you did instead.</div>
       </div>
+      <div class="hquiet rise d3"><span data-go="streak">Day <b style="color:var(--green-t)">68</b></span><span class="qsep">·</span><span data-sheet="timebank"><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b> banked</span><span class="qsep">·</span><span data-sheet="gates"><b style="color:var(--teal-t)">3</b> gated</span></div>
+      <div class="wavebox" aria-hidden="true">
+        <svg viewBox="0 0 434 268" preserveAspectRatio="none">
+          <path id="wavepath" pathLength="1" d="M-11 210 C 45 210, 69 203, 102 195 C 142 183, 167 174, 202 148 C 234 124, 253 88, 280 68 C 305 49, 325 55, 351 84 C 376 113, 391 155, 445 172"/>
+          <g id="wave-bumps"></g>
+        </svg>
+        <div id="latest-row" class="wavelabel"><b>ride to work</b> · 9:20</div>
+      </div>
       <div class="edcard rise d1" data-go="edition" id="edcard">
         <div class="edthumb"><svg viewBox="0 0 44 44" width="30" height="30" fill="none"><path d="M2 32 C 9 32, 12 30, 16 28 C 21 26, 23 12, 28 11 C 32 10, 34 20, 42 22" stroke="#9678D8" stroke-width="3.5" stroke-linecap="round"/></svg></div>
         <div class="edmain">
@@ -515,15 +512,8 @@
         </div>
         <div class="chev">›</div>
       </div>
-      <div class="hstrip rise d2" id="home-strip" data-go="receipt" title="Your week — tap for the full Receipt"></div>
-      <div class="latest rise d2" id="latest-row"><b>ride to work</b> · 9:20</div>
-      <div class="statbar rise d3">
-        <div class="stat" data-go="streak"><b style="color:var(--green-t)">68</b>day streak</div>
-        <div class="stat" data-sheet="gates"><b style="color:var(--teal-t)">3</b>apps gated</div>
-        <div class="stat" data-sheet="timebank"><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b>banked</div>
-      </div>
       <div class="bottombar">
-        <div class="homelinks"><span data-go="receipt">Weekly Receipt ›</span><span class="sep">·</span><span id="home-session" data-go="pivot">Start a session ›</span></div>
+        <div class="homepill"><span class="hp-seg" data-go="receipt">Weekly Receipt <span class="chev">›</span></span><span class="hp-seg" id="home-session" data-go="pivot">Start a session <span class="chev">›</span></span></div>
       </div>
     </div>
 
@@ -930,8 +920,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v35</h1>
-    <div class="sub">The founding page becomes a document · Sep 8, 2026</div>
+    <h1>OFFRAMP — v36</h1>
+    <div class="sub">The day becomes the object · Sep 8, 2026</div>
+    <div class="note"><b>Home subtracted to its Apple frame: one hero, one object, one control, void.</b> The week strip died (the wave owns the day; the Receipt owns the week — Health's one-highlight rule), and the stat chips died with it (a stat strip is banned chrome; their three doors survive as ONE Weather-pattern caption line under the hero — Day 68 · 6h 40m banked · 3 gated, noun colors, same taps, zero chrome). The wave breathes into the freed space: band 434×268 = φ exactly. Grid re-verified by probe: number center y210 (ρ⁻³), 21px Fib seams, zero text collisions in both states.</div>
     <div class="note"><b>The last screen speaks ledger now, and its math finally agrees with itself.</b> Founding was a stat block in a product that speaks document — rebuilt in the Receipt's grammar: 713-left as the hero number, a hairline track showing 287 written, facts behind one drawer, done-state sealed with the Receipt's own provenance line ("only the place number ever leaves this phone"). Caught while designing: v34 sold place № 713 in the done-state while the Receipt advertised 713 places <i>left</i> — both can't be true; the record now numbers the next place № 288 consistently. Flow audit found one wrong-direction door: founding→receipt pushed forward; it now slides back from the left, measured in the transition classes.</div>
     <div class="note"><b>Insight lines got their dots.</b> Soft spot (teal), Focus (gray), Pursuit (blue), Timebank (amber) — one scannable grammar in the Receipt's fine print, noun colors doing their job. Single-line ellipsis now covers receipt rows and every sheet row: labels truncate, they never wrap and swell a layout — the rule that fixed Home, applied everywhere.</div>
     <div class="note"><b>Same sheet, two frames.</b> From a gate: "Gate — Instagram → Pivot" with the soft-spot pre-decision. From Home: "Session — Start one," 25/45/90 duration chips, no pre-decision. The JITAI evidence says users rarely self-initiate in the moment — the gate stays the engine; sessions serve the planners.</div>
@@ -974,6 +965,31 @@ function countUp(el,target,dur=650){
     el.innerHTML=fmtH(Math.round(target*e)); if(p<1)requestAnimationFrame(tick);})(t0);
 }
 
+/* ---------- the wave: the day as the object ---------- */
+const waveSeeds=[[100,195],[200,148],[280,68]];      /* 6:40 · 7:58 · 9:20 — the morning, ending at the crest */
+const waveSlots=[[334,64],[367,93],[392,141],[418,163]]; /* live holds ride on down the day */
+let waveN=0, waveDrawn=false;
+function bump(x,y,delay){
+  const g=$("#wave-bumps"); if(!g)return;
+  const c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+  c.setAttribute("class","wbump"); c.setAttribute("cx",x); c.setAttribute("cy",y); c.setAttribute("r","4.5");
+  c.setAttribute("fill","var(--teal)"); c.setAttribute("stroke","#fff"); c.setAttribute("stroke-width","2.5");
+  g.appendChild(c);
+  setTimeout(()=>c.classList.add("on"),delay);
+}
+function moveWaveLabel(x,y){
+  const lr=$("#latest-row");
+  lr.style.left=(x/434*100)+"%"; lr.style.top=(y/268*100)+"%";
+}
+function renderWave(){
+  waveSeeds.forEach((s,i)=>bump(s[0],s[1],600+i*160));
+  const last=waveSeeds[waveSeeds.length-1]; moveWaveLabel(last[0],last[1]);
+}
+function addUrge(){
+  if(waveN>=waveSlots.length)return;
+  const [x,y]=waveSlots[waveN++]; bump(x,y,120); moveWaveLabel(x,y);
+}
+
 /* navigation — push grammar: content screens slide from right, back slides from left */
 let navInit=false, navDir="fwd";
 function show(id){
@@ -1004,7 +1020,13 @@ function show(id){
   if(navInit){setTimeout(()=>el.classList.remove("back-in"),400);}
   navInit=true;
   el.querySelectorAll(".rise").forEach(r=>{r.style.animation="none";void r.offsetWidth;r.style.animation="";});
-  if(id==="home")countUp($("#home-n"),state.kept);
+  if(id==="home"){
+    countUp($("#home-n"),state.kept);
+    if(!waveDrawn){waveDrawn=true;renderWave();
+      const wp=$("#wavepath");
+      setTimeout(()=>wp.classList.add("drawn"),250);
+      setTimeout(()=>wp.closest("svg").classList.add("breathe"),1250);}
+  }
   if(id==="receipt"){
     if(!state.seenReceipt){state.seenReceipt=true;$("#receipt-first").style.display="block";}
     else{$("#receipt-first").style.display="none";}
@@ -1066,7 +1088,6 @@ $("#s-gate .endlink").addEventListener("click",()=>{
   state.entries.unshift({day:"Today",kept:12,did:"gate held",flash:true});
   noteLatest("held off Instagram");
   state.nowMin=Math.min(state.nowMin+12,1439);
-  renderHomeStrip();
   const tt=$("#toast"); tt.innerHTML="Gate held. <b>+12m</b> to your Timebank.";
   tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
   note("Gate held. +12m banked.");
@@ -1078,7 +1099,6 @@ function mintQuiet(mins,label){ /* mints without leaving the current screen */
   state.entries.unshift({day:"Today",kept:mins,did:label,flash:true,self:true});
   noteLatest(label.split("—")[0].trim());
   state.nowMin=Math.min(state.nowMin+12,1439);
-  renderHomeStrip();
   const tt=$("#toast"); tt.innerHTML="On the record, self-marked. <b>+"+mins+"m</b>";
   tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
 }
@@ -1114,24 +1134,13 @@ $("#btn-start").addEventListener("click",()=>{
 });
 state.nowMin=581; /* mock clock: 9:41 — stamps new ledger rows */
 function tstamp(){const h=Math.floor(state.nowMin/60),m=state.nowMin%60;return h+":"+String(m).padStart(2,"0")}
-function noteLatest(label){ $("#latest-row").innerHTML=`<b>${label}</b> · ${tstamp()}`; }
-function renderHomeStrip(){
-  const strip=weeks[36].strip(), max=Math.max(...strip.map(t=>t.m),1);
-  const H=$("#home-strip"); H.innerHTML="";
-  strip.forEach((t)=>{
-    const c=document.createElement("div"); c.className="hc"+(t.m?"":" future");
-    const h=t.m?Math.max(5,Math.round(t.m/max*30)):4;
-    c.innerHTML=`<div class="ht${t.today?" today":""}" style="height:${h}px;${t.m?`background:${t.c};`:""}"></div><div class="hd">${t.l}</div>`;
-    H.appendChild(c);
-  });
-}
+function noteLatest(label){ $("#latest-row").innerHTML=`<b>${label}</b> · ${tstamp()}`; addUrge(); }
 function mint(mins,label){
   state.kept+=mins; state.weekMin+=mins;
   state.entries.unshift({day:"Today",kept:mins,did:label,flash:true});
   const pretty=label.replace("pivot: ","").replace("session: ","").replace("read the friday edition","edition reading");
   noteLatest(pretty);
   state.nowMin=Math.min(state.nowMin+12,1439);
-  renderHomeStrip();
   show("home");
   const tt=$("#toast"); tt.innerHTML="Written to your ledger. <b>+"+mins+"m</b>";
   tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
@@ -1339,7 +1348,6 @@ const weeks={
 let curWeek=36;
 const DN=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 const selIdx={36:4,35:6};
-renderHomeStrip(); /* the number's shape, on load */
 function renderReceipt(){ if(state.scope==="circle")renderCircle(); else renderWeek(curWeek);}
 function renderWeek(w){
   const W=weeks[w];
