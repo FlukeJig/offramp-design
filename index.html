@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v31</title>
+<title>OFFRAMP — product mock v32</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -129,7 +129,16 @@
   #seal-line{font-size:12px;color:var(--ter);margin-bottom:8px}
   #spot-line{font-size:13px;color:var(--sub);margin-bottom:8px;font-weight:600}
   #spot-tag{display:none;text-align:center;font-size:12.5px;color:var(--sub);margin:13px 22px 0}
-  .edcard{position:absolute;top:259px;left:22px;right:22px;background:var(--card);
+  /* home strip — the week's shape, Apple Health grammar; today ringed, grows live */
+  .hstrip{position:absolute;top:240px;left:22px;right:22px;display:flex;align-items:flex-end;gap:13px;height:47px;cursor:pointer}
+  .hstrip .hc{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .hstrip .ht{width:100%;border-radius:4px;position:relative}
+  .hstrip .ht.today:after{content:"";position:absolute;inset:-4px;border-radius:8px;border:1.5px solid var(--teal);opacity:.7}
+  .hstrip .hc.future .ht{background:rgba(0,0,0,.06)!important}
+  .hstrip .hd{font-size:10px;color:var(--ter);font-weight:700}
+  .latest{position:absolute;top:299px;left:22px;font-size:13px;color:var(--sub)}
+  .latest b{color:var(--ink);font-weight:600}
+  .edcard{position:absolute;top:337px;left:22px;right:22px;background:var(--card);
     border-radius:18px;
     box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);padding:22px 18px;cursor:pointer;
     display:flex;align-items:center;gap:14px;transition:transform .18s var(--spring)}
@@ -149,7 +158,7 @@
   .edcard .t3{color:var(--ter);font-size:12px;margin-top:3px}
   .edcard .t1,.edcard .t2,.edcard .t3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .edcard .chev{margin-left:auto;color:#C7C7CC;font-size:20px;font-weight:600}
-  .statbar{position:absolute;top:533px;left:22px;right:22px;display:flex;
+  .statbar{position:absolute;top:456px;left:22px;right:22px;display:flex;
     background:var(--card);border-radius:18px;
     box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06)}
   .stat{flex:1;text-align:center;padding:11px 2px;font-size:12px;color:var(--sub);font-weight:600;cursor:pointer}
@@ -485,14 +494,8 @@
         </div>
         <div class="chev">›</div>
       </div>
-      <div class="trec rise d2" id="trec">
-        <div class="trec-cap">Today on the record</div>
-        <div id="trec-rows">
-          <div class="trow"><span class="tt">7:30</span><span class="tl">held off Instagram</span><span class="ta" style="color:var(--teal-t)">+12m</span></div>
-          <div class="trow"><span class="tt">8:12</span><span class="tl">morning walk</span><span class="ta">+45m</span></div>
-          <div class="trow"><span class="tt">9:20</span><span class="tl">ride to work</span><span class="ta">+77m</span></div>
-        </div>
-      </div>
+      <div class="hstrip rise d2" id="home-strip" data-go="receipt" title="Your week — tap for the full Receipt"></div>
+      <div class="latest rise d2" id="latest-row"><b>ride to work</b> · 9:20</div>
       <div class="statbar rise d3">
         <div class="stat" data-go="streak"><b style="color:var(--green-t)">68</b>day streak</div>
         <div class="stat" data-sheet="gates"><b style="color:var(--teal-t)">3</b>apps gated</div>
@@ -883,10 +886,11 @@
 
   <!-- annotations -->
   <div class="notes">
-    <h1>OFFRAMP — v31</h1>
-    <div class="sub">The brother test · Sep 4, 2026</div>
-    <div class="note"><b>The screen answers in order: WHAT → DO → PROOF → SYSTEM.</b> The line now says "kept off your phone today — every minute proven" (direction, not process). The Edition card's headline is the action — "Read your Friday Edition" — with sources and the lead beneath it. The record rows name the app: "held off Instagram" teaches the gate with zero explainers. The strip reads "day streak · apps gated · banked."</div>
-    <div class="note"><b>Home finally explains itself — once.</b> "This is your day off your phone, proven. Gates hold your apps; the record shows what you did instead." Shown on first view, gone forever after — the same first-use doctrine as the gate, applied to the screen everyone sees first. Six invented nouns now have plain-English faces; the nouns themselves stay inside their homes.</div>
+    <h1>OFFRAMP — v32</h1>
+    <div class="sub">The number gets its shape · Sep 4, 2026</div>
+    <div class="note"><b>Words down, shape in.</b> The screen was ~15 text blocks and zero forms. The week strip moves to Home — seven ticks in noun colors, today ringed — the Apple Health grammar HIG Charts describes for daily sums: data over chrome, nothing to read, everything to see. Tap it and you're in the Receipt.</div>
+    <div class="note"><b>It grows when you do.</b> Every mint — a hold, a pivot, a session, the Edition — re-renders the strip, so today's bar rises in place. The wave's old promise ("watch your time come back") finally kept in honest shape.</div>
+    <div class="note"><b>One line keeps the teaching.</b> The three timestamp rows were the Receipt's job all along; Home keeps a single live line — "held off Instagram · 9:41" — your brother's lesson in five words. The full entries live where they belong: the Receipt.</div>
     <div class="note"><b>Same sheet, two frames.</b> From a gate: "Gate — Instagram → Pivot" with the soft-spot pre-decision. From Home: "Session — Start one," 25/45/90 duration chips, no pre-decision. The JITAI evidence says users rarely self-initiate in the moment — the gate stays the engine; sessions serve the planners.</div>
     <div class="note"><b>The first honest session in the category.</b> Forest's tree "does not watch you." Ours mints verified: in production, DeviceActivity confirms no gated apps were touched during the window. End at 41 of 45 and the record says 41 — partial truth, no withering tree, no guilt object. And one-color-one-noun held: session rows are ink, not gate teal (caught and fixed in the mint path).</div>
     <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
@@ -1017,11 +1021,9 @@ $("#s-gate .endlink").addEventListener("click",()=>{
   $("#tb-chip").textContent=fmt(state.tbMin);
   $("#tb-hero").textContent=fmt(state.tbMin); $("#tb-line-n").textContent=fmt(state.tbMin);
   state.entries.unshift({day:"Today",kept:12,did:"gate held",flash:true});
-  const r=document.createElement("div"); r.className="trow flash";
-  r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">held off Instagram</span><span class="ta" style="color:var(--teal-t)">+12m</span>`;
+  noteLatest("held off Instagram");
   state.nowMin=Math.min(state.nowMin+12,1439);
-  $("#trec-rows").appendChild(r);
-  const tr=$("#trec"); $(".statbar").style.top=(tr.offsetTop+tr.offsetHeight+21)+"px";
+  renderHomeStrip();
   const tt=$("#toast"); tt.innerHTML="Gate held. <b>+12m</b> to your Timebank.";
   tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
   note("Gate held. +12m banked.");
@@ -1031,11 +1033,9 @@ $("#s-gate .endlink").addEventListener("click",()=>{
 function mintQuiet(mins,label){ /* mints without leaving the current screen */
   state.kept+=mins; state.weekMin+=mins;
   state.entries.unshift({day:"Today",kept:mins,did:label,flash:true,self:true});
-  const r=document.createElement("div"); r.className="trow flash";
-  r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">${label}</span><span class="ta" style="color:var(--pursuit-t)">+${mins}m</span>`;
+  noteLatest(label.split("—")[0].trim());
   state.nowMin=Math.min(state.nowMin+12,1439);
-  $("#trec-rows").appendChild(r);
-  const tr=$("#trec"); $(".statbar").style.top=(tr.offsetTop+tr.offsetHeight+21)+"px";
+  renderHomeStrip();
   const tt=$("#toast"); tt.innerHTML="On the record, self-marked. <b>+"+mins+"m</b>";
   tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
 }
@@ -1071,17 +1071,24 @@ $("#btn-start").addEventListener("click",()=>{
 });
 state.nowMin=581; /* mock clock: 9:41 — stamps new ledger rows */
 function tstamp(){const h=Math.floor(state.nowMin/60),m=state.nowMin%60;return h+":"+String(m).padStart(2,"0")}
+function noteLatest(label){ $("#latest-row").innerHTML=`<b>${label}</b> · ${tstamp()}`; }
+function renderHomeStrip(){
+  const strip=weeks[36].strip(), max=Math.max(...strip.map(t=>t.m),1);
+  const H=$("#home-strip"); H.innerHTML="";
+  strip.forEach((t)=>{
+    const c=document.createElement("div"); c.className="hc"+(t.m?"":" future");
+    const h=t.m?Math.max(5,Math.round(t.m/max*30)):4;
+    c.innerHTML=`<div class="ht${t.today?" today":""}" style="height:${h}px;${t.m?`background:${t.c};`:""}"></div><div class="hd">${t.l}</div>`;
+    H.appendChild(c);
+  });
+}
 function mint(mins,label){
   state.kept+=mins; state.weekMin+=mins;
   state.entries.unshift({day:"Today",kept:mins,did:label,flash:true});
-  /* today's record: the mint lands as a live row, screen fills as the day fills */
   const pretty=label.replace("pivot: ","").replace("session: ","").replace("read the friday edition","edition reading");
-  const col=label.includes("edition")?"var(--violet-t)":label.includes("gate")?"var(--teal-t)":"";
-  const r=document.createElement("div"); r.className="trow flash";
-  r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">${pretty}</span><span class="ta"${col?` style="color:${col}"`:""}>+${mins}m</span>`;
+  noteLatest(pretty);
   state.nowMin=Math.min(state.nowMin+12,1439);
-  $("#trec-rows").appendChild(r);
-  const t=$("#trec"); $(".statbar").style.top=(t.offsetTop+t.offsetHeight+21)+"px";
+  renderHomeStrip();
   show("home");
   const tt=$("#toast"); tt.innerHTML="Written to your ledger. <b>+"+mins+"m</b>";
   tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
@@ -1289,6 +1296,7 @@ const weeks={
 let curWeek=36;
 const DN=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 const selIdx={36:4,35:6};
+renderHomeStrip(); /* the number's shape, on load */
 function renderReceipt(){ if(state.scope==="circle")renderCircle(); else renderWeek(curWeek);}
 function renderWeek(w){
   const W=weeks[w];
