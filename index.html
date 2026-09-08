@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v30</title>
+<title>OFFRAMP — product mock v31</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -146,6 +146,7 @@
   .edcheck{color:var(--violet-t);font-weight:800;margin:0 4px}
   .edcard .t1{font-weight:700;font-size:16px}
   .edcard .t2{color:var(--sub);font-size:13px;margin-top:2px}
+  .edcard .t3{color:var(--ter);font-size:12px;margin-top:3px}
   .edcard .chev{margin-left:auto;color:#C7C7CC;font-size:20px;font-weight:600}
   .statbar{position:absolute;top:535px;left:22px;right:22px;display:flex;
     background:var(--card);border-radius:18px;
@@ -471,31 +472,33 @@
       <div class="hero rise">
         <div class="cap">Good morning, Glenn · Fri, Sep 4</div>
         <div class="n hero-num" id="home-n" data-go="receipt" title="See the full record">0m</div>
-        <div class="l">not on your phone today — counted, verified</div>
+        <div class="l">kept off your phone today — every minute proven</div>
+        <div class="l" id="home-first" style="display:none;margin-top:8px;font-size:13px;line-height:1.5">This is your day off your phone, proven.<br>Gates hold your apps; the record shows what you did instead.</div>
       </div>
       <div class="edcard rise d1" data-go="edition" id="edcard">
         <div class="edthumb"><svg viewBox="0 0 44 44" width="30" height="30" fill="none"><path d="M2 32 C 9 32, 12 30, 16 28 C 21 26, 23 12, 28 11 C 32 10, 34 20, 42 22" stroke="#9678D8" stroke-width="3.5" stroke-linecap="round"/></svg></div>
         <div class="edmain">
-          <div class="t1"><span class="freshdot"></span>The quiet economics of attention</div>
-          <div class="t2">The Friday Edition · 6 pieces · 34 min · delivered 6:00</div>
+          <div class="t1"><span class="freshdot"></span>Read your Friday Edition</div>
+          <div class="t2">6 pieces from your 12 sources · 34 min</div>
+          <div class="t3" id="ed-lead">The lead: The quiet economics of attention</div>
         </div>
         <div class="chev">›</div>
       </div>
       <div class="trec rise d2" id="trec">
         <div class="trec-cap">Today on the record</div>
         <div id="trec-rows">
-          <div class="trow"><span class="tt">7:30</span><span class="tl">gate held</span><span class="ta" style="color:var(--teal-t)">+12m</span></div>
+          <div class="trow"><span class="tt">7:30</span><span class="tl">held off Instagram</span><span class="ta" style="color:var(--teal-t)">+12m</span></div>
           <div class="trow"><span class="tt">8:12</span><span class="tl">morning walk</span><span class="ta">+45m</span></div>
-          <div class="trow"><span class="tt">9:20</span><span class="tl">ride across town</span><span class="ta">+77m</span></div>
+          <div class="trow"><span class="tt">9:20</span><span class="tl">ride to work</span><span class="ta">+77m</span></div>
         </div>
       </div>
       <div class="statbar rise d3">
-        <div class="stat" data-go="streak"><b style="color:var(--green-t)">68</b>days</div>
-        <div class="stat" data-sheet="gates"><b style="color:var(--teal-t)">3</b>gates</div>
-        <div class="stat" data-sheet="timebank"><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b>timebank</div>
+        <div class="stat" data-go="streak"><b style="color:var(--green-t)">68</b>day streak</div>
+        <div class="stat" data-sheet="gates"><b style="color:var(--teal-t)">3</b>apps gated</div>
+        <div class="stat" data-sheet="timebank"><b style="color:var(--amber-t)" id="tb-chip">6h 40m</b>banked</div>
       </div>
       <div class="bottombar">
-        <div class="homelinks"><span data-go="receipt">Today's Receipt ›</span><span class="sep">·</span><span id="home-session" data-go="pivot">Start a session ›</span></div>
+        <div class="homelinks"><span data-go="receipt">Weekly Receipt ›</span><span class="sep">·</span><span id="home-session" data-go="pivot">Start a session ›</span></div>
       </div>
     </div>
 
@@ -879,9 +882,10 @@
 
   <!-- annotations -->
   <div class="notes">
-    <h1>OFFRAMP — v30</h1>
-    <div class="sub">Loop gaps closed · Sep 4, 2026</div>
-    <div class="note"><b>The core verb now mints.</b> Leaving a gate without opening banks +12m to your Timebank — the open you didn't take becomes minutes you own. Holds fill the Timebank; pivots, the Edition and sessions fill the kept number. The streak's floor is written down: a day counts when anything lands on the record.</div>
+    <h1>OFFRAMP — v31</h1>
+    <div class="sub">The brother test · Sep 4, 2026</div>
+    <div class="note"><b>The screen answers in order: WHAT → DO → PROOF → SYSTEM.</b> The line now says "kept off your phone today — every minute proven" (direction, not process). The Edition card's headline is the action — "Read your Friday Edition" — with sources and the lead beneath it. The record rows name the app: "held off Instagram" teaches the gate with zero explainers. The strip reads "day streak · apps gated · banked."</div>
+    <div class="note"><b>Home finally explains itself — once.</b> "This is your day off your phone, proven. Gates hold your apps; the record shows what you did instead." Shown on first view, gone forever after — the same first-use doctrine as the gate, applied to the screen everyone sees first. Six invented nouns now have plain-English faces; the nouns themselves stay inside their homes.</div>
     <div class="note"><b>Same sheet, two frames.</b> From a gate: "Gate — Instagram → Pivot" with the soft-spot pre-decision. From Home: "Session — Start one," 25/45/90 duration chips, no pre-decision. The JITAI evidence says users rarely self-initiate in the moment — the gate stays the engine; sessions serve the planners.</div>
     <div class="note"><b>The first honest session in the category.</b> Forest's tree "does not watch you." Ours mints verified: in production, DeviceActivity confirms no gated apps were touched during the window. End at 41 of 45 and the record says 41 — partial truth, no withering tree, no guilt object. And one-color-one-noun held: session rows are ink, not gate teal (caught and fixed in the mint path).</div>
     <div class="note"><b>Every piece is an object now.</b> Each unlocks a procedural cover in the wave grammar — dot field (boredom), contour path (walking), ascending steps (shipping), horizon fence (the town), registration marks (craft) — on its category ground. The teaser plate is the desaturated tint; the cover is its bloom. Zero stock imagery.</div>
@@ -911,7 +915,7 @@
 
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={kept:134, tbMin:400, weekMin:892, opens:3, pivot:null, viaPivot:false, edRead:0, editionDone:false, edReadMin:0, seenGate:false, seenReceipt:false, seenWave:false};
+const state={kept:134, tbMin:400, weekMin:892, opens:3, pivot:null, viaPivot:false, edRead:0, editionDone:false, edReadMin:0, seenGate:false, seenReceipt:false, seenWave:false, seenHome:false};
 
 const fmt=m=>m<60? m+"m" : Math.floor(m/60)+"h "+String(m%60).padStart(2,"0")+"m";
 const fmtH=m=>fmt(m).replace(/(\d+)([hm])/g,'$1<span class="u">$2</span>'); /* units at hierarchy size (HIG Typography) */
@@ -932,6 +936,10 @@ function show(id){
     const pb=$("#btn-start"); pb.disabled=true; pb.style.opacity=".3"; /* abandoning = fresh decision next fire */
   }
   if(id==="pivot")preselectPivot();
+  if(id==="home"){
+    if(!state.seenHome){state.seenHome=true;$("#home-first").style.display="block";}
+    else{$("#home-first").style.display="none";}
+  }
   if(id==="gate"){$("#s-gate").classList.add("on");
     state.gateArmed=true; /* a gate presented can be held — leaving without opening banks it */
     if(!state.seenGate){state.seenGate=true;$("#gate-first").style.display="block";}
@@ -1009,7 +1017,7 @@ $("#s-gate .endlink").addEventListener("click",()=>{
   $("#tb-hero").textContent=fmt(state.tbMin); $("#tb-line-n").textContent=fmt(state.tbMin);
   state.entries.unshift({day:"Today",kept:12,did:"gate held",flash:true});
   const r=document.createElement("div"); r.className="trow flash";
-  r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">gate held</span><span class="ta" style="color:var(--teal-t)">+12m</span>`;
+  r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">held off Instagram</span><span class="ta" style="color:var(--teal-t)">+12m</span>`;
   state.nowMin=Math.min(state.nowMin+12,1439);
   $("#trec-rows").appendChild(r);
   const tr=$("#trec"); $(".statbar").style.top=(tr.offsetTop+tr.offsetHeight+21)+"px";
@@ -1066,7 +1074,7 @@ function mint(mins,label){
   state.kept+=mins; state.weekMin+=mins;
   state.entries.unshift({day:"Today",kept:mins,did:label,flash:true});
   /* today's record: the mint lands as a live row, screen fills as the day fills */
-  const pretty=label.replace("pivot: ","").replace("read the friday edition","edition reading");
+  const pretty=label.replace("pivot: ","").replace("session: ","").replace("read the friday edition","edition reading");
   const col=label.includes("edition")?"var(--violet-t)":label.includes("gate")?"var(--teal-t)":"";
   const r=document.createElement("div"); r.className="trow flash";
   r.innerHTML=`<span class="tt">${tstamp()}</span><span class="tl">${pretty}</span><span class="ta"${col?` style="color:${col}"`:""}>+${mins}m</span>`;
@@ -1083,8 +1091,10 @@ function refreshHomeStates(){
     card.classList.add("done");
     card.querySelector(".t1").innerHTML="Today’s Edition <span class='edcheck'>✓</span> "+(state.edReadMin||34)+"m on the record";
     card.querySelector(".t2").textContent="New Edition tomorrow · 6:00";
+    card.querySelector(".t3").style.display="none";
   } else {
     card.classList.remove("done");
+    card.querySelector(".t3").style.display="";
   }
 }
 function finishEdition(m){
