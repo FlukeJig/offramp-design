@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v40</title>
+<title>OFFRAMP — product mock v41</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -231,8 +231,18 @@
   #gate-note{text-align:center;color:var(--teal-t);font-size:14px;font-weight:600;height:20px;margin-top:8px;
     opacity:0;transition:opacity .3s}
   /* circle — verified social: the sealed week, shared */
-  .scope-toggle{display:flex;background:rgba(0,0,0,.06);border-radius:13px;padding:3px;margin-bottom:13px}
-  .scope{flex:1;border:none;background:none;padding:8px;font-size:14px;font-weight:700;color:var(--sub);border-radius:10px;cursor:pointer;font-family:inherit}
+  .scope-toggle{display:flex;background:rgba(0,0,0,.06);border-radius:10px;padding:3px;margin:12px 12px 13px}
+  .scope{flex:1;border:none;background:none;padding:8px;font-size:14px;font-weight:700;color:var(--sub);border-radius:7px;cursor:pointer;font-family:inherit}
+  /* the ONE disclosure (HIG: at most one disclosure button per view) */
+  .docdrawer{border-top:1px solid var(--hair);margin:2px 0 0}
+  .docdrawer summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
+    padding:11px 16px;font-size:13px;font-weight:600;color:var(--sub)}
+  .docdrawer summary::-webkit-details-marker{display:none}
+  .docdrawer summary::after{content:"›";color:var(--ter);font-weight:600;transition:transform .25s var(--ease)}
+  .docdrawer[open] summary::after{transform:rotate(90deg)}
+  .docdrawer .dlines{padding:0 0 4px}
+  .docdrawer:not([open]) .dlines{display:none} /* explicit hide — UA details-hiding is flaky under headless */
+  .docdrawer[open] summary{border-bottom:1px solid var(--hair);margin-bottom:6px}
   .scope.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.1)}
   .crow .cname{font-weight:700;font-size:15px}
   .crow .cmeta{margin-left:auto;color:var(--sub);font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -757,11 +767,16 @@
         <div class="docrows" id="rows"></div>
         <div class="docfoot">
           <div id="seal-line"></div>
-          <div id="spot-line" class="fline"><span class="fdot" style="background:var(--teal)"></span>Your soft spot: 9–10pm — 4 of 5 TikTok opens landed there this week.</div>
-          <div id="pursuit-line" class="fline"></div>
-          <div id="focus-line" class="fline" style="display:none;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--sub)"><span class="fdot" style="background:var(--ter)"></span>Gates followed your Work Focus on 3 of 5 weekdays.</div>
-          <div id="tb-line" class="fline" data-sheet="timebank" style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--amber-t);cursor:pointer"><span class="fdot" style="background:var(--amber)"></span>Timebank — <b id="tb-line-n">6h 40m</b> stored · never expires <span style="color:var(--ter)">›</span></div>
-          <div id="streak-line" class="fline" data-go="streak" style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--green-t);cursor:pointer"><span class="fdot" style="background:var(--green)"></span>Day 68 — the streak holds <span style="color:var(--ter)">›</span></div>
+          <details class="docdrawer">
+            <summary>Noticed this week</summary>
+            <div class="dlines">
+              <div id="spot-line" class="fline"><span class="fdot" style="background:var(--teal)"></span>Your soft spot: 9–10pm — 4 of 5 TikTok opens landed there this week.</div>
+              <div id="pursuit-line" class="fline"></div>
+              <div id="focus-line" class="fline" style="display:none;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--sub)"><span class="fdot" style="background:var(--ter)"></span>Gates followed your Work Focus on 3 of 5 weekdays.</div>
+              <div id="tb-line" class="fline" data-sheet="timebank" style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--amber-t);cursor:pointer"><span class="fdot" style="background:var(--amber)"></span>Timebank — <b id="tb-line-n">6h 40m</b> stored · never expires <span style="color:var(--ter)">›</span></div>
+              <div id="streak-line" class="fline" data-go="streak" style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--green-t);cursor:pointer"><span class="fdot" style="background:var(--green)"></span>Day 68 — the streak holds <span style="color:var(--ter)">›</span></div>
+            </div>
+          </details>
           <div class="prov"><svg width="13" height="13" viewBox="0 0 14 14"><path fill="#0B8472" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified from on-device data — recall entries are self-marked. Never leaves this phone.</div>
           <div class="flink" data-go="founding"><b>713</b> founding places left ›</div>
         </div>
@@ -967,8 +982,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v40</h1>
-    <div class="sub">Annotations float clear · Sep 8, 2026</div>
+    <h1>OFFRAMP — v41</h1>
+    <div class="sub">The Receipt's fine print becomes a disclosure · Sep 8, 2026</div>
+    <div class="note"><b>One drawer, per Apple's own disclosure law.</b> The docfoot had quietly grown a second document — seal, soft spot, pursuit, focus, Timebank, streak, provenance, founding: eight stacked lines, ~190px of fine print. Today's HIG pull (Disclosure controls, fetched Sep 8): hide details until relevant, keep the essentials visible, label what the disclosure contains, and <i>use no more than one disclosure button in a single view</i>. So the seal line, provenance, and the founding door stay visible; the five insight lines collapse into one labeled drawer — "Noticed this week ›" — dots and doors intact, one tap away. The scope toggle also gets concentric geometry (22→10→7 radii, inset 12px) instead of riding the card's top edge. Measured after: docfoot 188px → ~96px, zero collisions, pager clamps verified at both bounds.</div>
     <div class="note"><b>The wave's label no longer sits on the curve.</b> Path-sampled geometry proved the crest label intersected the line in every state — a collision the eye caught before the probe did. Apple's chart grammar (Weather's hourly curve): the value floats in a fixed zone above, the point stays marked on the line, a hairline connects them. The label now pins to the top of the wave band — x tracking the latest bump, clamped to the frame — with a 0.5px leader down to the dot. Verified by the same path-sampling probe: zero intersections, all states. HIG charts: descriptive content gives context; it never obscures the marks.</div>
     <div class="note"><b>Detail pass, every choice sourced from today's HIG pulls.</b> Materials (Sep 9, 2025): the archead is content, so no Liquid Glass — solid document card with concentric radii, 0.5px hairline ring, two-layer ambient shadow. Motion (Sep 9, 2025): the perpetual today-pulse was a violation and it's dead — today now wears a static halo and breathes exactly once when the track advances; the track draws in a single time with spring-staggered node pops; completion gets one 600ms shimmer sweep and the seal glyph; prefers-reduced-motion silences all of it. Color (Dec 16, 2025): pursuit blue audited — one color, one noun, zero leaks. The track itself graduated from polyline segments to a catmull-rom curve — the product's wave grammar at reading scale. Counts run tabular; the offer's Follow presses on the same spring as the glass pill.</div>
     <div class="note"><b>The pursuit finally shows itself.</b> Before: a config-sheet declaration and a bare "4 of 14" on one article — a journey nobody could see. Now the arc is one object at two scales, built to four laws pulled live from Apple's own docs (HIG progress indicators / charts / onboarding + Apple Books reading goals, Sep 8): a 14-node track in our own curve grammar rides the pursuit piece's header — done, today glowing, still to come (determinate, consistent location, a few key things only); a micro-track ambassadors it on Home's Edition card so the journey survives past morning. Declaration left the Tune sheet for the moment of encounter — "Follow The chip war? 14 pieces, one each morning — Follow ›" — one contextual tap, teach-by-doing (Tune keeps change/exit, the Books-in-Settings pattern). Read today's piece and the track fills live; finish all fourteen and it seals — in the archead and in the Receipt's ledger. Noun sweep: "arc" and "bundle" are dead in copy; only Pursuit remains.</div>
