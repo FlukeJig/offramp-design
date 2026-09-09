@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v43</title>
+<title>OFFRAMP — product mock v44</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -218,6 +218,7 @@
   #s-gate .irow.now{color:var(--ink)}
   #s-gate .irow .cost{margin-left:auto;font-weight:700;color:var(--ter);font-size:14px}
   #s-gate .irow.now .cost{color:var(--teal-t)}
+  #wait-learned{font-size:12.5px;color:var(--sub);text-align:center;line-height:1.4;padding:0 8px;margin-top:-2px}
   #s-gate .endlink{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--sub);
     font-size:14px;font-weight:600;cursor:pointer;z-index:5;padding:12px}
   .partner-row{display:flex;align-items:center;gap:12px;width:100%;background:rgba(0,0,0,.035);
@@ -597,7 +598,8 @@
           <div class="hero"><div class="n hero-num">0</div>
             <div class="l" style="color:var(--ink);font-weight:600;font-size:16px;margin-top:10px">This open costs 18m of Timebank.</div></div>
           <div style="margin-top:18px;display:flex;flex-direction:column;gap:9px">
-            <button class="btn btn-tint" id="btn-wait">Wait 10:00 instead</button>
+            <button class="btn btn-tint" id="btn-wait">Wait 15:00 instead</button>
+            <div id="wait-learned">The wait was 10:00. It learned — three waits ended early this week.</div>
             <button class="partner-row" id="btn-partner">
               <span class="squircle">J</span>
               <span><span class="t1">Ask my Partner</span><br><span class="t2">Jo holds the other key. One tap asks.</span></span>
@@ -784,6 +786,7 @@
             <summary>Noticed this week</summary>
             <div class="dlines">
               <div id="spot-line" class="fline"><span class="fdot" style="background:var(--teal)"></span>Your soft spot: 9–10pm — 4 of 5 TikTok opens landed there this week.</div>
+              <div id="holdrate-line" class="fline" style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--sub)"><span class="fdot" style="background:var(--teal)"></span>The gate held 4 of 6 fires this week — 6 of 8 last week. It watches its own decay.</div>
               <div id="pursuit-line" class="fline"></div>
               <div id="focus-line" class="fline" style="display:none;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--sub)"><span class="fdot" style="background:var(--ter)"></span>Gates followed your Work Focus on 3 of 5 weekdays.</div>
               <div id="tb-line" class="fline" data-sheet="timebank" style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--amber-t);cursor:pointer"><span class="fdot" style="background:var(--amber)"></span>Timebank — <b id="tb-line-n">6h 40m</b> stored · never expires <span style="color:var(--ter)">›</span></div>
@@ -1004,8 +1007,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v43</h1>
-    <div class="sub">The Circle Walk · time back, spent together · Sep 8, 2026</div>
+    <h1>OFFRAMP — v44</h1>
+    <div class="sub">The gate learns; the Receipt watches it learn · Sep 8, 2026</div>
+    <div class="note"><b>Adaptive friction, evidence-driven and self-disclosing.</b> The research pull (Sep 8) validated the loop's core — a government field experiment shows friction works (Danish Competition Authority, 31–36% reduction, zero reactance) — but every friction study is short-horizon, and habituation is the standing threat. So the gate now adapts, under three laws: friction follows only the user's own baseline; it always announces itself ("The wait was 10:00. It learned — three waits ended early this week."); consistency is never punished. And the Receipt holds the mechanic accountable: "The gate held 4 of 6 fires this week — 6 of 8 last week. It watches its own decay." — the pre-registered habituation metric for the founding outcomes study, printed in the product's own document. Wellbeing copy stays banned (the 2025 meta-analysis says null); the wave stays a record, never a decay claim.</div>
     <div class="note"><b>The seal moment now proposes one walk.</b> The Circle scope graduates from sealed totals to real life: "Sunday, 9:00 — Riverside loop · 45m. [This week's sealed total] banked this week. Spend 45m of it together — Jo and Sam are in." The design is the doctrine applied to IRL: ONE proposal, fixed by the product, binary answer — no feed, no chat, no scheduling surface (scheduling is how apps learn to want attention). The banked total is the reason and the currency; "can't make it" is silent and untracked (warmth law); the walk logs like any session — verified, in the record. Lives only in Circle scope; Home never pings it. Stranger-discovery stays a different app — a churn-mill category (Fodors/Elite Daily 2026) that even Bumble is fleeing (TechCrunch, Aug 2026) — while phone-free venues stay partners, not features: we route, we don't host.</div>
     <div class="note"><b>Gate states collided; now they can't.</b> The "End session early" link was pinned to the screen while the modal card is centered by flex — so when the recall card grew the card upward (the wait state), the GATE label rose into the link: measured collision, one tap-target stacked on text. Apple's own modality/alerts pages (fetched today) put dismissal in the sheet's own chrome — so the link moved inside the card's top-right corner, iOS sheet-close placement. It rides the card in every state — normal, waiting, over-limit — collision structurally impossible. The rest of the interrupt audited clean against the same pulls: one decision per modal, ≤3 buttons, direct neutral copy, and the hold stays the hero exit.</div>
     <div class="note"><b>One drawer, per Apple's own disclosure law.</b> The docfoot had quietly grown a second document — seal, soft spot, pursuit, focus, Timebank, streak, provenance, founding: eight stacked lines, ~190px of fine print. Today's HIG pull (Disclosure controls, fetched Sep 8): hide details until relevant, keep the essentials visible, label what the disclosure contains, and <i>use no more than one disclosure button in a single view</i>. So the seal line, provenance, and the founding door stay visible; the five insight lines collapse into one labeled drawer — "Noticed this week ›" — dots and doors intact, one tap away. The scope toggle also gets concentric geometry (22→10→7 radii, inset 12px) instead of riding the card's top edge. Measured after: docfoot 188px → ~96px, zero collisions, pager clamps verified at both bounds.</div>
@@ -1158,10 +1162,10 @@ $("#btn-use").addEventListener("click",()=>{
 let waitT=null;
 $("#btn-wait").addEventListener("click",()=>{
   if(waitT)return;
-  let s=600; const b=$("#btn-wait"); b.style.opacity=".55";
+  let s=900; const b=$("#btn-wait"); b.style.opacity=".55";
   $("#recall-card").style.display="block"; /* the wait's dead time gets a job */
   waitT=setInterval(()=>{s--; b.textContent="Waiting — "+Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
-    if(s<=0){clearInterval(waitT);waitT=null;b.textContent="Wait 10:00 instead";b.style.opacity="1";
+    if(s<=0){clearInterval(waitT);waitT=null;b.textContent="Wait 15:00 instead";b.style.opacity="1";
       note("Gate passed. The wait was the win.");}},1000);
 });
 $("#btn-partner").addEventListener("click",()=>note("Asked Jo. Gate holds until they answer."));
