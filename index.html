@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v44</title>
+<title>OFFRAMP — product mock v45</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -234,6 +234,8 @@
   /* circle — verified social: the sealed week, shared */
   .scope-toggle{display:flex;background:rgba(0,0,0,.06);border-radius:10px;padding:3px;margin:12px 12px 13px}
   .scope{flex:1;border:none;background:none;padding:8px;font-size:14px;font-weight:700;color:var(--sub);border-radius:7px;cursor:pointer;font-family:inherit}
+  #became-line{font-size:12.5px;color:var(--sub);margin-bottom:9px;line-height:1.45}
+  #became-line b{color:var(--ink);font-weight:700}
   /* the ONE disclosure (HIG: at most one disclosure button per view) */
   .docdrawer{border-top:1px solid var(--hair);margin:2px 0 0}
   .docdrawer summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
@@ -782,6 +784,7 @@
         <div class="docrows" id="rows"></div>
         <div class="docfoot">
           <div id="seal-line"></div>
+          <div id="became-line">This week's 2h 14m became: 45m walk · 1h 20m reading · called Mom.</div>
           <details class="docdrawer">
             <summary>Noticed this week</summary>
             <div class="dlines">
@@ -975,7 +978,8 @@
     <div class="sheet" id="sheet-timebank">
       <div class="handle"></div>
       <div class="micro-h">Timebank</div>
-      <div class="hero"><div class="n hero-num" style="color:var(--amber)" id="tb-hero">6h 40m</div><div class="l">minutes earned off your phone — spend them to open gates</div></div>
+      <div class="hero"><div class="n hero-num" style="color:var(--amber)" id="tb-hero">6h 40m</div><div class="l">minutes earned off your phone — spend them to open gates</div>
+      <div class="l" id="tb-became" style="margin-top:7px;font-size:13px;color:var(--ink)">This week's bank became: 45m walk · 1h 20m reading · called Mom.</div></div>
       <div class="igroup">
         <div class="irow"><span class="st">Earned by</span><span class="v">gate holds · pivots · waits</span></div>
         <div class="irow"><span class="st">Spent on</span><span class="v">opening a gate · 18m</span></div>
@@ -1007,8 +1011,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v44</h1>
-    <div class="sub">The gate learns; the Receipt watches it learn · Sep 8, 2026</div>
+    <h1>OFFRAMP — v45</h1>
+    <div class="sub">Minutes, denominated in life · Sep 8, 2026</div>
+    <div class="note"><b>The Timebank stopped being a number and became an inventory.</b> A minute is worth nothing at 11:24pm; a walk is worth a gate. Every banked amount now carries its purchase: the hold mints "+12m — a walk's worth," sessions land as "the walk, verified," the Timebank's hero and the Receipt's docfoot state what the week's bank actually became ("45m walk · 1h 20m reading · called Mom"). This is the value lever from the loop analysis: the record is the only uncopyable part of the product, and a record you can't feel isn't an archive. The graduation track it serves: Gate (defense) → Record (proof) → Edition (replacement) → Credential &amp; Cohort (identity) — the job changes; the rails, the record, and the nouns never do.</div>
     <div class="note"><b>Adaptive friction, evidence-driven and self-disclosing.</b> The research pull (Sep 8) validated the loop's core — a government field experiment shows friction works (Danish Competition Authority, 31–36% reduction, zero reactance) — but every friction study is short-horizon, and habituation is the standing threat. So the gate now adapts, under three laws: friction follows only the user's own baseline; it always announces itself ("The wait was 10:00. It learned — three waits ended early this week."); consistency is never punished. And the Receipt holds the mechanic accountable: "The gate held 4 of 6 fires this week — 6 of 8 last week. It watches its own decay." — the pre-registered habituation metric for the founding outcomes study, printed in the product's own document. Wellbeing copy stays banned (the 2025 meta-analysis says null); the wave stays a record, never a decay claim.</div>
     <div class="note"><b>The seal moment now proposes one walk.</b> The Circle scope graduates from sealed totals to real life: "Sunday, 9:00 — Riverside loop · 45m. [This week's sealed total] banked this week. Spend 45m of it together — Jo and Sam are in." The design is the doctrine applied to IRL: ONE proposal, fixed by the product, binary answer — no feed, no chat, no scheduling surface (scheduling is how apps learn to want attention). The banked total is the reason and the currency; "can't make it" is silent and untracked (warmth law); the walk logs like any session — verified, in the record. Lives only in Circle scope; Home never pings it. Stranger-discovery stays a different app — a churn-mill category (Fodors/Elite Daily 2026) that even Bumble is fleeing (TechCrunch, Aug 2026) — while phone-free venues stay partners, not features: we route, we don't host.</div>
     <div class="note"><b>Gate states collided; now they can't.</b> The "End session early" link was pinned to the screen while the modal card is centered by flex — so when the recall card grew the card upward (the wait state), the GATE label rose into the link: measured collision, one tap-target stacked on text. Apple's own modality/alerts pages (fetched today) put dismissal in the sheet's own chrome — so the link moved inside the card's top-right corner, iOS sheet-close placement. It rides the card in every state — normal, waiting, over-limit — collision structurally impossible. The rest of the interrupt audited clean against the same pulls: one decision per modal, ≤3 buttons, direct neutral copy, and the hold stays the hero exit.</div>
@@ -1183,12 +1188,12 @@ $("#s-gate .endlink").addEventListener("click",()=>{
   state.gateArmed=false; state.tbMin+=12;
   $("#tb-chip").textContent=fmt(state.tbMin);
   $("#tb-hero").textContent=fmt(state.tbMin); $("#tb-line-n").textContent=fmt(state.tbMin);
-  state.entries.unshift({day:"Today",kept:12,did:"gate held",flash:true});
+  state.entries.unshift({day:"Today",kept:12,did:"held off Instagram · a walk's worth",flash:true});
   noteLatest("held off Instagram");
   state.nowMin=Math.min(state.nowMin+12,1439);
-  const tt=$("#toast"); tt.innerHTML="Gate held. <b>+12m</b> to your Timebank.";
+  const tt=$("#toast"); tt.innerHTML="Gate held. <b>+12m</b> — a walk's worth.";
   tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
-  note("Gate held. +12m banked.");
+  note("Gate held. +12m — a walk's worth.");
 });
 
 /* recall — think at the wait, write at the close; self-marked, honestly labeled */
@@ -1197,7 +1202,7 @@ function mintQuiet(mins,label){ /* mints without leaving the current screen */
   state.entries.unshift({day:"Today",kept:mins,did:label,flash:true,self:true});
   noteLatest(label.split("—")[0].trim());
   state.nowMin=Math.min(state.nowMin+12,1439);
-  const tt=$("#toast"); tt.innerHTML="On the record, self-marked. <b>+"+mins+"m</b>";
+  const tt=$("#toast"); tt.innerHTML="On the record, self-marked. <b>+"+mins+"m</b> — "+label.split("—")[0].trim().toLowerCase()+".";
   tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
 }
 $("#rc-reveal").addEventListener("click",()=>{
@@ -1240,7 +1245,7 @@ function mint(mins,label){
   noteLatest(pretty);
   state.nowMin=Math.min(state.nowMin+12,1439);
   show("home");
-  const tt=$("#toast"); tt.innerHTML="Written to your ledger. <b>+"+mins+"m</b>";
+  const tt=$("#toast"); tt.innerHTML="Written to your ledger. <b>+"+mins+"m</b> — the "+pretty+", verified.";
   tt.classList.add("on"); setTimeout(()=>tt.classList.remove("on"),2400);
 }
 function refreshHomeStates(){
@@ -1550,6 +1555,7 @@ function renderWeek(w){
   });
   $("#share-n").textContent=fmt(W.total());
   $("#seal-line").textContent = w<36 ? "Sealed Sunday, 6:00 PM · on the record" : "Seals Sunday · 6:00 PM";
+  $("#became-line").innerHTML="This week's <b>"+fmt(W.total())+"</b> became: "+state.entries.slice(0,3).map(e=>e.did).join(" · ")+".";
   $(".sharecard .wk").textContent="Week "+w+" — On the record";
   $("#wk-prev").style.opacity=w<=35?".3":"1";
   $("#wk-next").style.opacity=w>=36?".3":"1";
