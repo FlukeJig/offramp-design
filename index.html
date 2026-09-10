@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v47</title>
+<title>OFFRAMP — product mock v48</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -770,6 +770,7 @@
       <div class="doccard rise d2">
         <div class="scope-toggle">
           <button class="scope on" id="scope-mine">My week</button>
+          <button class="scope" id="scope-offramp">Offramp</button>
           <button class="scope" id="scope-circle">Circle</button>
         </div>
         <div id="doc-mine">
@@ -807,6 +808,34 @@
           <div class="prov"><svg width="13" height="13" viewBox="0 0 14 14"><path fill="#0B8472" d="M7 0c.5 1.1 1.3 1.4 2.4 1.1.3 1.2 1.1 1.9 2.3 2-.2 1.2.2 2.1 1.3 2.6-.7 1-.7 2.2 0 3.2-1.1.5-1.5 1.4-1.3 2.6-1.2.1-2 .8-2.3 2-1.1-.3-1.9 0-2.4 1.1-.5-1.1-1.3-1.4-2.4-1.1-.3-1.2-1.1-1.9-2.3-2 .2-1.2-.2-2.1-1.3-2.6.7-1 .7-2.2 0-3.2C2.1 5.2 2.5 4.3 2.3 3.1c1.2-.1 2-.8 2.3-2C5.7 1.4 6.5 1.1 7 0z"/><path d="M4.3 7.3l1.8 1.8 3.5-3.9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified from on-device data — recall entries are self-marked. Never leaves this phone.</div>
           <div class="flink" data-go="founding"><b>713</b> founding places left ›</div>
         </div>
+        </div>
+        <div id="doc-offramp" style="display:none">
+          <div class="dochead">
+            <div class="docbrand">Offramp · What I did for you</div>
+            <div class="n hero-num">23</div>
+            <div class="ro">gates held for you this week — 4 of them at your 9–10pm soft spot</div>
+          </div>
+          <div class="igroup" style="margin:10px 12px 0">
+            <div class="irow"><span class="st">Adjusted the wait</span><span class="v">10:00 → 15:00 · twice</span></div>
+            <div class="irow"><span class="st">Covered your soft spot</span><span class="v">4 nights</span></div>
+            <div class="irow"><span class="st">Ranked out 2 sources</span><span class="v">unfinished 3 weeks</span></div>
+            <div class="irow"><span class="st">Booked 1 ride</span><span class="v">Saturday · you took it</span></div>
+            <div class="irow"><span class="st">Ranked your Edition</span><span class="v">5 of 12 sources</span></div>
+          </div>
+          <div class="doccard" style="margin:12px 12px 0;padding:14px 16px">
+            <div class="wc-cap">The result</div>
+            <div style="font-size:16px;font-weight:800;margin-top:4px;letter-spacing:-.01em">TikTok −9% · Instagram −4% vs last week</div>
+            <div style="font-size:12.5px;color:var(--sub);margin-top:3px">Minutes, measured by your phone. Nothing else claimed.</div>
+          </div>
+          <details class="docdrawer" style="margin:12px 12px 0;border-top:none;border:1px solid var(--hair);border-radius:14px;background:var(--card);overflow:hidden">
+            <summary>Why I changed things</summary>
+            <div class="dlines" style="padding:0 16px 12px;text-align:left">
+              <div class="fline"><span class="fdot" style="background:var(--amber)"></span>Tuesday: wait went 10:00 → 15:00 — three waits ended early the week before. Since then: 2 of 2 held.</div>
+              <div class="fline"><span class="fdot" style="background:var(--violet)"></span>Ranked out The Verge and Wired — three weeks, zero pieces finished. They're in Tune if you want them back.</div>
+              <div class="fline"><span class="fdot" style="background:var(--teal)"></span>Friday's 9pm gate held on the first wait — no change made.</div>
+            </div>
+          </details>
+          <div style="text-align:center;font-size:12px;color:var(--ter);padding:12px 16px 14px">Everything I change is logged here. Reverse any of it in Settings.</div>
         </div>
         <div id="doc-circle" style="display:none">
           <div class="dochead">
@@ -1019,8 +1048,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v47</h1>
-    <div class="sub">The booked bank — the spend side becomes your own intentions · Sep 9, 2026</div>
+    <h1>OFFRAMP — v48</h1>
+    <div class="sub">The Receipt inverts — the product reports to you · Sep 9, 2026</div>
+    <div class="note"><b>The Receipt gains a third page: Offramp's own week.</b> Until now the Receipt showed what YOU did. The Autopilot tier (the $200/yr value architecture) inverts the relationship — the product reports to you, like an employee: "23 gates held for you this week — 4 of them at your 9–10pm soft spot." Five plain rows of what it did (adjusted the wait 10:00 → 15:00 twice · covered the soft spot 4 nights · ranked out 2 sources you'd never finished · booked the Saturday ride you took · ranked your Edition), a result card that claims minutes and nothing else ("TikTok −9% · Instagram −4% vs last week — measured by your phone"), and the trust layer that makes autonomy safe: "Why I changed things" — every action logged with its reason and its outcome ("three waits ended early the week before; since then: 2 of 2 held"), every change reversible in Settings. Autonomy without disclosure is surveillance; autonomy with disclosure is service. This page is the disclosure — and the $200/yr artifact. Toggle order: My week · Offramp · Circle — you, then your employee, then your people.</div>
     <div class="note"><b>The promise's second half, built.</b> "Time back" was only half the product; the other half is "spent well" — and until now the Timebank's single sink was paying 18m to open a gate (spending good time on the bad thing). The seal moment now proposes one booking beside the Circle Walk: "The long ride — Saturday, 9:00 · 90m. [live Timebank balance] sits in the Timebank. Book 90m of it for the ride you keep naming." Same doctrine as the walk: ONE proposal, fixed by the product, binary answer, no scheduling surface; booked state tells the truth ("Logs like any session — verified, in the record. Can't make it? Nothing breaks."); amber glyph because the bank spends amber. The loop closes: time saved → time booked → time lived → on the record — and every booking feeds the became-line the life it denominates. Lives only in My week scope, under the day rows; Circle scope keeps the walk.</div>
     <div class="note"><b>Text and prototype no longer disagree about the engine.</b> The partner's Block 2 analysis (Sep 9) caught it: the document said "the hold stays the hero exit" while the gate's tinted primary was "Choose a pivot instead" — and the one sec evidence (dismiss + delay carry the effect; the menu is unmeasured) says the stop is the engine. In the moment of urge a person has one tap of will; that tap now goes to <b>Hold — don't open · +12m</b>, primary and tinted. The pivot demotes to one quiet line ("or the thing you set — Walk · 25m ›") for the person with will to spare, awaiting kill criterion 1's four-week verdict. The corner "End session early" link is gone — one action, one place. The framing line ("This is a gate. It counts your opens.") is stripped — the counter does the accounting; persuasion was dead weight. Also in this pass: Settings' founding row read #713 against Founding's № 288 (the v34 math lie's last hiding place — fixed), and the Timebank sheet now states the earnings table (holds +12m · pivots, verified length · waits +5m). Accepted from Block 2 as marked: reach C served-never-claimed; day-0-measures/day-1-doesn't-lock for the heavy end (extends v44 backward — product doc update); the Partner as the lapse's door in v1. The over-limit state was already stop-primary (Wait 15:00); untouched.</div>
     <div class="note"><b>The Timebank stopped being a number and became an inventory.</b> A minute is worth nothing at 11:24pm; a walk is worth a gate. Every banked amount now carries its purchase: the hold mints "+12m — a walk's worth," sessions land as "the walk, verified," the Timebank's hero and the Receipt's docfoot state what the week's bank actually became ("45m walk · 1h 20m reading · called Mom"). This is the value lever from the loop analysis: the record is the only uncopyable part of the product, and a record you can't feel isn't an archive. The graduation track it serves: Gate (defense) → Record (proof) → Edition (replacement) → Credential &amp; Cohort (identity) — the job changes; the rails, the record, and the nouns never do.</div>
@@ -1474,12 +1504,15 @@ const CIRCLE=[{name:"You",sealed:892,streak:68,you:true},{name:"Jo",sealed:611,s
 function setScope(s){
   state.scope=s;
   $("#scope-mine").classList.toggle("on",s==="mine");
+  $("#scope-offramp").classList.toggle("on",s==="offramp");
   $("#scope-circle").classList.toggle("on",s==="circle");
   $("#doc-mine").style.display=s==="mine"?"block":"none";
+  $("#doc-offramp").style.display=s==="offramp"?"block":"none";
   $("#doc-circle").style.display=s==="circle"?"block":"none";
-  if(s==="circle")renderCircle(); else renderWeek(curWeek);
+  if(s==="circle")renderCircle(); else if(s==="mine")renderWeek(curWeek);
 }
 $("#scope-mine").addEventListener("click",()=>setScope("mine"));
+$("#scope-offramp").addEventListener("click",()=>setScope("offramp"));
 $("#scope-circle").addEventListener("click",()=>setScope("circle"));
 function renderCircle(){
   const ctot=CIRCLE.reduce((a,m)=>a+m.sealed,0);
