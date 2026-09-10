@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v45</title>
+<title>OFFRAMP — product mock v46</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -579,11 +579,9 @@
     
     <div id="s-gate">
       <div class="card">
-        <button class="endlink" data-go="home">End session early</button>
         <div class="gcap">Gate</div>
         <div class="apptile">IG</div>
         <div class="appname">Instagram</div>
-        <div id="gate-first" style="display:none">This is a gate. It counts your opens.</div>
         <div id="gate-normal">
           <div class="hero"><div class="n hero-num" id="gate-n">3</div><div class="l">opens left today — each one costs more</div></div>
           <div class="igroup">
@@ -592,7 +590,8 @@
             <div class="irow">Last open<span class="cost">+18m Timebank</span></div>
           </div>
           <div style="margin-top:16px;display:flex;flex-direction:column;gap:9px">
-            <button class="btn btn-tint" data-go="pivot">Choose a pivot instead</button>
+            <button class="btn btn-tint" id="btn-hold">Hold — don't open · +12m</button>
+            <button class="btn btn-plain" data-go="pivot" style="height:auto;padding:6px;font-size:13px">or the thing you set — Walk · 25m ›</button>
             <button class="btn btn-plain" id="btn-use">Use one open</button>
           </div>
         </div>
@@ -911,7 +910,7 @@
       <div class="igroup" style="margin-top:14px">
         <div class="irow setrow" data-sheet="gates"><span class="st">Gated apps</span><span class="v">3<span class="chev">›</span></span></div>
         <div class="irow setrow"><span class="squircle" style="width:32px;height:32px;min-width:32px;font-size:13px">J</span><span class="st">Partner — Jo holds the other key</span><span class="v">Manage<span class="chev">›</span></span></div>
-        <div class="irow setrow"><span class="st">Founding place</span><span class="v">#713<span class="chev">›</span></span></div>
+        <div class="irow setrow"><span class="st">Founding place</span><span class="v">№ 288<span class="chev">›</span></span></div>
         <div class="irow setrow"><span class="st">Export your record</span><span class="v">JSON<span class="chev">›</span></span></div>
         <div class="irow setrow danger"><span class="st">Delete the record</span></div>
       </div>
@@ -981,7 +980,7 @@
       <div class="hero"><div class="n hero-num" style="color:var(--amber)" id="tb-hero">6h 40m</div><div class="l">minutes earned off your phone — spend them to open gates</div>
       <div class="l" id="tb-became" style="margin-top:7px;font-size:13px;color:var(--ink)">This week's bank became: 45m walk · 1h 20m reading · called Mom.</div></div>
       <div class="igroup">
-        <div class="irow"><span class="st">Earned by</span><span class="v">gate holds · pivots · waits</span></div>
+        <div class="irow"><span class="st">Earned by</span><span class="v">holds +12m · pivots, verified length · waits +5m</span></div>
         <div class="irow"><span class="st">Spent on</span><span class="v">opening a gate · 18m</span></div>
         <div class="irow"><span class="st">Rule</span><span class="v">never expires · can't be bought</span></div>
       </div>
@@ -1011,8 +1010,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v45</h1>
-    <div class="sub">Minutes, denominated in life · Sep 8, 2026</div>
+    <h1>OFFRAMP — v46</h1>
+    <div class="sub">The gate's hierarchy corrected — the hold is the primary button · Sep 9, 2026</div>
+    <div class="note"><b>Text and prototype no longer disagree about the engine.</b> The partner's Block 2 analysis (Sep 9) caught it: the document said "the hold stays the hero exit" while the gate's tinted primary was "Choose a pivot instead" — and the one sec evidence (dismiss + delay carry the effect; the menu is unmeasured) says the stop is the engine. In the moment of urge a person has one tap of will; that tap now goes to <b>Hold — don't open · +12m</b>, primary and tinted. The pivot demotes to one quiet line ("or the thing you set — Walk · 25m ›") for the person with will to spare, awaiting kill criterion 1's four-week verdict. The corner "End session early" link is gone — one action, one place. The framing line ("This is a gate. It counts your opens.") is stripped — the counter does the accounting; persuasion was dead weight. Also in this pass: Settings' founding row read #713 against Founding's № 288 (the v34 math lie's last hiding place — fixed), and the Timebank sheet now states the earnings table (holds +12m · pivots, verified length · waits +5m). Accepted from Block 2 as marked: reach C served-never-claimed; day-0-measures/day-1-doesn't-lock for the heavy end (extends v44 backward — product doc update); the Partner as the lapse's door in v1. The over-limit state was already stop-primary (Wait 15:00); untouched.</div>
     <div class="note"><b>The Timebank stopped being a number and became an inventory.</b> A minute is worth nothing at 11:24pm; a walk is worth a gate. Every banked amount now carries its purchase: the hold mints "+12m — a walk's worth," sessions land as "the walk, verified," the Timebank's hero and the Receipt's docfoot state what the week's bank actually became ("45m walk · 1h 20m reading · called Mom"). This is the value lever from the loop analysis: the record is the only uncopyable part of the product, and a record you can't feel isn't an archive. The graduation track it serves: Gate (defense) → Record (proof) → Edition (replacement) → Credential &amp; Cohort (identity) — the job changes; the rails, the record, and the nouns never do.</div>
     <div class="note"><b>Adaptive friction, evidence-driven and self-disclosing.</b> The research pull (Sep 8) validated the loop's core — a government field experiment shows friction works (Danish Competition Authority, 31–36% reduction, zero reactance) — but every friction study is short-horizon, and habituation is the standing threat. So the gate now adapts, under three laws: friction follows only the user's own baseline; it always announces itself ("The wait was 10:00. It learned — three waits ended early this week."); consistency is never punished. And the Receipt holds the mechanic accountable: "The gate held 4 of 6 fires this week — 6 of 8 last week. It watches its own decay." — the pre-registered habituation metric for the founding outcomes study, printed in the product's own document. Wellbeing copy stays banned (the 2025 meta-analysis says null); the wave stays a record, never a decay claim.</div>
     <div class="note"><b>The seal moment now proposes one walk.</b> The Circle scope graduates from sealed totals to real life: "Sunday, 9:00 — Riverside loop · 45m. [This week's sealed total] banked this week. Spend 45m of it together — Jo and Sam are in." The design is the doctrine applied to IRL: ONE proposal, fixed by the product, binary answer — no feed, no chat, no scheduling surface (scheduling is how apps learn to want attention). The banked total is the reason and the currency; "can't make it" is silent and untracked (warmth law); the walk logs like any session — verified, in the record. Lives only in Circle scope; Home never pings it. Stranger-discovery stays a different app — a churn-mill category (Fodors/Elite Daily 2026) that even Bumble is fleeing (TechCrunch, Aug 2026) — while phone-free venues stay partners, not features: we route, we don't host.</div>
@@ -1109,8 +1109,6 @@ function show(id){
   }
   if(id==="gate"){$("#s-gate").classList.add("on");
     state.gateArmed=true; /* a gate presented can be held — leaving without opening banks it */
-    if(!state.seenGate){state.seenGate=true;$("#gate-first").style.display="block";}
-    else{$("#gate-first").style.display="none";}
     if(state.opens===0){$("#gate-normal").style.display="none";$("#gate-over").style.display="block";}
     return;}
   $("#s-gate").classList.remove("on");
@@ -1183,7 +1181,7 @@ $("#btn-pay").addEventListener("click",()=>{
 function note(t){const n=$("#gate-note");n.textContent=t;n.style.opacity=1;setTimeout(()=>n.style.opacity=0,2600);}
 
 /* the gate-hold is the loop's core verb — it mints to the Timebank, not to kept */
-$("#s-gate .endlink").addEventListener("click",()=>{
+$("#btn-hold").addEventListener("click",()=>{
   if(!state.gateArmed||state.opens<=0)return;
   state.gateArmed=false; state.tbMin+=12;
   $("#tb-chip").textContent=fmt(state.tbMin);
