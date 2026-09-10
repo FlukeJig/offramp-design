@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OFFRAMP — product mock v50</title>
+<title>OFFRAMP — product mock v51</title>
 <style>
   :root{
     --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73; --ter:#8E8E93;
@@ -237,9 +237,10 @@
   #became-line{font-size:12.5px;color:var(--sub);margin-bottom:8px;line-height:1.35}
   #became-line b{color:var(--ink);font-weight:700}
   /* attended — the score: ink, never traffic-light; states are words */
-  .attcard{display:flex;gap:13px;align-items:center;margin:21px 0 14px;padding:13px 16px;background:var(--card);border-radius:14px;
+  .attcard{display:flex;gap:13px;align-items:center;margin:14px 0;background:var(--card);border-radius:14px;padding:13px 16px;
     box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 26px rgba(0,0,0,.06),inset 0 0 0 .5px rgba(0,0,0,.03)}
   .edscroll .attcard+.mast{margin-top:0}
+  .edscroll .mast+.attcard{margin-top:14px}
   .att-n{font-size:34px;font-weight:800;letter-spacing:-.03em;color:var(--ink);line-height:1}
   .att-t{font-size:12.5px;color:var(--sub);line-height:1.45}
   .att-t b{color:var(--ink);font-weight:700}
@@ -660,15 +661,15 @@
       <button class="iconbtn l" data-sheet="edtune">Tune</button>
       <div class="progressline"><i id="edprog"></i></div>
       <div class="edscroll" id="edscroll">
-        <div class="attcard rise">
-          <div class="att-n" id="att-ed">82</div>
-          <div class="att-t"><b id="att-ed-state">Holding</b> · <span id="att-ed-why">The 9–10pm holds carried yesterday. Today the gates watch 9–10pm.</span></div>
-        </div>
         <div class="mast rise">
           <div class="mast-title">The Friday Edition</div>
           <div class="mast-line">Nº 36 · Friday, September 4</div>
           <div class="mast-line2">6 pieces from 5 of your 12 sources · 34 min</div>
           <div class="mast-line3">nothing older than 24h · in your order</div>
+        </div>
+        <div class="attcard rise">
+          <div class="att-n" id="att-ed">82</div>
+          <div class="att-t"><b id="att-ed-state">Holding</b> · <span id="att-ed-why">The 9–10pm holds carried yesterday. Today the gates watch 9–10pm.</span></div>
         </div>
 
         <article class="piece unlocked rise d1" data-i="0" data-min="6">
@@ -1064,8 +1065,9 @@
 
   
   <div class="notes">
-    <h1>OFFRAMP — v50</h1>
-    <div class="sub">Polish pass — measured geometry, golden ratio held · Sep 9, 2026</div>
+    <h1>OFFRAMP — v51</h1>
+    <div class="sub">Edition layout fixed — masthead first, score under it, chrome clear · Sep 9, 2026</div>
+    <div class="note"><b>The floating Tune/Later buttons were stacked on the score card — measured 31px of overlap.</b> v49–v50 put the Attended card above the masthead, into the exact band where the Edition's frosted chrome floats (y115–159). The fix restores the page's grammar rather than patching around it: the masthead leads (its 118px of editorial top air restored — the buttons float over that air, clear by 22px, as designed), and the score card follows as the first content object — 14px seam under the masthead, 26px to the first piece, column-aligned at left 97 with everything below it. Yesterday's verdict still arrives before any piece; it just no longer fights the chrome. Zero overlap, zero collisions, score live.</div>
     <div class="note"><b>Polish by measurement, not assertion.</b> The audit found four real defects and fixed each: (1) the Edition's score card had a 118px hole under it — a legacy rule (<code>.edscroll .mast{margin-top:118px}</code>) from when the masthead was the top object; the mast now sits 14px under the card (Fib seam), and the card aligns to the editorial column exactly (left edge 97 = the pieces' left edge). (2) The Receipt's docfoot had crept from 139px to 248px — the became-line wrapped 3 lines and the score line wrapped 2; tightened copy and rhythm (consistent 8px seams, 12-week spark at 60px) to 206px with both value lines intact. (3) The scope segments measured 33px tall — under Apple's 44px touch target; now 41px. (4) The day-row score sat 2px off the kept baseline; nudged to 1. Zero text collisions on every screen, Home's φ anchors untouched (hero center y210 = φ⁻³, wavebox 1.612), and the score still runs live on the loop. Nothing added, nothing removed — only aligned.</div>
     <div class="note"><b>The Whoop mechanic, transplanted to attention.</b> One number about you, 0–100, relative to your own baseline — Held 30% (gate outcomes ÷ fires) · Kept 30% (verified minutes vs weekday baseline) · Lived 25% (sessions and pursuits done) · Integrity 15% (the soft-spot hours). It runs on the real loop: open the gate and it counts a fire; hold and the score rises; finish a session and Lived moves. The laws are the product's: ink, never traffic-light (a low score is information, not alarm); states are words (Building · Holding · Strong · Resting); self-marked entries never move it — the honesty architecture becomes a scoring feature. It lives in two places, never fighting a hero: the morning Edition card ("82 · Holding — the 9–10pm holds carried yesterday. Today the gates watch 9–10pm." — the daily pull that isn't a notification) and the Receipt (day-row scores beside kept minutes; the docfoot seals the week average plus baseline movement, 12-week hairline in the founding track's grammar). Home stays minutes. The noun is the 2030 metric planted in v1: when agents arrive, Attended is already the score. Monetization line: free sees today's number; the components, the trend, and the why-line are the paid tier.</div>
     <div class="note"><b>The Receipt gains a third page: Offramp's own week.</b> Until now the Receipt showed what YOU did. The Autopilot tier (the $200/yr value architecture) inverts the relationship — the product reports to you, like an employee: "23 gates held for you this week — 4 of them at your 9–10pm soft spot." Five plain rows of what it did (adjusted the wait 10:00 → 15:00 twice · covered the soft spot 4 nights · ranked out 2 sources you'd never finished · booked the Saturday ride you took · ranked your Edition), a result card that claims minutes and nothing else ("TikTok −9% · Instagram −4% vs last week — measured by your phone"), and the trust layer that makes autonomy safe: "Why I changed things" — every action logged with its reason and its outcome ("three waits ended early the week before; since then: 2 of 2 held"), every change reversible in Settings. Autonomy without disclosure is surveillance; autonomy with disclosure is service. This page is the disclosure — and the $200/yr artifact. Toggle order: My week · Offramp · Circle — you, then your employee, then your people.</div>
